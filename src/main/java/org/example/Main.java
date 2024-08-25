@@ -14,6 +14,7 @@ public class Main {
             System.out.println("i = " + i);
             System.out.printf("dd");
             System.out.printf("test");
+            System.out.println("안녕하세요");
         }
     }
 }
