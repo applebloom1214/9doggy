@@ -1,10 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/board.css" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon/favicon.ico">
+    <link rel="icon" href="/img/favicon/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" href="/img/favicon/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="/img/favicon/android-icon-48x48.png" sizes="48x48" />
+    <title>9doggy</title>
 </head>
 <body>
-
+<div class="wrapper">
+    <div class="header">
+        <a class="logo" href="/"><div class="logo__img"></div></a>
+        <ul class="menus">
+            <li class="menu__shop hover">SHOP</li>
+            <li class="menu__community hover">
+                <a th:href="@{/board}">COMMUNITY</a>
+            </li>
+        </ul>
+        <div class="cart hover">
+            <i class="fa-solid fa-cart-shopping fa-lg"></i>
+        </div>
+        <div class="account hover"><i class="fa-solid fa-user fa-lg"></i></div>
+    </div>
+    <main>
+        <h1>커뮤니티</h1>
+        <div class="board">
+            <div class="board__row bheader">
+                <div class="boardcell__no">번호</div>
+                <div class="boardcell__title">제목</div>
+                <div class="boardcell__writer">글쓴이</div>
+                <div class="boardcell__date">날짜</div>
+                <div class="boardcell__hit">조회</div>
+                <div class="boardcell__like">좋아요</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+            <div class="board__row">
+                <div class="boardcell__no">1</div>
+                <div class="boardcell__title">안녕하세요 ?</div>
+                <div class="boardcell__writer">테스터</div>
+                <div class="boardcell__date">
+                    <span class="date">2024.08.15</span>
+                    <span class="time">20:38:15</span>
+                </div>
+                <div class="boardcell__hit">111</div>
+                <div class="boardcell__like">77</div>
+            </div>
+        </div>
+        <div class="board__btns">
+            <div class="board__sortbtns">
+                <div class="board__listbtn btn">전체글</div>
+                <div class="board__hitbtn btn">조회순</div>
+                <div class="board__likebtn btn">좋아요순</div>
+            </div>
+            <a href="write.html"><div class="board__writebtn btn">글쓰기</div></a>
+        </div>
+        <div class="board__pagination">
+            <a class="prev" href="#"><</a>
+            <a class="active" href="#">1</a>
+            <a class="pagination" href="#">2</a>
+            <a class="pagination" href="#">3</a>
+            <a class="pagination" href="#">4</a>
+            <a class="pagination" href="#">5</a>
+            <a class="pagination" href="#">6</a>
+            <a class="pagination" href="#">7</a>
+            <a class="pagination" href="#">8</a>
+            <a class="pagination" href="#">9</a>
+            <a class="pagination" href="#">10</a>
+            <a class="next" href="#">></a>
+        </div>
+        <div class="board__searchbar">
+            <select name="" id="" class="board__select">
+                <option>제목</option>
+                <option>제목 + 내용</option>
+                <option>내용</option>
+                <option>글쓴이</option>
+            </select>
+            <input type="text" class="board__text" />
+            <div class="board__search">
+                <i
+                        class="fa-solid fa-magnifying-glass fa-2xl"
+                        style="color: white"
+                ></i>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <span class="footer__text">© 9doggy Inc. ALL Rights Reserved</span>
+    </footer>
+</div>
 </body>
+<script
+        src="https://kit.fontawesome.com/cbc86f8bd3.js"
+        crossorigin="anonymous"
+></script>
 </html>
