@@ -5,17 +5,28 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 public class PostDto {
+    private Long bno;
     private String title;
     private String content;
     private String writer;
+    private LocalDateTime createdAt;
+    private Long hit;
+    private Long likes;
+
 
     public PostDto(Post post) {
+        this.bno = post.getBno();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.writer = post.getWriter();
+        this.createdAt = post.getDate();
+        this.hit = post.getHit();
+        this.likes = post.getLikes();
     }
 }

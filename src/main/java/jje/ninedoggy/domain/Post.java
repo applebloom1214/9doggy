@@ -36,9 +36,9 @@ public class Post {
     @ColumnDefault("0")
     private Long hit;
 
-    @Column(name = "like", nullable = false)
+    @Column(name = "likes", nullable = false)
     @ColumnDefault("0")
-    private Long like;
+    private Long likes;
 
     @Builder
     public Post(String title, String content, String writer) {
