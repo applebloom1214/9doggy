@@ -34,7 +34,8 @@ class BoardRepositoryTest {
                 .stream()
                 .map(PostDto::new)
                 .toList();
-        System.out.println(posts);
+
+        posts.forEach(System.out::println);
     }
 
 }

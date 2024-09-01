@@ -4,12 +4,14 @@ import jje.ninedoggy.domain.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@ToString
 public class PostDto {
     private Long bno;
     private String title;

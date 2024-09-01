@@ -6,13 +6,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
+@DynamicInsert
 public class Post {
 
     @Id
@@ -32,11 +36,11 @@ public class Post {
     @CreatedDate
     private LocalDateTime date;
 
-    @Column(name = "hit", nullable = false)
+    @Column(name = "hit")
     @ColumnDefault("0")
     private Long hit;
 
-    @Column(name = "likes", nullable = false)
+    @Column(name = "likes")
     @ColumnDefault("0")
     private Long likes;
 
