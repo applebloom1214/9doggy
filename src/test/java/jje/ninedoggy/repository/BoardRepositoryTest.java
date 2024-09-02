@@ -19,12 +19,17 @@ class BoardRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        Post post = new Post("test","contentcontent","tester");
-        boardRepository.save(Post.builder()
-                .title(post.getTitle())
-                .content(post.getContent())
-                .writer(post.getWriter())
-                .build());
+        for (int i = 0; i < 10; i++) {
+            Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
+            boardRepository.save(Post.builder()
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .writer(post.getWriter())
+                    .build());
+        }
+
+
+
 
     }
 

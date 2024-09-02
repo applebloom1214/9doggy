@@ -17,7 +17,7 @@ public class PostDto {
     private String title;
     private String content;
     private String writer;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private Long hit;
     private Long likes;
 

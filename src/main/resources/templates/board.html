@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,116 +38,20 @@
                 <div class="boardcell__hit">조회</div>
                 <div class="boardcell__like">좋아요</div>
             </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
+            <div class="board__rows" th:each="post:${posts}">
+                <div class="board__row">
+                    <div class="boardcell__no" th:text="${post.bno}"></div>
+                    <div class="boardcell__title" th:text="${post.title}"></div>
+                    <div class="boardcell__writer" th:text="${post.writer}"></div>
+                    <div class="boardcell__date">
+                        <span class="date" th:text="${post.createdAt}">2</span>
+                        <span class="time"></span>
+                    </div>
+                    <div class="boardcell__hit" th:text="${post.hit}"></div>
+                    <div class="boardcell__like" th:text="${post.likes}"></div>
                 </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
             </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
-                </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
-            </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
-                </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
-            </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
-                </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
-            </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
-                </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
-            </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
-                </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
-            </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
-                </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
-            </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
-                </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
-            </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
-                </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
-            </div>
-            <div class="board__row">
-                <div class="boardcell__no">1</div>
-                <div class="boardcell__title">안녕하세요 ?</div>
-                <div class="boardcell__writer">테스터</div>
-                <div class="boardcell__date">
-                    <span class="date">2024.08.15</span>
-                    <span class="time">20:38:15</span>
-                </div>
-                <div class="boardcell__hit">111</div>
-                <div class="boardcell__like">77</div>
-            </div>
+
         </div>
         <div class="board__btns">
             <div class="board__sortbtns">

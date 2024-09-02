@@ -1,16 +1,15 @@
 package jje.ninedoggy.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
@@ -34,15 +33,20 @@ public class Post {
     private String writer;
 
     @CreatedDate
-    private LocalDateTime date;
+    private String date;
 
     @Column(name = "hit")
-    @ColumnDefault("0")
     private Long hit;
 
     @Column(name = "likes")
-    @ColumnDefault("0")
     private Long likes;
+
+    @PrePersist
+    public void prePersist() {
+        this.hit= this.hit == null ? 0 : this.hit;
+        this.likes= this.likes == null ? 0 : this.likes;
+        this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
 
     @Builder
     public Post(String title, String content, String writer) {

@@ -17,6 +17,7 @@ public class BoardController {
     @GetMapping("/board")
     public ModelAndView board() {
         ModelAndView mav = new ModelAndView("board");
+
         List<PostDto> posts = boardService.findAll().stream()
                 .map(PostDto::new)
                 .toList();
