@@ -1,0 +1,119 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1{
+        font-size: 3rem;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    & .board__write{
+        font-size: 1.5rem;
+        display: grid;
+        justify-content: center;
+        width: 126rem;
+        gap: 2rem;
+
+        & .write__title, .write__upload, .write__desc, .write__textarea, .write__btns{
+            width: 80rem;
+        }
+
+        & .write__title, .write__textarea{
+            font-size: 2rem;
+            border: solid 0.2rem #c6bfb9;
+            outline: none;
+        }
+
+        & .write__title:hover{
+            border: solid 0.2rem #c5875e;
+        }
+
+        & .write__textarea:hover{
+            border: solid 0.2rem #c5875e;
+        }
+
+        & .write__desc{
+            display: flex;
+            gap: 1.5rem;
+
+            & .desc__writer{
+                font-weight: bold;
+            }
+        }
+
+        & .write__title{
+            height: 4rem;
+        }
+
+        & .write__upload{
+
+            & .upload__file{
+                display: none;
+            }
+        }
+
+        & .write__textarea{
+            height: 50rem;
+            resize: none;
+        }
+
+        & .write__btns{
+            display: flex;
+            gap: 1.5rem;
+
+            & .write__btn{
+                font-size: 1.5rem;
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #c5875e;
+                width: 7rem;
+                height: 3rem;
+                border-radius: 1rem;
+            }
+        }
+    }
+}
+
+footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    & .footer__text{
+        width: 126rem;
+    }
+}
+
+/* Media Query 시작 */
+
+@media screen and (max-width:945px) {
+
+    main{
+        & .board__write{
+            width: 44.5rem;
+
+            & .write__title, .write__upload, .write__desc, .write__textarea, .write__btns{
+                width: 44.5rem;
+            }
+        }
+
+
+    }
+
+    footer{
+        & .footer__text{
+            width: 44.5rem;
+        }
+    }
+
+}
+
+/* Media Query 끝 */

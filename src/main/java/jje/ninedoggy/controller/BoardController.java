@@ -25,4 +25,11 @@ public class BoardController {
         return mav;
     }
 
+    @GetMapping("/write")
+    public ModelAndView write() {
+        ModelAndView mav = new ModelAndView("write");
+
+        return mav;
+    }
+
 }

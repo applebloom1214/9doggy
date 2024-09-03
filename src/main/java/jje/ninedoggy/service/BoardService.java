@@ -13,15 +13,6 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public List<Post> findAll() {
-        for (int i = 0; i < 10; i++) {
-            Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
-            boardRepository.save(Post.builder()
-                    .title(post.getTitle())
-                    .content(post.getContent())
-                    .writer(post.getWriter())
-                    .build());
-        }
-
         return boardRepository.findAll();
     }
 

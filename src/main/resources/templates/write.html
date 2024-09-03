@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/header.css" />
+  <link rel="stylesheet" href="/css/write.css" />
+  <link rel="icon" type="image/x-icon" href="/img/favicon/favicon.ico">
+  <link rel="icon" href="/img/favicon/favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" href="/img/favicon/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" href="/img/favicon/android-icon-48x48.png" sizes="48x48" />
+  <title>9doggy</title>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <a class="logo" href="/"><div class="logo__img"></div></a>
+    <ul class="menus">
+      <li class="menu__shop hover">SHOP</li>
+      <li class="menu__community hover">
+        <a th:href="@{/board}">COMMUNITY</a>
+      </li>
+    </ul>
+    <div class="cart hover">
+      <i class="fa-solid fa-cart-shopping fa-lg"></i>
+    </div>
+    <div class="account hover"><i class="fa-solid fa-user fa-lg"></i></div>
+  </div>
+  <main>
+    <h1>글쓰기</h1>
+    <div class="board__write">
+      <div class="write__desc">
+            <span class="desc__writer"
+            ><span style="color: #c6bfb9">by. </span>글쓴이</span
+            >
+        <span class="desc__date">2024.08.19</span>
+      </div>
+      <input
+              type="text"
+              class="write__title"
+              placeholder="제목을 입력해주세요."
+      />
+      <div class="write__upload">
+        <label for="upload__file" class="upload__label"
+        ><i class="fa-solid fa-image fa-lg"></i
+        ></label>
+        <span class="upload__desc">파일 업로드</span>
+        <input type="file" class="upload__file" id="upload__file" />
+      </div>
+
+      <textarea
+              name="textarea"
+              class="write__textarea"
+              placeholder="내용내용내용"
+      ></textarea>
+      <div class="write__btns">
+        <div class="write__btn" th:onclick="|location.href='@{/board}'|">취소</div>
+        <div class="write__btn" th:onclick="|location.href='@{/write}'|">등록</div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <span class="footer__text">© 9doggy Inc. ALL Rights Reserved</span>
+  </footer>
+</div>
+</body>
+<script
+        src="https://kit.fontawesome.com/cbc86f8bd3.js"
+        crossorigin="anonymous"
+></script>
+</html>
