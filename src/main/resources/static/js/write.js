@@ -1,8 +1,8 @@
 
 // 게시물 등록
-const writeBtn = documnet.querySelector(".write__btn");
+const writeBtn = document.querySelector(".write__btn");
 if (writeBtn) {
-    writeBtn.addEventListener("click", (event) => {
+    writeBtn.addEventListener("click", event => {
         fetch("/write",{
             method: "POST",
             headers: {
@@ -19,3 +19,4 @@ if (writeBtn) {
         )
     })
 }
+

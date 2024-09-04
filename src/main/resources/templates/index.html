@@ -14,19 +14,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="header">
-        <a class="logo" href="/"><div class="logo__img"></div></a>
-        <ul class="menus">
-            <li class="menu__shop hover">SHOP</li>
-            <li class="menu__community hover">
-                <a th:href="@{/board}">COMMUNITY</a>
-            </li>
-        </ul>
-        <div class="cart hover">
-            <i class="fa-solid fa-cart-shopping fa-lg"></i>
-        </div>
-        <div class="account hover"><i class="fa-solid fa-user fa-lg"></i></div>
-    </div>
+    <div th:replace="~{/header :: headerFragment}"></div>
     <div class="slide_banner">
         <div class="slide__banner__text">
             <h1>언제나 그 곁에 함께, <br />구도기도 있겠습니다</h1>

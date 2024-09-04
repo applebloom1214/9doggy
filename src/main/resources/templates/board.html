@@ -14,19 +14,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="header">
-        <a class="logo" href="/"><div class="logo__img"></div></a>
-        <ul class="menus">
-            <li class="menu__shop hover">SHOP</li>
-            <li class="menu__community hover">
-                <a th:href="@{/board}">COMMUNITY</a>
-            </li>
-        </ul>
-        <div class="cart hover">
-            <i class="fa-solid fa-cart-shopping fa-lg"></i>
-        </div>
-        <div class="account hover"><i class="fa-solid fa-user fa-lg"></i></div>
-    </div>
+    <div th:replace="~{/header :: headerFragment}"></div>
     <main>
         <h1>커뮤니티</h1>
         <div class="board">

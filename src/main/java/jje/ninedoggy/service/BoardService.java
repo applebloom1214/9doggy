@@ -1,6 +1,7 @@
 package jje.ninedoggy.service;
 
 import jje.ninedoggy.domain.Post;
+import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,10 @@ public class BoardService {
 
     public List<Post> findAll() {
         return boardRepository.findAll();
+    }
+
+    public Post save(PostDto dto) {
+        return boardRepository.save(dto.toEntity());
     }
 
 

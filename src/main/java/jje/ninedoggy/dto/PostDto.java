@@ -21,6 +21,13 @@ public class PostDto {
     private Long hit;
     private Long likes;
 
+    public Post toEntity() {
+        return Post.builder()
+                .title(title)
+                .content(content)
+                .writer(writer)
+                .build();
+    }
 
     public PostDto(Post post) {
         this.bno = post.getBno();

@@ -14,19 +14,7 @@
 </head>
 <body>
 <div class="wrapper">
-  <div class="header">
-    <a class="logo" href="/"><div class="logo__img"></div></a>
-    <ul class="menus">
-      <li class="menu__shop hover">SHOP</li>
-      <li class="menu__community hover">
-        <a th:href="@{/board}">COMMUNITY</a>
-      </li>
-    </ul>
-    <div class="cart hover">
-      <i class="fa-solid fa-cart-shopping fa-lg"></i>
-    </div>
-    <div class="account hover"><i class="fa-solid fa-user fa-lg"></i></div>
-  </div>
+  <div th:replace="~{/header :: headerFragment}"></div>
   <main>
     <h1>글쓰기</h1>
     <div class="board__write">
@@ -56,7 +44,7 @@
       ></textarea>
       <div class="write__btns">
         <div class="write__btn" th:onclick="|location.href='@{/board}'|">취소</div>
-        <div class="write__btn" th:onclick="|location.href='@{/write}'|">등록</div>
+        <div class="write__btn">등록</div>
       </div>
     </div>
   </main>
@@ -69,4 +57,5 @@
         src="https://kit.fontawesome.com/cbc86f8bd3.js"
         crossorigin="anonymous"
 ></script>
+<script src="/js/write.js"></script>
 </html>
