@@ -1,16 +1,14 @@
 package jje.ninedoggy.dto;
 
 import jje.ninedoggy.domain.Post;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @ToString
 public class PostDto {
     private Long bno;

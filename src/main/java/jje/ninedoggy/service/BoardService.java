@@ -17,8 +17,8 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public Post save(PostDto dto) {
-        return boardRepository.save(dto.toEntity());
+    public Long save(PostDto dto) {
+        return boardRepository.save(dto.toEntity()).getBno();
     }
 
 

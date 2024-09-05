@@ -37,11 +37,11 @@ public class BoardController {
         return mav;
     }
 
-    @PostMapping("/write")
-    public ResponseEntity<Post> addPost(@RequestBody PostDto postDto) {
-        Post savedPost = boardService.save(postDto);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                             .body(savedPost);
-    }
+//    @PostMapping("/write")
+//    public ResponseEntity<Post> addPost(@RequestBody PostDto postDto) {
+//        Post savedPost = boardService.save(postDto);
+//        return ResponseEntity.status(HttpStatus.CREATED)
+//                             .body(savedPost);
+//    }
 
 }
