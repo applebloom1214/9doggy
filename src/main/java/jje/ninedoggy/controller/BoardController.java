@@ -39,7 +39,6 @@ public class BoardController {
 
     @PostMapping("/write")
     public ResponseEntity<Post> addPost(@RequestBody PostDto postDto) {
-        System.out.println(postDto);
         Post savedPost = boardService.save(postDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                              .body(savedPost);

@@ -63,7 +63,7 @@ main{
             display: flex;
             gap: 1.5rem;
 
-            & .write__btn{
+            & div{
                 font-size: 1.5rem;
                 font-weight: bold;
                 display: flex;

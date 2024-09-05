@@ -10,11 +10,12 @@ if (writeBtn) {
             },
             body: JSON.stringify({
                 title : document.querySelector(".write__title").value,
-                content : document.querySelector(".write__content").value
+                content : document.querySelector(".write__textarea").value,
+                writer : "test"
             })
         }).then(() => {
                 alert("게시물이 등록되었습니다 !");
-                location.reload("/board");
+                location.replace("/board");
             }
         )
     })
