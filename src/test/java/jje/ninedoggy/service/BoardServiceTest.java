@@ -9,8 +9,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.Optional;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -36,6 +40,8 @@ class BoardServiceTest {
         //mocking
         given(boardRepository.save(any()))
                 .willReturn(post);
+        given(boardRepository.findById(fakeBno)).
+                willReturn(Optional.ofNullable(post));
 
         //when
         Long newBno = boardService.save(postDto);
@@ -52,9 +58,9 @@ class BoardServiceTest {
 
     private Post createPost(PostDto postDto) {
         return Post.builder()
-                .writer(postDto.getWriter())
                 .title(postDto.getTitle())
                 .content(postDto.getContent())
+                .writer(postDto.getWriter())
                 .build();
     }
 
