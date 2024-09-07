@@ -4,12 +4,14 @@ import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.dto.PostDto;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -29,6 +31,19 @@ class BoardRepositoryTest {
 //        }
 //
 //    }
+    @Test
+    @DisplayName("게시글 등록 테스트")
+    public void writeTest(){
+        // given
+        PostDto postDto = createPostDto();
+        Post post = createPost(postDto);
+
+        // when
+        boardRepository.save(post);
+
+        // then
+        assertThat(boardRepository.findById(post.getBno()).get().getWriter()).isEqualTo("tester");
+    }
 
     @Test
     public void readAll(){
@@ -38,6 +53,22 @@ class BoardRepositoryTest {
                 .toList();
 
         posts.forEach(System.out::println);
+    }
+
+    private Post createPost(PostDto postDto) {
+        return Post.builder()
+                .title(postDto.getTitle())
+                .content(postDto.getContent())
+                .writer(postDto.getWriter())
+                .build();
+    }
+
+    private PostDto createPostDto() {
+        PostDto postDto = new PostDto();
+        postDto.setWriter("tester");
+        postDto.setTitle("test title");
+        postDto.setContent("test content");
+        return postDto;
     }
 
 }
