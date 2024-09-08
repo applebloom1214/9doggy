@@ -19,18 +19,18 @@ class BoardRepositoryTest {
     @Autowired
     private BoardRepository boardRepository;
 
-//    @BeforeEach
-//    public void setUp() {
-//        for (int i = 0; i < 10; i++) {
-//            Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
-//            boardRepository.save(Post.builder()
-//                    .title(post.getTitle())
-//                    .content(post.getContent())
-//                    .writer(post.getWriter())
-//                    .build());
-//        }
-//
-//    }
+    @BeforeEach
+    public void setUp() {
+        for (int i = 0; i < 10; i++) {
+            Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
+            boardRepository.save(Post.builder()
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .writer(post.getWriter())
+                    .build());
+        }
+
+    }
     @Test
     @DisplayName("게시글 등록 테스트")
     public void writeTest(){
@@ -43,6 +43,19 @@ class BoardRepositoryTest {
 
         // then
         assertThat(boardRepository.findById(post.getBno()).get().getWriter()).isEqualTo("tester");
+    }
+
+    @Test
+    @DisplayName("게시글 읽기 테스트")
+    public void readTest(){
+        // given
+        Long readId = 1l;
+
+        // when
+        Post post = boardRepository.findById(readId).get();
+
+        // then
+        assertThat(post.getBno()).isEqualTo(readId);
     }
 
     @Test

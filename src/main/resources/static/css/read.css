@@ -1,0 +1,245 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    & .board__read{
+        font-size: 1.5rem;
+        display: grid;
+        justify-content: center;
+        width: 126rem;
+        gap: 2rem;
+
+        h1{
+            font-weight: bold;
+            font-size: 3rem;
+            margin-top: 3rem;
+        }
+
+        & .read__desc, .read__textarea, .write__btns, .read__reply{
+            width: 80rem;
+        }
+
+        & .read__textarea{
+            font-size: 2rem;
+            border: none;
+            height: 50rem;
+            outline: none;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+
+            & .read__img{
+                align-self: center;
+            }
+        }
+
+        & .read__desc{
+            display: flex;
+            gap: 1.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: solid 0.2rem #c6bfb9;
+
+            & .desc__writer{
+                font-weight: bold;
+            }
+
+            & .desc__date{
+                color: #c6bfb9;
+            }
+        }
+
+        & .read__reply{
+            margin-top: 1rem;
+
+
+            & .reply__cnt{
+                margin-bottom: 4rem;
+            }
+
+            & .reply__write{
+                margin-bottom: 1.5rem;
+                padding-bottom: 1rem;
+                border-bottom: solid 0.2rem rgba(198, 191, 185, 0.2);
+                gap: 1rem;
+
+                & .reply__write__writer{
+                    display: block;
+                    font-weight: bold;
+                    margin-bottom: 1.5rem;
+                }
+
+                & .reply__write__inputbox{
+                    padding: 0 2rem;
+                    height: 6rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border: solid 0.1rem black;
+                    border-radius: 0.5rem;
+
+
+                    & .inputbox__textarea{
+                        display: block;
+                        width: 65rem;
+                        border: none;
+                        outline: none;
+                        resize: none;
+                    }
+
+                    & .inputbox__btn{
+                        color: white;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 5.5rem;
+                        height: 4rem;
+                        background-color: #5e504d;
+                        border-radius: 0.5rem;
+                    }
+                }
+
+                & .reply__write__inputbox:hover{
+                    border: solid 0.1rem #c5875e;
+                }
+            }
+
+            & .replies{
+                display: flex;
+                flex-direction: column;
+
+
+                & .reply{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                    border-bottom: solid 0.2rem rgba(198, 191, 185, 0.2);
+                    margin-bottom: 1.5rem;
+                    padding-bottom: 1rem;
+
+                    & .reply__header{
+                        display: flex;
+                        justify-content: space-between;
+
+                        & .reply__writer{
+                            font-weight: bold;
+                        }
+
+                        & .reply__rightsection{
+                            display: flex;
+                            gap: 1rem;
+                        }
+                    }
+                    & .reply__content{
+                        color: #a49990;
+                    }
+
+                    & .nested__reply{
+                        background-color: #f4f1ec;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.5rem;
+                        border: solid 0.2rem rgba(198, 191, 185, 0.2);
+                        padding: 1rem;
+                        align-self: flex-end;
+                        width: 95%;
+                    }
+                }
+
+                & .reply:last-child{
+                    border-bottom: none;
+                }
+            }
+        }
+
+        & .read__navi{
+            font-size: 1.3rem;
+            padding: 3rem 0;
+            border-top: solid 0.2rem #c6bfb9;
+            border-bottom: solid 0.2rem #c6bfb9;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            & .navi__next, .navi__prev{
+                display: flex;
+                justify-content: space-between;
+
+                & .navi__title:hover{
+                    color: #c5875e;
+                }
+
+                & .navi__left{
+                    display: flex;
+                    gap: 1rem;
+                }
+            }
+        }
+
+
+        & .read__btns{
+            display: flex;
+            gap: 1.5rem;
+
+            & .read__btn{
+                font-size: 1.5rem;
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #c5875e;
+                width: 7rem;
+                height: 3rem;
+                border-radius: 1rem;
+            }
+        }
+    }
+}
+
+footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    & .footer__text{
+        width: 126rem;
+    }
+}
+
+/* Media Query 시작 */
+
+@media screen and (max-width:945px) {
+
+    main{
+        & .board__read{
+            width: 44.5rem;
+
+            & .read__desc, .read__textarea, .write__btns, .read__reply{
+                width: 44.5rem;
+            }
+
+
+
+            & .inputbox__btn{
+                font-size: 1.2rem;
+
+            }
+        }
+
+
+    }
+
+    footer{
+        & .footer__text{
+            width: 44.5rem;
+        }
+    }
+
+}
+
+/* Media Query 끝 */

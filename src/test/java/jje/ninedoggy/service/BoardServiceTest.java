@@ -56,6 +56,36 @@ class BoardServiceTest {
 
     }
 
+    @Test
+    @DisplayName("게시물 읽기 테스트")
+    void readTest(){
+        //given
+        PostDto postDto = createPostDto();
+        Post post = createPost(postDto);
+
+        Long fakeBno = 1L;
+        ReflectionTestUtils.setField(post, "bno", fakeBno);
+
+        //mocking
+        given(boardRepository.save(any()))
+                .willReturn(post);
+        given(boardRepository.findById(fakeBno)).
+                willReturn(Optional.ofNullable(post));
+
+        //when
+        Long newBno = boardService.save(postDto);
+
+
+        //then
+        Post findPost = boardRepository.findById(newBno).get();
+
+        assertEquals(post.getBno(), findPost.getBno());
+        assertEquals(post.getTitle(), findPost.getTitle());
+        assertEquals(post.getContent(), findPost.getContent());
+
+    }
+
+
     private Post createPost(PostDto postDto) {
         return Post.builder()
                 .title(postDto.getTitle())

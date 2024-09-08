@@ -44,4 +44,12 @@ public class BoardController {
                              .body(bno);
     }
 
+
+    @GetMapping("/read")
+    public ModelAndView read() {
+        ModelAndView mav = new ModelAndView("read");
+
+        return mav;
+    }
+
 }
