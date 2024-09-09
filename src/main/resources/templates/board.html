@@ -29,7 +29,8 @@
             <div class="board__rows" th:each="post:${posts}">
                 <div class="board__row">
                     <div class="boardcell__no" th:text="${post.bno}"></div>
-                    <div class="boardcell__title" th:text="${post.title}"></div>
+                    <a th:href="@{/posting/{bno}(bno=${post.bno})}">
+                        <div class="boardcell__title" th:text="${post.title}"></div></a>
                     <div class="boardcell__writer" th:text="${post.writer}"></div>
                     <div class="boardcell__date">
                         <span class="date" th:text="${post.createdAt}">2</span>

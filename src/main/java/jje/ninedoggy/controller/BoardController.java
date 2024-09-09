@@ -41,10 +41,12 @@ public class BoardController {
                              .body(bno);
     }
 
-    @GetMapping("/posting/${bno}")
-    public ResponseEntity<PostDto> readPost(@PathVariable("bno") Long bno) {
+    @GetMapping("/posting/{bno}")
+    public ModelAndView readPost(@PathVariable("bno") Long bno) {
         Post post = boardService.findById(bno);
-        return ResponseEntity.ok(new PostDto(post));
+        ModelAndView mav = new ModelAndView("read");
+        mav.addObject("post", new PostDto(post));
+        return mav;
     }
 
 

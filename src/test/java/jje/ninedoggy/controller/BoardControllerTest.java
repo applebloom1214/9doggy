@@ -20,7 +20,9 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -85,8 +87,15 @@ class BoardControllerTest {
                 .build());
 
         //when
+        final ResultActions result = mockMvc.perform(get(url, savedPost.getBno()));
 
         //then
+        result
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value(postDto.getTitle()))
+                .andExpect(jsonPath("$.content").value(postDto.getContent()));
+
+
     }
 
     private PostDto createPostDto() {
