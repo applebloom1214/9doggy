@@ -6,10 +6,7 @@ import jje.ninedoggy.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -30,18 +27,24 @@ public class BoardController {
         return mav;
     }
 
-    @GetMapping("/write")
+    @GetMapping("/posting")
     public ModelAndView write() {
         ModelAndView mav = new ModelAndView("write");
 
         return mav;
     }
 
-    @PostMapping("/write")
+    @PostMapping("/posting")
     public ResponseEntity<Long> addPost(@RequestBody PostDto postDto) {
         Long bno = boardService.save(postDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                              .body(bno);
+    }
+
+    @GetMapping("/posting/${bno}")
+    public ResponseEntity<PostDto> readPost(@PathVariable("bno") Long bno) {
+        Post post = boardService.findById(bno);
+        return ResponseEntity.ok(new PostDto(post));
     }
 
 

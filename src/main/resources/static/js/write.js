@@ -3,7 +3,7 @@
 const writeBtn = document.querySelector(".write__btn");
 if (writeBtn) {
     writeBtn.addEventListener("click", event => {
-        fetch("/write",{
+        fetch("/posting",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

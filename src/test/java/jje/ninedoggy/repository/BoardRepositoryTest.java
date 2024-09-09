@@ -56,6 +56,9 @@ class BoardRepositoryTest {
 
         // then
         assertThat(post.getBno()).isEqualTo(readId);
+        assertThat(post.getTitle()).isEqualTo("test0");
+        assertThat(post.getContent()).isEqualTo("contentcontent0");
+        assertThat(post.getWriter()).isEqualTo("tester0");
     }
 
     @Test

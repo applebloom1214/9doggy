@@ -21,6 +21,10 @@ public class BoardService {
         return boardRepository.save(dto.toEntity()).getBno();
     }
 
+    public Post findById(Long id) {
+        return boardRepository.findById(id).get();
+    }
+
 
 
 }

@@ -74,10 +74,10 @@ class BoardServiceTest {
 
         //when
         Long newBno = boardService.save(postDto);
+        Post findPost = boardService.findById(newBno);
 
 
         //then
-        Post findPost = boardRepository.findById(newBno).get();
 
         assertEquals(post.getBno(), findPost.getBno());
         assertEquals(post.getTitle(), findPost.getTitle());

@@ -48,7 +48,7 @@ class BoardControllerTest {
     @Test
     public void writeTest() throws Exception {
         //given
-        final String url = "/write";
+        final String url = "/posting";
         final PostDto postDto = createPostDto();
 
         // java object -> json
@@ -69,6 +69,24 @@ class BoardControllerTest {
         assertThat(posts.get(0).getContent()).isEqualTo(postDto.getContent());
         assertThat(posts.get(0).getWriter()).isEqualTo(postDto.getWriter());
 
+    }
+
+    @DisplayName("글 하나 읽기 테스트")
+    @Test
+    public void readPostTest() throws Exception {
+        //given
+        final String url = "/posting/{bno}";
+        final PostDto postDto = createPostDto();
+
+        Post savedPost = boardRepository.save(Post.builder()
+                .title(postDto.getTitle())
+                .content(postDto.getContent())
+                .writer(postDto.getWriter())
+                .build());
+
+        //when
+
+        //then
     }
 
     private PostDto createPostDto() {
