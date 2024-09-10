@@ -1,5 +1,6 @@
 package jje.ninedoggy.service;
 
+import jakarta.transaction.Transactional;
 import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.repository.BoardRepository;
@@ -13,8 +14,10 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public List<Post> findAll() {
-        return boardRepository.findAll();
+    public List<PostDto> findAll() {
+        return boardRepository.findAll().stream()
+                .map(PostDto::new)
+                .toList();
     }
 
     public Long save(PostDto dto) {
@@ -23,6 +26,14 @@ public class BoardService {
 
     public Post findById(Long id) {
         return boardRepository.findById(id).get();
+    }
+
+    @Transactional
+    public Post update(Long bno, PostDto dto) {
+        Post post= boardRepository.findById(bno)
+                .orElseThrow(()->new IllegalArgumentException("not found: "+bno));
+        post.changePost(dto.getTitle(), dto.getContent());
+        return post;
     }
 
 

@@ -62,6 +62,20 @@ class BoardRepositoryTest {
     }
 
     @Test
+    @DisplayName("게시글 업데이트 테스트")
+    public void updateTest(){
+        // given
+        Post post = boardRepository.findById(1l).get();
+
+        // when
+        post.changePost("modified","update content");
+
+        // then
+        assertThat(boardRepository.findById(post.getBno()).get().getTitle()).isEqualTo("modified");
+        assertThat(boardRepository.findById(post.getBno()).get().getContent()).isEqualTo("update content");
+    }
+
+    @Test
     public void readAll(){
         List<PostDto> posts = boardRepository.findAll()
                 .stream()

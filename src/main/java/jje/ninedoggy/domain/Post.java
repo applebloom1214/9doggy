@@ -48,6 +48,11 @@ public class Post {
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
+    public void changePost(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     @Builder
     public Post(String title, String content, String writer) {
         this.title = title;

@@ -85,6 +85,35 @@ class BoardServiceTest {
 
     }
 
+    @Test
+    @DisplayName("게시물 업데이트 테스트")
+    void updateTest(){
+        //given
+        PostDto postDto = createPostDto();
+        Post post = createPost(postDto);
+
+        Long fakeBno = 1L;
+        ReflectionTestUtils.setField(post, "bno", fakeBno);
+
+        //mocking
+        given(boardRepository.save(any()))
+                .willReturn(post);
+        given(boardRepository.findById(fakeBno)).
+                willReturn(Optional.ofNullable(post));
+
+        //when
+        boardService.save(postDto);
+        PostDto updatePostDto = new PostDto("수정", "수정된 내용");
+        Post findPost = boardService.update(fakeBno, updatePostDto);
+        PostDto updateCompletePostDto = new PostDto(post);
+
+        //then
+
+        assertEquals(post.getTitle(), findPost.getTitle());
+        assertEquals(post.getContent(), findPost.getContent());
+
+    }
+
 
     private Post createPost(PostDto postDto) {
         return Post.builder()

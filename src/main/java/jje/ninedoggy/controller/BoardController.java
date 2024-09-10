@@ -19,10 +19,7 @@ public class BoardController {
     @GetMapping("/board")
     public ModelAndView board() {
         ModelAndView mav = new ModelAndView("board");
-
-        List<PostDto> posts = boardService.findAll().stream()
-                .map(PostDto::new)
-                .toList();
+        List<PostDto> posts = boardService.findAll();
         mav.addObject("posts", posts);
         return mav;
     }
@@ -48,6 +45,12 @@ public class BoardController {
         mav.addObject("post", new PostDto(post));
         return mav;
     }
+
+    @PutMapping("/posting/{bno}")
+    public void updatePost(@PathVariable("bno") Long bno, @RequestBody PostDto postDto) {
+        boardService.update(bno, postDto);
+    }
+
 
 
     @GetMapping("/read")

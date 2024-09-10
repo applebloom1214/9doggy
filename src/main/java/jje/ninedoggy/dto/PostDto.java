@@ -36,4 +36,9 @@ public class PostDto {
         this.hit = post.getHit();
         this.likes = post.getLikes();
     }
+
+    public PostDto(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }
