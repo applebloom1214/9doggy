@@ -20,8 +20,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -94,8 +93,39 @@ class BoardControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value(postDto.getTitle()))
                 .andExpect(jsonPath("$.content").value(postDto.getContent()));
+    }
+
+    @DisplayName("글 수정 테스트")
+    @Test
+    public void modifyPostTest() throws Exception {
+        // given
+        final String url = "/posting/{bno}";
+        final PostDto postDto = createPostDto();
+
+        Post savedPost = boardRepository.save(Post.builder()
+                .title(postDto.getTitle())
+                .content(postDto.getContent())
+                .writer(postDto.getWriter())
+                .build());
+
+        final String newTitle ="new title";
+        final String newContent ="new content";
+
+        PostDto modifyPostDto = new PostDto(newTitle, newContent);
+
+        // when
+        ResultActions result = mockMvc.perform(put(url, savedPost.getBno())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(modifyPostDto)));
 
 
+        // then
+        result.andExpect(status().isOk());
+
+        Post modifyPost = boardRepository.findById(savedPost.getBno()).get();
+
+        assertThat(modifyPost.getTitle()).isEqualTo(newTitle);
+        assertThat(modifyPost.getContent()).isEqualTo(newContent);
     }
 
     private PostDto createPostDto() {
