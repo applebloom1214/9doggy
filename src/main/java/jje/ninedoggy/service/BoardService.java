@@ -36,6 +36,12 @@ public class BoardService {
         return post;
     }
 
+    public void delete(Long bno) {
+        boardRepository.deleteById(bno);
+    }
+
+
+
 
 
 }

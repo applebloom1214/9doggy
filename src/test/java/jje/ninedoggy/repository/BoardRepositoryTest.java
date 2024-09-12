@@ -2,17 +2,14 @@ package jje.ninedoggy.repository;
 
 import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.dto.PostDto;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import java.util.List;
-
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 @DataJpaTest
 class BoardRepositoryTest {
@@ -49,7 +46,7 @@ class BoardRepositoryTest {
     @DisplayName("게시글 읽기 테스트")
     public void readTest(){
         // given
-        Long readId = 1l;
+        Long readId = 1L;
 
         // when
         Post post = boardRepository.findById(readId).get();
@@ -74,6 +71,20 @@ class BoardRepositoryTest {
         assertThat(boardRepository.findById(post.getBno()).get().getTitle()).isEqualTo("modified");
         assertThat(boardRepository.findById(post.getBno()).get().getContent()).isEqualTo("update content");
     }
+
+    @Test
+    @DisplayName("게시글 삭제 테스트")
+    public void deleteTest(){
+        // given
+        Post post = boardRepository.findById(1l).get();
+
+        // when
+        boardRepository.delete(post);
+
+        // then
+        assertThat(boardRepository.findById(post.getBno()).isEmpty()).isTrue();
+    }
+
 
     @Test
     public void readAll(){

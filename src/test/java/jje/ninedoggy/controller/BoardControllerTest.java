@@ -128,6 +128,32 @@ class BoardControllerTest {
         assertThat(modifyPost.getContent()).isEqualTo(newContent);
     }
 
+    @DisplayName("글 삭제 테스트")
+    @Test
+    public void deletePostTest() throws Exception {
+        // given
+        final String url = "/posting/{bno}";
+        final PostDto postDto = createPostDto();
+        final Long bno = 1l;
+
+        Post savedPost = boardRepository.save(Post.builder()
+                .title(postDto.getTitle())
+                .content(postDto.getContent())
+                .writer(postDto.getWriter())
+                .build());
+
+        // when
+        ResultActions result = mockMvc.perform(delete(url, savedPost.getBno()));
+
+
+        // then
+        result.andExpect(status().isOk());
+
+        assertThat(boardRepository.findById(bno)).isEmpty();
+
+    }
+
+
     private PostDto createPostDto() {
         PostDto postDto = new PostDto();
         postDto.setTitle("title");

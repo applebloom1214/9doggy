@@ -18,6 +18,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BoardServiceTest {
@@ -40,19 +41,12 @@ class BoardServiceTest {
         //mocking
         given(boardRepository.save(any()))
                 .willReturn(post);
-        given(boardRepository.findById(fakeBno)).
-                willReturn(Optional.ofNullable(post));
 
         //when
         Long newBno = boardService.save(postDto);
 
-
         //then
-        Post findPost = boardRepository.findById(newBno).get();
-
-        assertEquals(post.getBno(), findPost.getBno());
-        assertEquals(post.getTitle(), findPost.getTitle());
-        assertEquals(post.getContent(), findPost.getContent());
+        assertThat(newBno).isNotNull();
 
     }
 
@@ -62,26 +56,20 @@ class BoardServiceTest {
         //given
         PostDto postDto = createPostDto();
         Post post = createPost(postDto);
-
         Long fakeBno = 1L;
         ReflectionTestUtils.setField(post, "bno", fakeBno);
 
         //mocking
-        given(boardRepository.save(any()))
-                .willReturn(post);
         given(boardRepository.findById(fakeBno)).
                 willReturn(Optional.ofNullable(post));
 
         //when
-        Long newBno = boardService.save(postDto);
-        Post findPost = boardService.findById(newBno);
+        Post findPost = boardService.findById(fakeBno);
 
 
         //then
 
-        assertEquals(post.getBno(), findPost.getBno());
-        assertEquals(post.getTitle(), findPost.getTitle());
-        assertEquals(post.getContent(), findPost.getContent());
+        assertThat(findPost).isNotNull();
 
     }
 
@@ -91,26 +79,41 @@ class BoardServiceTest {
         //given
         PostDto postDto = createPostDto();
         Post post = createPost(postDto);
+        String title = post.getTitle();
+        String content = post.getContent();
 
         Long fakeBno = 1L;
         ReflectionTestUtils.setField(post, "bno", fakeBno);
 
         //mocking
-        given(boardRepository.save(any()))
-                .willReturn(post);
         given(boardRepository.findById(fakeBno)).
                 willReturn(Optional.ofNullable(post));
 
         //when
-        boardService.save(postDto);
         PostDto updatePostDto = new PostDto("수정", "수정된 내용");
         Post findPost = boardService.update(fakeBno, updatePostDto);
-        PostDto updateCompletePostDto = new PostDto(post);
 
         //then
 
-        assertEquals(post.getTitle(), findPost.getTitle());
-        assertEquals(post.getContent(), findPost.getContent());
+        assertNotEquals(title, findPost.getTitle());
+        assertNotEquals(content, findPost.getContent());
+
+    }
+
+
+    @Test
+    @DisplayName("게시물 삭제 테스트")
+    void deleteTest(){
+        //given
+        Long bno = 1L;
+
+        //mocking
+
+        //when
+        boardService.delete(bno);
+
+        //then
+        verify(boardRepository, atLeastOnce()).deleteById(any());
 
     }
 

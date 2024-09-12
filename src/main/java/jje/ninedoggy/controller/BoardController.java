@@ -47,17 +47,20 @@ public class BoardController {
     }
 
     @PutMapping("/posting/{bno}")
-    public void updatePost(@PathVariable("bno") Long bno, @RequestBody PostDto postDto) {
+    public ResponseEntity<Void> updatePost(@PathVariable("bno") Long bno, @RequestBody PostDto postDto) {
         boardService.update(bno, postDto);
+
+        return ResponseEntity.ok()
+                .build();
     }
 
+    @DeleteMapping("/posting/{bno}")
+    public ResponseEntity<Void> deletePost(@PathVariable("bno") Long bno) {
+        boardService.delete(bno);
 
-
-    @GetMapping("/read")
-    public ModelAndView read() {
-        ModelAndView mav = new ModelAndView("read");
-
-        return mav;
+        return ResponseEntity.ok()
+                .build();
     }
+
 
 }
