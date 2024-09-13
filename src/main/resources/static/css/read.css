@@ -44,8 +44,12 @@ main{
             padding-bottom: 2.5rem;
             border-bottom: solid 0.2rem #c6bfb9;
 
-            & .desc__writer{
+            & .desc__writer, .desc__hits{
                 font-weight: bold;
+            }
+
+            & .desc__hits{
+                word-spacing: 0.5rem;
             }
 
             & .desc__date{

@@ -159,6 +159,7 @@ class BoardControllerTest {
         postDto.setTitle("title");
         postDto.setContent("content");
         postDto.setWriter("writer");
+        postDto.setHit(0l);
         return postDto;
     }
 

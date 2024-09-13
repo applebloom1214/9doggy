@@ -24,7 +24,9 @@ public class BoardService {
         return boardRepository.save(dto.toEntity()).getBno();
     }
 
+    @Transactional
     public Post findById(Long id) {
+        plusHit(id);
         return boardRepository.findById(id).get();
     }
 
@@ -40,6 +42,12 @@ public class BoardService {
         boardRepository.deleteById(bno);
     }
 
+    @Transactional
+    public void plusHit(Long bno) {
+        Post post= boardRepository.findById(bno)
+                .orElseThrow(()->new IllegalArgumentException("not found: "+bno));
+        post.plusHit();
+    }
 
 
 

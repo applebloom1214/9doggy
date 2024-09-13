@@ -25,3 +25,19 @@ if (modifyBtn) {
     })
 }
 
+// 게시물 삭제
+const deleteBtn = document.querySelector("#delete__btn");
+if (deleteBtn) {
+    deleteBtn.addEventListener("click", event => {
+        let bno = document.querySelector(".read__bno").value;
+
+        fetch("/posting/"+bno,{
+            method: "DELETE"
+        }).then(() => {
+                alert("게시물이 삭제되었습니다 !");
+                location.replace("/board");
+            }
+        )
+    })
+}
+

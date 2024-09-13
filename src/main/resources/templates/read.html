@@ -23,6 +23,7 @@
             <span class="desc__writer" th:text="${post.writer}"
             ><span style="color: #c6bfb9">by. </span></span>
                 <span class="desc__date" th:text="${post.getCreatedAt()}">2024.08.19</span>
+                <span class="desc__hits" th:text="|조회 ${post.getHit()}|"></span>
             </div>
 
             <div class="read__textarea">
@@ -272,7 +273,7 @@
             <div class="read__btns">
                 <div class="read__btn" th:onclick="|location.href='@{/board}'|">목록</div>
                 <div class="read__btn" id="modify__btn">수정</div>
-                <div class="read__btn">삭제</div>
+                <div class="read__btn" id="delete__btn">삭제</div>
             </div>
         </div>
     </main>

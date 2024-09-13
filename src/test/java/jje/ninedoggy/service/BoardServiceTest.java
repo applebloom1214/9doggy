@@ -58,6 +58,7 @@ class BoardServiceTest {
         Post post = createPost(postDto);
         Long fakeBno = 1L;
         ReflectionTestUtils.setField(post, "bno", fakeBno);
+        ReflectionTestUtils.setField(post, "hit", fakeBno);
 
         //mocking
         given(boardRepository.findById(fakeBno)).
