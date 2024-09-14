@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -88,11 +89,18 @@ class BoardControllerTest {
         //when
         final ResultActions result = mockMvc.perform(get(url, savedPost.getBno()));
 
+
         //then
+
+        MvcResult mvcResult = result.andReturn();
+        PostDto readPost = (PostDto) mvcResult.getModelAndView().getModel().get("post");
+
         result
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value(postDto.getTitle()))
-                .andExpect(jsonPath("$.content").value(postDto.getContent()));
+                .andExpect(status().isOk());
+
+        assertThat(readPost.getTitle()).isEqualTo(savedPost.getTitle());
+        assertThat(readPost.getContent()).isEqualTo(savedPost.getContent());
+
     }
 
     @DisplayName("글 수정 테스트")
@@ -159,7 +167,6 @@ class BoardControllerTest {
         postDto.setTitle("title");
         postDto.setContent("content");
         postDto.setWriter("writer");
-        postDto.setHit(0l);
         return postDto;
     }
 
