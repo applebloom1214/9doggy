@@ -24,6 +24,22 @@ main{
             width: 80rem;
         }
 
+        & .read__likes{
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+
+            & .fa-heart{
+                font-size: 2.5rem;
+            }
+
+            & .read__like{
+                font-weight: bold;
+                align-self: center;
+            }
+
+        }
+
         & .read__textarea{
             font-size: 2rem;
             border: none;

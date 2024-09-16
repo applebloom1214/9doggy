@@ -34,7 +34,11 @@
                         class="read__img"
                 />
                 <div class="read__content" th:text="${post.getContent()}" contenteditable="true"/>
-
+            </div>
+            <div class="read__likes">
+                <i class="fa-regular fa-heart" style="animation-iteration-count
+:1" th:onclick="like()"></i>
+                <span class="read__like">좋아요 0개</span>
             </div>
 
 <!--            <div class="read__reply">-->
@@ -282,9 +286,9 @@
     </footer>
 </div>
 </body>
+<script src="/js/read.js"></script>
 <script
         src="https://kit.fontawesome.com/cbc86f8bd3.js"
         crossorigin="anonymous"
 ></script>
-<script src="/js/read.js"></script>
 </html>

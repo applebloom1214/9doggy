@@ -1,3 +1,39 @@
+// 좋아요 구현
+
+let likeTrigger = false;
+let likeIcon = document.querySelector(".fa-heart");
+function mouseEnterEvent(e) {
+    likeIcon.style.opacity = "0.5";
+}
+function mouseLeaveEvent(e){
+    likeIcon.style.opacity = "1";
+}
+function heartBeatEvent(e) {
+
+}
+likeIcon.addEventListener("mouseenter", mouseEnterEvent);
+likeIcon.addEventListener("mouseleave", mouseLeaveEvent);
+
+
+function like(){
+    likeTrigger = !likeTrigger;
+    if(likeTrigger){
+        likeIcon.classList.replace("fa-regular","fa-solid");
+        likeIcon.classList.add("fa-bounce");
+        likeIcon.style.color = "#ff3040";
+        likeIcon.style.opacity = "1";
+        likeIcon.removeEventListener("mouseenter", mouseEnterEvent);
+        likeIcon.removeEventListener("mouseleave", mouseLeaveEvent);
+    }else{
+        likeIcon.classList.replace("fa-solid","fa-regular");
+        likeIcon.classList.remove("fa-bounce");
+        likeIcon.style.color = "black";
+        likeIcon.style.opacity = "0.5";
+        likeIcon.addEventListener("mouseenter", mouseEnterEvent);
+        likeIcon.addEventListener("mouseleave", mouseLeaveEvent);
+    }
+}
+
 
 // 게시물 업데이트
 const modifyBtn = document.querySelector("#modify__btn");
