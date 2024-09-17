@@ -52,6 +52,11 @@ public class Post {
         this.hit += 1;
     }
 
+    public void changeLikes(int likeFlag){
+        this.likes += likeFlag;
+    }
+
+
     public void changePost(String title, String content) {
         this.title = title;
         this.content = content;

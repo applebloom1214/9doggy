@@ -38,7 +38,7 @@
             <div class="read__likes">
                 <i class="fa-regular fa-heart" style="animation-iteration-count
 :1" th:onclick="like()"></i>
-                <span class="read__like">좋아요 0개</span>
+                <span class="read__like" th:text="|좋아요 ${post.getLikes()}개|"></span>
             </div>
 
 <!--            <div class="read__reply">-->

@@ -85,6 +85,20 @@ class BoardRepositoryTest {
         assertThat(boardRepository.findById(post.getBno()).isEmpty()).isTrue();
     }
 
+    @Test
+    @DisplayName("좋아요 카운트 조회 테스트")
+    public void likeCntTest(){
+        // given
+        Post post = boardRepository.findById(1l).get();
+        post.changeLikes(1);
+
+        // when
+        Long selectLike = boardRepository.findByBno(1l).getLikes();
+
+        // then
+        assertThat(post.getLikes()).isEqualTo(selectLike);
+    }
+
 
     @Test
     public void readAll(){
