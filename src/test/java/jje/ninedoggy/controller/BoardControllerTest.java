@@ -162,6 +162,36 @@ class BoardControllerTest {
     }
 
 
+    @DisplayName("조회수 증감 테스트")
+    @Test
+    public void likesTest() throws Exception {
+        // given
+        final String url = "/posting/{bno}/{likeFlag}";
+        final PostDto postDto = createPostDto();
+
+        Post savedPost = boardRepository.save(Post.builder()
+                .title(postDto.getTitle())
+                .content(postDto.getContent())
+                .writer(postDto.getWriter())
+                .build());
+
+        int likeFlag = 1;
+
+        // when
+        ResultActions result = mockMvc.perform(put(url, savedPost.getBno(), likeFlag)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(likeFlag)));
+
+
+        // then
+        result.andExpect(status().isOk());
+
+        Post modifyPost = boardRepository.findById(savedPost.getBno()).get();
+
+        assertThat(modifyPost.getLikes()).isEqualTo(1);
+    }
+
+
     private PostDto createPostDto() {
         PostDto postDto = new PostDto();
         postDto.setTitle("title");

@@ -95,6 +95,8 @@ class BoardServiceTest {
         Post findPost = boardService.update(fakeBno, updatePostDto);
 
         //then
+        System.out.println(title);
+        System.out.println(findPost.getTitle());
 
         assertNotEquals(title, findPost.getTitle());
         assertNotEquals(content, findPost.getContent());
@@ -117,6 +119,33 @@ class BoardServiceTest {
         verify(boardRepository, atLeastOnce()).deleteById(any());
 
     }
+
+    @Test
+    @DisplayName("좋아요 기능 테스트")
+    void likesTest() throws Exception {
+        //given
+
+        PostDto postDto = createPostDto();
+        Post post = createPost(postDto);
+        Long fakeLikes = 0l;
+        Long fakeBno = 1L;
+        int likeflag = 1;
+        ReflectionTestUtils.setField(post, "bno", fakeBno);
+        ReflectionTestUtils.setField(post, "likes", fakeLikes);
+
+
+        //mocking
+        given(boardRepository.findById(fakeBno)).
+                willReturn(Optional.ofNullable(post));
+
+        //when
+        Long likes  =  boardService.handleLikes(fakeBno, likeflag);
+
+        //then
+        assertThat(likes.equals(1l));
+
+    }
+
 
 
     private Post createPost(PostDto postDto) {

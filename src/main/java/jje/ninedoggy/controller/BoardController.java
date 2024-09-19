@@ -54,6 +54,13 @@ public class BoardController {
                 .build();
     }
 
+    @PutMapping("/posting/{bno}/{likeFlag}")
+    public ResponseEntity<Long> updateLikes(@PathVariable("bno") Long bno, @PathVariable("likeFlag") int likeFlag) {
+        Long likes = boardService.handleLikes(bno, likeFlag);
+        return ResponseEntity.ok()
+                .body(likes);
+    }
+
     @DeleteMapping("/posting/{bno}")
     public ResponseEntity<Void> deletePost(@PathVariable("bno") Long bno) {
         boardService.delete(bno);

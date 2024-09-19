@@ -1,6 +1,6 @@
 // 좋아요 구현
-
-let likeTrigger = false;
+let bno = document.querySelector(".read__bno").value;
+let likeTrigger = -1;
 let likeIcon = document.querySelector(".fa-heart");
 function mouseEnterEvent(e) {
     likeIcon.style.opacity = "0.5";
@@ -8,22 +8,39 @@ function mouseEnterEvent(e) {
 function mouseLeaveEvent(e){
     likeIcon.style.opacity = "1";
 }
-function heartBeatEvent(e) {
-
-}
 likeIcon.addEventListener("mouseenter", mouseEnterEvent);
 likeIcon.addEventListener("mouseleave", mouseLeaveEvent);
 
+function addLikes(){
+    fetch("/posting/"+bno+"/"+likeTrigger,{
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            bno : bno,
+            likeFlag : likeTrigger
+        })
+    }).then((response) => {
+            alert("좋아요 누름 !");
+            console.log(response);
+            let read__like = document.querySelector(".read__like");
+            read__like.innerHTML = "좋아요 "+response.likes +"개";
+        }
+    )
+}
+
 
 function like(){
-    likeTrigger = !likeTrigger;
-    if(likeTrigger){
+    likeTrigger *= -1;
+    if(likeTrigger == 1){
         likeIcon.classList.replace("fa-regular","fa-solid");
         likeIcon.classList.add("fa-bounce");
         likeIcon.style.color = "#ff3040";
         likeIcon.style.opacity = "1";
         likeIcon.removeEventListener("mouseenter", mouseEnterEvent);
         likeIcon.removeEventListener("mouseleave", mouseLeaveEvent);
+        addLikes();
     }else{
         likeIcon.classList.replace("fa-solid","fa-regular");
         likeIcon.classList.remove("fa-bounce");
@@ -31,6 +48,7 @@ function like(){
         likeIcon.style.opacity = "0.5";
         likeIcon.addEventListener("mouseenter", mouseEnterEvent);
         likeIcon.addEventListener("mouseleave", mouseLeaveEvent);
+        addLikes();
     }
 }
 
@@ -39,10 +57,6 @@ function like(){
 const modifyBtn = document.querySelector("#modify__btn");
 if (modifyBtn) {
     modifyBtn.addEventListener("click", event => {
-        let bno = document.querySelector(".read__bno").value;
-
-
-
         fetch("/posting/"+bno,{
             method: "PUT",
             headers: {

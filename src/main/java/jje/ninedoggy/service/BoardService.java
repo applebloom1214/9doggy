@@ -57,7 +57,7 @@ public class BoardService {
     public Long handleLikes(Long bno, int likesFlag){
         Post post = findByIdPlain(bno);
         post.changeLikes(likesFlag);
-        return boardRepository.findByBno(bno).getLikes();
+        return post.getLikes();
     }
 
 
