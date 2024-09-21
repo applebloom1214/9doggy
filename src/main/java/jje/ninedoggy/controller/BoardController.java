@@ -19,7 +19,15 @@ public class BoardController {
     @GetMapping("/board")
     public ModelAndView board() {
         ModelAndView mav = new ModelAndView("board");
-        List<PostDto> posts = boardService.findAll();
+        List<PostDto> posts = boardService.listPaging(0);
+        mav.addObject("posts", posts);
+        return mav;
+    }
+
+    @GetMapping("/board/{page}")
+    public ModelAndView boardByPage(@PathVariable("page") int page) {
+        ModelAndView mav = new ModelAndView("board");
+        List<PostDto> posts = boardService.listPaging(page);
         mav.addObject("posts", posts);
         return mav;
     }

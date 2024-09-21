@@ -7,6 +7,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+
 import java.util.List;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -18,7 +21,7 @@ class BoardRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 17; i++) {
             Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
             boardRepository.save(Post.builder()
                     .title(post.getTitle())
@@ -26,8 +29,25 @@ class BoardRepositoryTest {
                     .writer(post.getWriter())
                     .build());
         }
-
     }
+
+
+    @Test
+    @DisplayName("페이징 테스트")
+    public void pagingTest(){
+        // given
+        PageRequest pageRequest = PageRequest.of(1, 10, Sort.by("bno").descending());
+
+        // when
+        List<Post> postList = boardRepository.findAll(pageRequest).getContent();
+        for (Post post : postList) {
+            System.out.println(post);
+        }
+
+        // then
+        assertThat(postList.size()).isEqualTo(7);
+    }
+
     @Test
     @DisplayName("게시글 등록 테스트")
     public void writeTest(){

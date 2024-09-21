@@ -10,8 +10,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -47,6 +53,35 @@ class BoardServiceTest {
 
         //then
         assertThat(newBno).isNotNull();
+
+    }
+
+    @Test
+    @DisplayName("페이징 테스트")
+    void pagingTest(){
+        //given
+        PostDto postDto = createPostDto();
+        Post post = createPost(postDto);
+        List<Post> postList = new ArrayList<>();
+        postList.add(post);
+        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("bno").descending());
+        Page<Post> page = new PageImpl<>(postList);
+        Long fakeBno = 1L;
+        ReflectionTestUtils.setField(post, "bno", fakeBno);
+        ReflectionTestUtils.setField(post, "hit", fakeBno);
+
+        //mocking
+        given(boardRepository.findAll(pageRequest))
+                .willReturn(page);
+
+
+        //when
+        List<PostDto> postDTOList = boardService.listPaging(0);
+
+
+        //then
+
+        assertThat(postDTOList).isNotNull();
 
     }
 
@@ -163,5 +198,7 @@ class BoardServiceTest {
         postDto.setContent("test content");
         return postDto;
     }
+
+
 
 }

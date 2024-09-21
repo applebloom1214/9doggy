@@ -5,6 +5,8 @@ import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +16,9 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public List<PostDto> findAll() {
-        return boardRepository.findAll().stream()
+    public List<PostDto> listPaging(int page) {
+        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("bno").descending());
+        return boardRepository.findAll(pageRequest)
                 .map(PostDto::new)
                 .toList();
     }

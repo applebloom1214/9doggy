@@ -13,21 +13,23 @@ likeIcon.addEventListener("mouseleave", mouseLeaveEvent);
 
 function addLikes(){
     fetch("/posting/"+bno+"/"+likeTrigger,{
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            bno : bno,
-            likeFlag : likeTrigger
-        })
-    }).then((response) => {
+        method: "PUT"})
+        .then((res) => res.json())
+        .then((data)=>{
+            let likes = data;
             alert("좋아요 누름 !");
-            console.log(response);
             let read__like = document.querySelector(".read__like");
-            read__like.innerHTML = "좋아요 "+response.likes +"개";
-        }
-    )
+            read__like.innerHTML = "좋아요 "+ likes +"개";
+    })
+
+        // .then((response) =>response.text())
+        // .then((data)=>{
+        //     let likes = data.likes;
+        //     alert("좋아요 누름 !");
+        //     console.log(data);
+        //     let read__like = document.querySelector(".read__like");
+        //     read__like.innerHTML = "좋아요 "+ likes +"개";
+        // })
 }
 
 

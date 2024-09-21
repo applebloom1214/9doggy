@@ -73,6 +73,37 @@ class BoardControllerTest {
 
     }
 
+    @DisplayName("페이징 테스트")
+    @Test
+    public void pagingTest() throws Exception {
+        //given
+        final String url = "/board/{page}";
+        final int page = 1;
+
+        for (int i = 0; i < 17; i++) {
+            Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
+            boardRepository.save(Post.builder()
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .writer(post.getWriter())
+                    .build());
+        }
+
+        //when
+        final ResultActions result = mockMvc.perform(get(url, page));
+
+
+        //then
+
+        MvcResult mvcResult = result.andReturn();
+        List<PostDto> postDtos = (List<PostDto>) mvcResult.getModelAndView().getModel().get("posts");
+        result
+                .andExpect(status().isOk());
+
+        assertThat(postDtos.size()).isEqualTo(7);
+
+    }
+
     @DisplayName("글 하나 읽기 테스트")
     @Test
     public void readPostTest() throws Exception {
