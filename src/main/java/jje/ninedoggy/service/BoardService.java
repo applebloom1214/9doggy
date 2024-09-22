@@ -5,6 +5,7 @@ import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,21 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public List<PostDto> listPaging(int page) {
+    public void createPostDummy(){
+        for (int i = 0; i < 10; i++) {
+            Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
+            boardRepository.save(Post.builder()
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .writer(post.getWriter())
+                    .build());
+        }
+    }
+
+    public Page<Post> listPaging(int page) {
         PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("bno").descending());
-        return boardRepository.findAll(pageRequest)
-                .map(PostDto::new)
-                .toList();
+        return boardRepository.findAll(pageRequest);
+
     }
 
     public Long save(PostDto dto) {

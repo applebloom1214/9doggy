@@ -19,7 +19,10 @@ public class BoardController {
     @GetMapping("/board")
     public ModelAndView board() {
         ModelAndView mav = new ModelAndView("board");
-        List<PostDto> posts = boardService.listPaging(0);
+        List<PostDto> posts = boardService.listPaging(0)
+                .getContent()
+                .stream().map(PostDto::new)
+                .toList();
         mav.addObject("posts", posts);
         return mav;
     }
@@ -27,7 +30,10 @@ public class BoardController {
     @GetMapping("/board/{page}")
     public ModelAndView boardByPage(@PathVariable("page") int page) {
         ModelAndView mav = new ModelAndView("board");
-        List<PostDto> posts = boardService.listPaging(page);
+        List<PostDto> posts = boardService.listPaging(page)
+                .getContent()
+                .stream().map(PostDto::new)
+                .toList();
         mav.addObject("posts", posts);
         return mav;
     }

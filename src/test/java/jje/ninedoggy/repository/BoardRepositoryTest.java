@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
@@ -21,7 +22,7 @@ class BoardRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        for (int i = 0; i < 17; i++) {
+        for (int i = 0; i < 170; i++) {
             Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
             boardRepository.save(Post.builder()
                     .title(post.getTitle())
@@ -36,16 +37,29 @@ class BoardRepositoryTest {
     @DisplayName("페이징 테스트")
     public void pagingTest(){
         // given
-        PageRequest pageRequest = PageRequest.of(1, 10, Sort.by("bno").descending());
+        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("bno").descending());
 
         // when
         List<Post> postList = boardRepository.findAll(pageRequest).getContent();
-        for (Post post : postList) {
-            System.out.println(post);
-        }
+        Page<Post> pageList = boardRepository.findAll(pageRequest);
+        int size = 10;
+        int currentPage = pageList.getNumber() +1;  // index + 1
+        int totalPage = pageList.getTotalPages();
+        int startPage = (currentPage - 1) / size * size +1;
+        int endPage = Math.min(startPage + size-1, totalPage);
+        boolean showNext; // 다음 페이지로 이동하는 링크를 표시할 것인지
+        boolean showPrev; // 이전 페이지로 이동하는 링크를 표시할 것인지
+        showPrev = startPage != 1;
+        showNext = endPage != totalPage;
 
+
+        System.out.print(showPrev == true ? "<prev> ":" ");
+        for (int i = startPage; i <= endPage; i++) {
+            System.out.print(i+" ");
+        }
+        System.out.println(showNext == true ? " <next>":" ");
         // then
-        assertThat(postList.size()).isEqualTo(7);
+        assertThat(postList.size()).isEqualTo(10);
     }
 
     @Test
