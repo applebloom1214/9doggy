@@ -50,19 +50,20 @@
             </div>
             <a th:href="@{/posting}"><div class="board__writebtn btn">글쓰기</div></a>
         </div>
-        <div class="board__pagination">
-            <a class="prev" href="#"><</a>
-            <a class="active" href="#">1</a>
-            <a class="pagination" href="#">2</a>
-            <a class="pagination" href="#">3</a>
-            <a class="pagination" href="#">4</a>
-            <a class="pagination" href="#">5</a>
-            <a class="pagination" href="#">6</a>
-            <a class="pagination" href="#">7</a>
-            <a class="pagination" href="#">8</a>
-            <a class="pagination" href="#">9</a>
-            <a class="pagination" href="#">10</a>
-            <a class="next" href="#">></a>
+        <div class="board__pagination" th:each="num : ${#numbers.sequence(pagingDTO.getStartPage(),pagingDTO.getEndPage())}">
+<!--            <a class="prev" href="#"><</a>-->
+                <a class="pagination" href="#" th:text="${num}"/>
+<!--            <a class="active" href="#">1</a>-->
+<!--            <a class="pagination" href="#">2</a>-->
+<!--            <a class="pagination" href="#">3</a>-->
+<!--            <a class="pagination" href="#">4</a>-->
+<!--            <a class="pagination" href="#">5</a>-->
+<!--            <a class="pagination" href="#">6</a>-->
+<!--            <a class="pagination" href="#">7</a>-->
+<!--            <a class="pagination" href="#">8</a>-->
+<!--            <a class="pagination" href="#">9</a>-->
+<!--            <a class="pagination" href="#">10</a>-->
+<!--            <a class="next" href="#">></a>-->
         </div>
         <div class="board__searchbar">
             <select name="" id="" class="board__select">

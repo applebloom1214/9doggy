@@ -1,9 +1,11 @@
 package jje.ninedoggy.controller;
 
 import jje.ninedoggy.domain.Post;
+import jje.ninedoggy.dto.PagingDTO;
 import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +21,13 @@ public class BoardController {
     @GetMapping("/board")
     public ModelAndView board() {
         ModelAndView mav = new ModelAndView("board");
-        List<PostDto> posts = boardService.listPaging(0)
+        Page<Post> paging = boardService.listPaging(0);
+        List<PostDto> posts = paging
                 .getContent()
                 .stream().map(PostDto::new)
                 .toList();
+        PagingDTO pagingDTO = new PagingDTO(0, paging.getTotalPages());
+        mav.addObject("pagingDTO", pagingDTO);
         mav.addObject("posts", posts);
         return mav;
     }
