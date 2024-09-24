@@ -27,6 +27,7 @@ public class BoardController {
                 .stream().map(PostDto::new)
                 .toList();
         PagingDTO pagingDTO = new PagingDTO(0, paging.getTotalPages());
+        System.out.println(pagingDTO);
         mav.addObject("pagingDTO", pagingDTO);
         mav.addObject("posts", posts);
         return mav;

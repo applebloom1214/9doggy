@@ -17,17 +17,6 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public void createPostDummy(){
-        for (int i = 0; i < 10; i++) {
-            Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
-            boardRepository.save(Post.builder()
-                    .title(post.getTitle())
-                    .content(post.getContent())
-                    .writer(post.getWriter())
-                    .build());
-        }
-    }
-
     public Page<Post> listPaging(int page) {
         PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("bno").descending());
         return boardRepository.findAll(pageRequest);

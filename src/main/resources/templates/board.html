@@ -44,26 +44,20 @@
         </div>
         <div class="board__btns">
             <div class="board__sortbtns">
-                <div class="board__listbtn btn">전체글</div>
+                <a th:href="@{/board}"><div class="board__listbtn btn">전체글</div></a>
                 <div class="board__hitbtn btn">조회순</div>
                 <div class="board__likebtn btn">좋아요순</div>
             </div>
             <a th:href="@{/posting}"><div class="board__writebtn btn">글쓰기</div></a>
         </div>
-        <div class="board__pagination" th:each="num : ${#numbers.sequence(pagingDTO.getStartPage(),pagingDTO.getEndPage())}">
-<!--            <a class="prev" href="#"><</a>-->
-                <a class="pagination" href="#" th:text="${num}"/>
-<!--            <a class="active" href="#">1</a>-->
-<!--            <a class="pagination" href="#">2</a>-->
-<!--            <a class="pagination" href="#">3</a>-->
-<!--            <a class="pagination" href="#">4</a>-->
-<!--            <a class="pagination" href="#">5</a>-->
-<!--            <a class="pagination" href="#">6</a>-->
-<!--            <a class="pagination" href="#">7</a>-->
-<!--            <a class="pagination" href="#">8</a>-->
-<!--            <a class="pagination" href="#">9</a>-->
-<!--            <a class="pagination" href="#">10</a>-->
-<!--            <a class="next" href="#">></a>-->
+        <div class="board__pagination">
+            <a th:if="${pagingDTO.showPrev}" class="prev" th:href="@{/board/{page}(page=${num}-1)}" th:utext="&lt;"/>
+                <a th:href="@{/board/{page}(page=${num})}"
+                   th:class="${num} == ${pagingDTO.getStartPage()} ? active : pagination"
+                   th:text="${num}"
+                   th:each="num : ${#numbers.sequence(pagingDTO.getStartPage(),pagingDTO.getEndPage())}"
+                />
+            <a th:if="${pagingDTO.showNext}"class="next" th:href="@{/board/{page}(page=${num}+1)}" th:utext="&gt;"/>
         </div>
         <div class="board__searchbar">
             <select name="" id="" class="board__select">
