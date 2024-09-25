@@ -36,10 +36,14 @@ public class BoardController {
     @GetMapping("/board/{page}")
     public ModelAndView boardByPage(@PathVariable("page") int page) {
         ModelAndView mav = new ModelAndView("board");
-        List<PostDto> posts = boardService.listPaging(page)
+        Page<Post> paging = boardService.listPaging(page-1);
+        List<PostDto> posts = paging
                 .getContent()
                 .stream().map(PostDto::new)
                 .toList();
+        PagingDTO pagingDTO = new PagingDTO(page-1, paging.getTotalPages());
+        System.out.println(pagingDTO);
+        mav.addObject("pagingDTO", pagingDTO);
         mav.addObject("posts", posts);
         return mav;
     }
@@ -59,10 +63,11 @@ public class BoardController {
     }
 
     @GetMapping("/posting/{bno}")
-    public ModelAndView readPost(@PathVariable("bno") Long bno) {
+    public ModelAndView readPost(@PathVariable("bno") Long bno, int page) {
         Post post = boardService.findById(bno);
         ModelAndView mav = new ModelAndView("read");
         mav.addObject("post", new PostDto(post));
+        mav.addObject("page", page);
         return mav;
     }
 

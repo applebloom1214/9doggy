@@ -21,7 +21,7 @@ public class PagingDTO {
         this.totalPage = totalPage == 0 ? 1 : totalPage;
         this.startPage = (this.currentPage - 1) / size * size +1;
         this.endPage = Math.min(startPage + size-1, this.totalPage);
-        showPrev = startPage != 1;
+        showPrev = this.currentPage != 1;
         showNext = endPage != this.totalPage;
     }
 
