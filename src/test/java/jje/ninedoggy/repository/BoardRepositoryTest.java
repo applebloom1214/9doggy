@@ -24,7 +24,7 @@ class BoardRepositoryTest {
     @BeforeEach
     public void setUp() {
         for (int i = 0; i < 170; i++) {
-            Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
+            Post post = new Post("testcontent"+i, "contentcontent"+i, "tester"+i);
             boardRepository.save(Post.builder()
                     .title(post.getTitle())
                     .content(post.getContent())
@@ -33,6 +33,25 @@ class BoardRepositoryTest {
         }
     }
 
+    @Test
+    @DisplayName("검색 테스트")
+    public void searchTest(){
+        // given
+        PageRequest pageRequest = PageRequest.of(0, 1000, Sort.by("bno").descending());
+        String keyword = "test";
+
+        // when
+        Page<Post> pageList = boardRepository.findByTitleOrContentContaining(keyword, keyword, pageRequest);
+        List<PostDto> postList = pageList.getContent().stream().map(PostDto::new).toList();
+
+        for (PostDto postDto : postList) {
+            System.out.println(postDto);
+        }
+
+
+        // then
+        assertThat(postList.size()).isEqualTo(170);
+    }
 
 
     @Test
