@@ -31,6 +31,7 @@ class BoardRepositoryTest {
                     .writer(post.getWriter())
                     .build());
         }
+
     }
 
     @Test
@@ -41,7 +42,7 @@ class BoardRepositoryTest {
         String keyword = "test";
 
         // when
-        Page<Post> pageList = boardRepository.findByTitleOrContentContaining(keyword, keyword, pageRequest);
+        Page<Post> pageList = boardRepository.findByTitleContainingOrContentContaining(keyword, keyword, pageRequest);
         List<PostDto> postList = pageList.getContent().stream().map(PostDto::new).toList();
 
         for (PostDto postDto : postList) {
