@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -39,10 +40,12 @@ class BoardRepositoryTest {
     public void searchTest(){
         // given
         PageRequest pageRequest = PageRequest.of(0, 1000, Sort.by("bno").descending());
-        String keyword = "test";
+        String keyword = "169";
+        Specification<Post> spec = (root, query, criteriaBuilder) -> null;
+        spec = PostSpecification.searchByTitle(keyword).or(PostSpecification.searchByContent("test"));
 
         // when
-        Page<Post> pageList = boardRepository.findByTitleContainingOrContentContaining(keyword, keyword, pageRequest);
+        Page<Post> pageList = boardRepository.findAll(spec, pageRequest);
         List<PostDto> postList = pageList.getContent().stream().map(PostDto::new).toList();
 
         for (PostDto postDto : postList) {
@@ -51,7 +54,7 @@ class BoardRepositoryTest {
 
 
         // then
-        assertThat(postList.size()).isEqualTo(170);
+        assertThat(postList.size()).isEqualTo(1);
     }
 
 

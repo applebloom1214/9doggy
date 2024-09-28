@@ -21,7 +21,7 @@ public class BoardController {
     @GetMapping("/board")
     public ModelAndView board() {
         ModelAndView mav = new ModelAndView("board");
-        Page<Post> paging = boardService.listPaging(0);
+        Page<Post> paging = boardService.listPaging(0, "", "");
         List<PostDto> posts = paging
                 .getContent()
                 .stream().map(PostDto::new)
@@ -36,7 +36,7 @@ public class BoardController {
     @GetMapping("/board/{page}")
     public ModelAndView boardByPage(@PathVariable("page") int page) {
         ModelAndView mav = new ModelAndView("board");
-        Page<Post> paging = boardService.listPaging(page-1);
+        Page<Post> paging = boardService.listPaging(page-1,"","");
         List<PostDto> posts = paging
                 .getContent()
                 .stream().map(PostDto::new)

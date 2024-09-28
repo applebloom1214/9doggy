@@ -4,10 +4,12 @@ import jakarta.transaction.Transactional;
 import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.repository.BoardRepository;
+import jje.ninedoggy.repository.PostSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +19,22 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public Page<Post> listPaging(int page) {
-        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("bno").descending());
-        return boardRepository.findAll(pageRequest);
+    public Page<Post> listPaging(int page, String condition, String keyword) {
 
+        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("bno").descending());
+        Specification<Post> spec = (root, query, criteriaBuilder) -> null;
+        if(condition.isEmpty()){
+            return boardRepository.findAll(spec,pageRequest);
+        } else if (condition.equals("TC")) {
+            spec = PostSpecification.searchByTitle(keyword).or(PostSpecification.searchByContent(keyword));
+        } else if (condition.equals("T")) {
+            spec = PostSpecification.searchByTitle(keyword);
+        } else if (condition.equals("C")) {
+            spec = PostSpecification.searchByContent(keyword);
+        } else if (condition.equals("W")) {
+            spec = PostSpecification.searchByWriter(keyword);
+        }
+        return boardRepository.findAll(spec, pageRequest);
     }
 
     public Long save(PostDto dto) {

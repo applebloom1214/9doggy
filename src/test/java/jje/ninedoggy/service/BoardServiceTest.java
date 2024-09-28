@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
@@ -69,14 +70,15 @@ class BoardServiceTest {
         Long fakeBno = 1L;
         ReflectionTestUtils.setField(post, "bno", fakeBno);
         ReflectionTestUtils.setField(post, "hit", fakeBno);
+        Specification<Post> spec = (root, query, criteriaBuilder) -> null;
 
         //mocking
-        given(boardRepository.findAll(pageRequest))
+        given(boardRepository.findAll(spec,pageRequest))
                 .willReturn(page);
 
 
         //when
-        List<PostDto> postDTOList = boardService.listPaging(0).getContent().stream().map(PostDto::new).toList();
+        List<PostDto> postDTOList = boardService.listPaging(0,"","").getContent().stream().map(PostDto::new).toList();
 
 
         //then
