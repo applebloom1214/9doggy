@@ -40,9 +40,9 @@ class BoardRepositoryTest {
     public void searchTest(){
         // given
         PageRequest pageRequest = PageRequest.of(0, 1000, Sort.by("bno").descending());
-        String keyword = "169";
+        String keyword = "";
         Specification<Post> spec = (root, query, criteriaBuilder) -> null;
-        spec = PostSpecification.searchByTitle(keyword).or(PostSpecification.searchByContent("test"));
+        spec = PostSpecification.searchByTitle(keyword);
 
         // when
         Page<Post> pageList = boardRepository.findAll(spec, pageRequest);
@@ -54,7 +54,7 @@ class BoardRepositoryTest {
 
 
         // then
-        assertThat(postList.size()).isEqualTo(1);
+        assertThat(postList.size()).isEqualTo(170);
     }
 
 

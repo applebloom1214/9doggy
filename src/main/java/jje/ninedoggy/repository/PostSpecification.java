@@ -17,4 +17,5 @@ public class PostSpecification {
     public static Specification<Post> searchByWriter(String writer) {
         return ((root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("writer"), "%" + writer + "%"));
     }
+
 }

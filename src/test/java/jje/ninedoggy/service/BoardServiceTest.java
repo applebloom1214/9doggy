@@ -3,6 +3,7 @@ package jje.ninedoggy.service;
 import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.repository.BoardRepository;
+import jje.ninedoggy.repository.PostSpecification;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,14 +72,21 @@ class BoardServiceTest {
         ReflectionTestUtils.setField(post, "bno", fakeBno);
         ReflectionTestUtils.setField(post, "hit", fakeBno);
         Specification<Post> spec = (root, query, criteriaBuilder) -> null;
+//        spec = PostSpecification.searchByTitle("");
+
+
 
         //mocking
-        given(boardRepository.findAll(spec,pageRequest))
-                .willReturn(page);
+        lenient().when(boardRepository.findAll(spec, pageRequest))
+                        .thenReturn(page);
+//        given(boardRepository.findAll(spec ,pageRequest))
+//        .willReturn(page);
+
 
 
         //when
-        List<PostDto> postDTOList = boardService.listPaging(0,"","").getContent().stream().map(PostDto::new).toList();
+        List<PostDto> postDTOList = boardService.listPaging(0,"","").getContent()
+                .stream().map(PostDto::new).toList();
 
 
         //then

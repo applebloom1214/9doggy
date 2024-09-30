@@ -24,7 +24,7 @@ public class BoardService {
         PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("bno").descending());
         Specification<Post> spec = (root, query, criteriaBuilder) -> null;
         if(condition.isEmpty()){
-            return boardRepository.findAll(spec,pageRequest);
+            return boardRepository.findAll(pageRequest);
         } else if (condition.equals("TC")) {
             spec = PostSpecification.searchByTitle(keyword).or(PostSpecification.searchByContent(keyword));
         } else if (condition.equals("T")) {
