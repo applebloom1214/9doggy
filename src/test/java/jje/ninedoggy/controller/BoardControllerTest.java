@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
 class BoardControllerTest {
@@ -100,7 +102,44 @@ class BoardControllerTest {
         result
                 .andExpect(status().isOk());
 
-        assertThat(postDtos.size()).isEqualTo(7);
+        assertThat(postDtos.size()).isEqualTo(10);
+
+    }
+
+    @DisplayName("검색 테스트")
+    @Test
+    public void searchTest() throws Exception {
+        //given
+        final String url = "/board/{page}";
+        final int page = 1;
+        final String condition = "TC";
+        final String keyword = "content7";
+
+        for (int i = 0; i < 17; i++) {
+            Post post = new Post("test"+i, "contentcontent"+i, "tester"+i);
+            boardRepository.save(Post.builder()
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .writer(post.getWriter())
+                    .build());
+        }
+
+        //when
+        final ResultActions result = mockMvc.perform(get(url, page).param("condition", condition)
+                .param("keyword", keyword));
+
+
+        //then
+
+        MvcResult mvcResult = result.andReturn();
+        List<PostDto> postDtos = (List<PostDto>) mvcResult.getModelAndView().getModel().get("posts");
+
+        postDtos.forEach(System.out::println);
+
+        result
+                .andExpect(status().isOk());
+
+        assertThat(postDtos.size()).isEqualTo(1);
 
     }
 

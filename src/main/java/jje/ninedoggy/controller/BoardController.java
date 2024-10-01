@@ -34,9 +34,10 @@ public class BoardController {
     }
 
     @GetMapping("/board/{page}")
-    public ModelAndView boardByPage(@PathVariable("page") int page) {
+    public ModelAndView boardByPage(@PathVariable("page") int page, String condition, String keyword) {
         ModelAndView mav = new ModelAndView("board");
-        Page<Post> paging = boardService.listPaging(page-1,"","");
+        Page<Post> paging = boardService.listPaging(page-1,condition==null ? "": condition
+                ,keyword==null ? "" : keyword);
         List<PostDto> posts = paging
                 .getContent()
                 .stream().map(PostDto::new)

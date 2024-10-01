@@ -11,10 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -66,26 +63,25 @@ class BoardServiceTest {
         Post post = createPost(postDto);
         List<Post> postList = new ArrayList<>();
         postList.add(post);
-        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("bno").descending());
         Page<Post> page = new PageImpl<>(postList);
         Long fakeBno = 1L;
         ReflectionTestUtils.setField(post, "bno", fakeBno);
         ReflectionTestUtils.setField(post, "hit", fakeBno);
-        Specification<Post> spec = (root, query, criteriaBuilder) -> null;
-//        spec = PostSpecification.searchByTitle("");
-
+        Specification<Post> spec;
 
 
         //mocking
-        lenient().when(boardRepository.findAll(spec, pageRequest))
-                        .thenReturn(page);
-//        given(boardRepository.findAll(spec ,pageRequest))
-//        .willReturn(page);
+        given(boardRepository.findAll((Specification<Post>) any(), (Pageable) any()))
+        .willReturn(page); // boardService.listPaging 에 spec과 Pageable이 이미 정의 되어 있어
+                           // 테스트에 정의된 지역변수와 충돌이 일어나 any() 로 처리함
+
+//        given(boardRepository.findAll(pageRequest))  // contion이 null 일때
+//                .willReturn(page);
 
 
 
         //when
-        List<PostDto> postDTOList = boardService.listPaging(0,"","").getContent()
+        List<PostDto> postDTOList = boardService.listPaging(0,"TC","").getContent()
                 .stream().map(PostDto::new).toList();
 
 

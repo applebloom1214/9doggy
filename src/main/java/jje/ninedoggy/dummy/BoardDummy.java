@@ -5,8 +5,10 @@ import jje.ninedoggy.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+@Profile("!test") // test 그룹을 활성화시키지 않음
 @Component
 public class BoardDummy implements ApplicationRunner {
     private final BoardRepository boardRepository;
