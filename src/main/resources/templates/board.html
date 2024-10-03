@@ -51,21 +51,24 @@
             <a th:href="@{/posting}"><div class="board__writebtn btn">글쓰기</div></a>
         </div>
         <div class="board__pagination">
-            <a th:if="${pagingDTO.showPrev}" class="prev" th:href="@{/board/{page}(page=1)}">
+            <a th:if="${pagingDTO.showPrev}" class="prev" th:href="@{/board/{page}(page=1, condition=${condition}, keyword=${keyword})}">
                 <i class="fa-solid fa-angles-left"></i>
             </a>
-            <a th:if="${pagingDTO.showPrev}" class="prev" th:href="@{/board/{page}(page=${pagingDTO.currentPage}-1)}">
+            <a th:if="${pagingDTO.showPrev}" class="prev" th:href="@{/board/{page}(page=${pagingDTO.currentPage}-1,
+            condition=${condition}, keyword=${keyword})}">
                 <i class="fa-solid fa-angle-left"></i>
             </a>
-                <a th:href="@{/board/{page}(page=${num})}"
+                <a th:href="@{/board/{page}(page=${num}, condition=${condition}, keyword=${keyword})}"
                    th:class="${num} == ${pagingDTO.getCurrentPage()} ? active : pagination"
                    th:text="${num}"
                    th:each="num : ${#numbers.sequence(pagingDTO.getStartPage(),pagingDTO.getEndPage())}"
                 />
-            <a th:if="${pagingDTO.showNext}"class="next" th:href="@{/board/{page}(page=${pagingDTO.getCurrentPage()}+1)}">
+            <a th:if="${pagingDTO.showNext}"class="next" th:href="@{/board/{page}(page=${pagingDTO.getCurrentPage()}+1,
+            condition=${condition}, keyword=${keyword})}">
                 <i class="fa-solid fa-angle-right"></i>
             </a>
-            <a th:if="${pagingDTO.showNext}" class="prev" th:href="@{/board/{page}(page=${pagingDTO.getTotalPage()})}">
+            <a th:if="${pagingDTO.showNext}" class="prev" th:href="@{/board/{page}(page=${pagingDTO.getTotalPage()}
+            , condition=${condition}, keyword=${keyword})}">
                 <i class="fa-solid fa-angles-right"></i>
             </a>
         </div>

@@ -275,7 +275,8 @@
 <!--                </div>-->
 <!--            </div>-->
             <div class="read__btns">
-                <div class="read__btn" th:onclick="|location.href='@{/board/{page}(page=${page})}'|">목록</div>
+                <div class="read__btn" th:onclick="|location.href
+                ='@{/board/{page}(page=${page}, condition=${condition}, keyword=${keyword})}'|">목록</div>
                 <div class="read__btn" id="modify__btn">수정</div>
                 <div class="read__btn" id="delete__btn">삭제</div>
             </div>

@@ -46,8 +46,12 @@ public class BoardController {
         System.out.println(pagingDTO);
         mav.addObject("pagingDTO", pagingDTO);
         mav.addObject("posts", posts);
+        mav.addObject("condition", condition);
+        mav.addObject("keyword", keyword);
         return mav;
     }
+
+
 
     @GetMapping("/posting")
     public ModelAndView write() {

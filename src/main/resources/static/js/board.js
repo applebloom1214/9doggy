@@ -3,16 +3,17 @@ const searchBtn = document.querySelector('.board__search');
 
 if(searchBtn) {
     searchBtn.addEventListener('click', (e) => {
-        let formData = new FormData();
+        // let formData = new FormData();
+        let page = 1;
         let condition = document.querySelector('.board__select').value;
         let keyword = document.querySelector('.board__text').value;
-        formData.append('page', 1);
-        formData.append('condition', condition);
-        formData.append('keyword', keyword);
+        // formData.append('page', page);
+        // formData.append('condition', condition);
+        // formData.append('keyword', keyword);
 
-        for (const x of formData.entries()) {
-            console.log(x);
-        };
-    })
+        location.replace("/board/1?"+"condition="+condition+"&keyword="+keyword);
 
-}
+        // for (const x of formData.entries()) {
+        //     console.log(x);
+        // };
+})}
