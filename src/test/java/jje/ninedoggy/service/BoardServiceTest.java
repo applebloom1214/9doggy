@@ -81,7 +81,7 @@ class BoardServiceTest {
 
 
         //when
-        List<PostDto> postDTOList = boardService.listPaging(0,"TC","").getContent()
+        List<PostDto> postDTOList = boardService.listPaging(0,"TC","",null).getContent()
                 .stream().map(PostDto::new).toList();
 
 

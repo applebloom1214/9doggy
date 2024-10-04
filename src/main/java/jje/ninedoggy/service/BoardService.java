@@ -19,9 +19,18 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public Page<Post> listPaging(int page, String condition, String keyword) {
+    public Page<Post> listPaging(int page, String condition, String keyword, String searchCondition) {
 
-        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("bno").descending());
+        PageRequest pageRequest;
+        if (searchCondition == null || searchCondition.isEmpty()) {
+            pageRequest = PageRequest.of(page, 10
+                    , Sort.by("bno").descending());
+        }else {
+            pageRequest = PageRequest.of(page, 10
+                    , Sort.by(searchCondition).descending()
+                            .and(Sort.by("bno").descending()));
+        }
+
         Specification<Post> spec = (root, query, criteriaBuilder) -> null;
         if(condition.isEmpty()){
             return boardRepository.findAll(pageRequest);

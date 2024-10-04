@@ -45,8 +45,8 @@
         <div class="board__btns">
             <div class="board__sortbtns">
                 <a th:href="@{/board}"><div class="board__listbtn btn">전체글</div></a>
-                <div class="board__hitbtn btn">조회순</div>
-                <div class="board__likebtn btn">좋아요순</div>
+                <a th:href="@{/board(searchCondition ='hit')}"><div class="board__hitbtn btn">조회순</div></a>
+                <a th:href="@{/board(searchCondition ='likes')}"><div  class="board__likebtn btn">좋아요순</div></a>
             </div>
             <a th:href="@{/posting}"><div class="board__writebtn btn">글쓰기</div></a>
         </div>
@@ -79,7 +79,7 @@
                 <option value="C">내용</option>
                 <option value="W">글쓴이</option>
             </select>
-            <input type="text" class="board__text" />
+            <input type="text" class="board__text" th:value="${keyword}" />
             <div class="board__search">
                 <i
                         class="fa-solid fa-magnifying-glass fa-2xl"

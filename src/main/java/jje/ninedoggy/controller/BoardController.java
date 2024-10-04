@@ -19,9 +19,10 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/board")
-    public ModelAndView board() {
+    public ModelAndView board(String searchCondition) {
         ModelAndView mav = new ModelAndView("board");
-        Page<Post> paging = boardService.listPaging(0, "", "");
+        Page<Post> paging = boardService.listPaging(0, "", ""
+                , searchCondition ==null ?"": searchCondition);
         List<PostDto> posts = paging
                 .getContent()
                 .stream().map(PostDto::new)
@@ -37,7 +38,7 @@ public class BoardController {
     public ModelAndView boardByPage(@PathVariable("page") int page, String condition, String keyword) {
         ModelAndView mav = new ModelAndView("board");
         Page<Post> paging = boardService.listPaging(page-1,condition==null ? "": condition
-                ,keyword==null ? "" : keyword);
+                ,keyword==null ? "" : keyword,null);
         List<PostDto> posts = paging
                 .getContent()
                 .stream().map(PostDto::new)
