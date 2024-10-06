@@ -32,7 +32,6 @@ class BoardRepositoryTest {
                     .writer(post.getWriter())
                     .build());
         }
-
     }
 
     @Test

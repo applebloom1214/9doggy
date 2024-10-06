@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -40,15 +42,27 @@ public class Post {
     @Column(name = "likes")
     private Long likes;
 
+    @Column(name = "rcnt")
+    private Long rcnt;
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("rno asc")
+    private List<Reply> replies = new ArrayList<>();
+
     @PrePersist
     public void prePersist() {
         this.hit= this.hit == null ? 0 : this.hit;
         this.likes= this.likes == null ? 0 : this.likes;
+        this.rcnt= this.rcnt == null ? 0 : this.rcnt;
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     public void plusHit(){
         this.hit += 1;
+    }
+
+    public void plusRcnt(){
+        this.rcnt += 1;
     }
 
     public void changeLikes(int likeFlag){
@@ -68,8 +82,10 @@ public class Post {
         this.writer = writer;
     }
 
-
-
-
+    public void addReply(Reply reply){
+        this.replies.add(reply);
+        plusRcnt();
+        reply.updatePost(this);
+    }
 
 }
