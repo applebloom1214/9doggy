@@ -1,9 +1,12 @@
 package jje.ninedoggy.dto;
 
 import jje.ninedoggy.domain.Post;
+import jje.ninedoggy.domain.Reply;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +21,8 @@ public class PostDto {
     private String createdAt;
     private Long hit;
     private Long likes;
+    private Long rcnt;
+    private List<Reply> replies;
 
     public Post toEntity() {
         return Post.builder()
@@ -35,6 +40,8 @@ public class PostDto {
         this.createdAt = post.getDate();
         this.hit = post.getHit();
         this.likes = post.getLikes();
+        this.rcnt = post.getRcnt();
+        this.replies = post.getReplies();
     }
 
     public PostDto(String title, String content) {

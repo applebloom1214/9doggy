@@ -3,7 +3,6 @@ package jje.ninedoggy.service;
 import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.repository.BoardRepository;
-import jje.ninedoggy.repository.PostSpecification;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
