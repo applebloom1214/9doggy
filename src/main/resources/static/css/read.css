@@ -76,6 +76,11 @@ main{
         & .read__reply{
             margin-top: 1rem;
 
+            & .reply__cnt__wrapper{
+                display: flex;
+                gap: 0.5rem;
+            }
+
 
             & .reply__cnt{
                 margin-bottom: 4rem;
