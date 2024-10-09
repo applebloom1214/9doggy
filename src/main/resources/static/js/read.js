@@ -93,3 +93,27 @@ if (deleteBtn) {
     })
 }
 
+// 리플 생성
+const replyCreateBtn = document.querySelector(".inputbox__btn");
+if (replyCreateBtn) {
+    replyCreateBtn.addEventListener("click", event => {
+        alert("클릭됨!");
+        event.stopPropagation();
+        fetch("/posting/reply",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content : document.querySelector(".inputbox__textarea").value,
+                writer : "testWriter",
+                bno : bno
+            })
+        }).then(() => {
+                alert("리플이 등록되었습니다 !");
+                location.replace("/board/"+bno);
+            }
+        )
+    })
+}
+

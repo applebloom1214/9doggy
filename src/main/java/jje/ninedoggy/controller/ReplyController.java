@@ -17,6 +17,7 @@ public class ReplyController {
 
     @PostMapping("/posting/reply")
     public ResponseEntity<Long> addReply(@RequestBody ReplyDTO replyDTO) {
+        System.out.println(replyDTO);
         Long rno = replyService.saveReply(replyDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(rno);
