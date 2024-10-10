@@ -18,6 +18,7 @@
     <main>
         <div class="board__read">
             <input type="hidden" class="read__bno" th:value="${post.bno}">
+            <input type="hidden" class="read__page" th:value="${page}">
             <h1 class="read__title" th:text="${post.title}" contenteditable="true"></h1>
             <div class="read__desc">
             <span class="desc__writer" th:text="${post.writer}"
@@ -58,204 +59,207 @@
                     </div>
                 </div>
                 <div class="replies">
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                        <div class="nested__reply">
-                            <div class="reply__header">
-                    <span class="reply__writer"
-                    ><span class="towriter"></span>안*민</span
-                    >
-                                <div class="reply__rightsection">
-                      <span class="reply__delete" style="color: #c08184"
-                      >삭제</span
-                      >
-                                    <span class="reply__date">2024-08-22 20:04</span>
-                                </div>
-                            </div>
-                            <div class="reply__content">
-                                내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                                내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                                내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                            </div>
-                        </div>
-                        <div class="nested__reply">
-                            <div class="reply__header">
-                    <span class="reply__writer"
-                    ><span class="towriter">@안*민&nbsp;&nbsp; </span
-                    >성*훈</span
-                    >
-                                <div class="reply__rightsection">
-                      <span class="reply__delete" style="color: #c08184"
-                      >삭제</span
-                      >
-                                    <span class="reply__date">2024-08-22 20:04</span>
-                                </div>
-                            </div>
-                            <div class="reply__content">
-                                내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                                내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                                내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                            </div>
-                        </div>
-                    </div>
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                    </div>
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                    </div>
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                    </div>
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                    </div>
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                    </div>
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                    </div>
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                    </div>
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                    </div>
-                    <div class="reply">
-                        <div class="reply__header">
-                            <span class="reply__writer">용*지</span>
-                            <div class="reply__rightsection">
-                    <span class="reply__delete" style="color: #c08184"
-                    >삭제</span
-                    >
-                                <span class="reply__date">2024-08-22 20:04</span>
-                            </div>
-                        </div>
-                        <div class="reply__content">
-                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용
-                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용
-                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^
-                        </div>
-                    </div>
+
                 </div>
+<!--                <div class="replies">-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                        <div class="nested__reply">-->
+<!--                            <div class="reply__header">-->
+<!--                    <span class="reply__writer"-->
+<!--                    ><span class="towriter"></span>안*민</span-->
+<!--                    >-->
+<!--                                <div class="reply__rightsection">-->
+<!--                      <span class="reply__delete" style="color: #c08184"-->
+<!--                      >삭제</span-->
+<!--                      >-->
+<!--                                    <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="reply__content">-->
+<!--                                내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                                내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                                내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="nested__reply">-->
+<!--                            <div class="reply__header">-->
+<!--                    <span class="reply__writer"-->
+<!--                    ><span class="towriter">@안*민&nbsp;&nbsp; </span-->
+<!--                    >성*훈</span-->
+<!--                    >-->
+<!--                                <div class="reply__rightsection">-->
+<!--                      <span class="reply__delete" style="color: #c08184"-->
+<!--                      >삭제</span-->
+<!--                      >-->
+<!--                                    <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="reply__content">-->
+<!--                                내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                                내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                                내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="reply">-->
+<!--                        <div class="reply__header">-->
+<!--                            <span class="reply__writer">용*지</span>-->
+<!--                            <div class="reply__rightsection">-->
+<!--                    <span class="reply__delete" style="color: #c08184"-->
+<!--                    >삭제</span-->
+<!--                    >-->
+<!--                                <span class="reply__date">2024-08-22 20:04</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reply__content">-->
+<!--                            내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용-->
+<!--                            내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용내용^^내용내용-->
+<!--                            내용^^내내용내용내용^^내용내용내용^^내용내용내용^^용내용내용^^-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
             <div class="read__navi">
                 <div class="navi__next">
@@ -288,9 +292,9 @@
     </footer>
 </div>
 </body>
-<script src="/js/read.js?v=<%=System.currentTimeMillis()%>"></script>
 <script
         src="https://kit.fontawesome.com/cbc86f8bd3.js"
         crossorigin="anonymous"
 ></script>
+<script src="/js/read.js"></script>
 </html>

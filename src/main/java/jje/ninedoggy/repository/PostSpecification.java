@@ -1,8 +1,6 @@
 package jje.ninedoggy.repository;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jje.ninedoggy.domain.Post;
-import jje.ninedoggy.dto.PostDto;
 import org.springframework.data.jpa.domain.Specification;
 
 public class PostSpecification {

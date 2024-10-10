@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReplyService {
     private final ReplyRepository replyRepository;
-    private final BoardRepository boardRepository;
 
     public Long saveReply(ReplyDTO replyDTO) {
         return replyRepository.save(replyDTO.toEntity()).getRno();

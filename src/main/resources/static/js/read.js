@@ -97,21 +97,21 @@ if (deleteBtn) {
 const replyCreateBtn = document.querySelector(".inputbox__btn");
 if (replyCreateBtn) {
     replyCreateBtn.addEventListener("click", event => {
-        alert("클릭됨!");
-        event.stopPropagation();
+        // let page = document.querySelector('.read__page').value;
+        let content = document.querySelector(".inputbox__textarea");
         fetch("/posting/reply",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                content : document.querySelector(".inputbox__textarea").value,
+                content : content.value,
                 writer : "testWriter",
                 bno : bno
             })
         }).then(() => {
                 alert("리플이 등록되었습니다 !");
-                location.replace("/board/"+bno);
+                content.value = "";
             }
         )
     })

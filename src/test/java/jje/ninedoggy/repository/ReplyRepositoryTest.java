@@ -46,4 +46,14 @@ public class ReplyRepositoryTest {
         }
     }
 
+    @DisplayName("댓글 가져오기")
+    @Test
+    public void readReplyTest(){
+        List<Reply> replies = replyRepository.findAllByBno(1l);
+        for (Reply reply : replies) {
+            System.out.println(reply);
+        }
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package jje.ninedoggy.controller;
 
 import jje.ninedoggy.domain.Post;
+import jje.ninedoggy.domain.Reply;
 import jje.ninedoggy.dto.PagingDTO;
 import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.service.BoardService;
