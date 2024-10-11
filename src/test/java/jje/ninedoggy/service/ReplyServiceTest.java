@@ -1,7 +1,10 @@
 package jje.ninedoggy.service;
 
+import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.domain.Reply;
+import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.dto.ReplyDTO;
+import jje.ninedoggy.repository.BoardRepository;
 import jje.ninedoggy.repository.ReplyRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +13,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,6 +28,8 @@ import static org.mockito.Mockito.*;
 public class ReplyServiceTest {
     @Mock
     private ReplyRepository replyRepository;
+    @Mock
+    private BoardRepository boardRepository;
 
     @InjectMocks
     private ReplyService replyService;
@@ -30,13 +40,21 @@ public class ReplyServiceTest {
         // given
         ReplyDTO replyDTO = createReplyDTO();
         Reply reply = createReply(replyDTO);
+        PostDto postDto = createPostDto();
+        Post post = createPost(postDto);
 
         Long fakeRno = 1L;
+        Long fakeBno = 1L;
+        Long fakeRcnt = 1L;
         ReflectionTestUtils.setField(reply, "rno", fakeRno);
+        ReflectionTestUtils.setField(post, "bno", fakeBno);
+        ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
 
         // mocking
         given(replyRepository.save(any(Reply.class)))
                 .willReturn(reply);
+        given(boardRepository.findById(any(Long.class)))
+                .willReturn(Optional.of(post));
 
 
         // when
@@ -45,6 +63,36 @@ public class ReplyServiceTest {
 
         // then
         assertThat(newRno).isEqualTo(fakeRno);
+    }
+
+    @Test
+    @DisplayName("댓글 읽기 테스트")
+    void readReplyTest(){
+        // given
+        ReplyDTO replyDTO = createReplyDTO();
+        Reply reply = createReply(replyDTO);
+        PostDto postDto = createPostDto();
+        Post post = createPost(postDto);
+        List<Reply> replies = new ArrayList<>();
+        replies.add(reply);
+
+        Long fakeRno = 1L;
+        Long fakeBno = 1L;
+        Long fakeRcnt = 1L;
+        ReflectionTestUtils.setField(reply, "rno", fakeRno);
+        ReflectionTestUtils.setField(post, "bno", fakeBno);
+        ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
+
+        // mocking
+        given(replyRepository.findAllByBno(any(Long.class)))
+                .willReturn(replies);
+
+
+        // when
+        List<Reply> readReplies = replyService.readReply(fakeBno);
+
+        // then
+        assertThat(readReplies).isNotNull();
     }
 
     private Reply createReply(ReplyDTO replyDTO){
@@ -61,6 +109,22 @@ public class ReplyServiceTest {
         replyDTO.setWriter("testwriter");
         replyDTO.setBno(1l);
         return replyDTO;
+    }
+
+    private Post createPost(PostDto postDto) {
+        return Post.builder()
+                .title(postDto.getTitle())
+                .content(postDto.getContent())
+                .writer(postDto.getWriter())
+                .build();
+    }
+
+    private PostDto createPostDto() {
+        PostDto postDto = new PostDto();
+        postDto.setWriter("tester");
+        postDto.setTitle("test title");
+        postDto.setContent("test content");
+        return postDto;
     }
 
 }

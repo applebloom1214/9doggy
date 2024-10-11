@@ -1,7 +1,10 @@
 package jje.ninedoggy.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jje.ninedoggy.domain.Post;
+import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.dto.ReplyDTO;
+import jje.ninedoggy.repository.BoardRepository;
 import jje.ninedoggy.repository.ReplyRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,6 +38,9 @@ public class ReplyControllerTest {
     @Autowired
     private ReplyRepository replyRepository;
 
+    @Autowired
+    private BoardRepository boardRepository;
+
     @BeforeEach
     public void mockSetUp() throws Exception {
         this.mvc = MockMvcBuilders.webAppContextSetup(context)
@@ -49,6 +55,13 @@ public class ReplyControllerTest {
         final ReplyDTO replyDTO = createReplyDTO();
 
         final String requestBody = objectMapper.writeValueAsString(replyDTO);
+        Post post = createPostDto().toEntity();
+        boardRepository.save(Post.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .writer(post.getWriter())
+                .build());
+
 
         //when
         ResultActions result = mvc.perform(post(url)
@@ -65,6 +78,14 @@ public class ReplyControllerTest {
         replyDTO.setWriter("writer");
         replyDTO.setBno(1L);
         return replyDTO;
+    }
+
+    private PostDto createPostDto() {
+        PostDto postDto = new PostDto();
+        postDto.setTitle("title");
+        postDto.setContent("content");
+        postDto.setWriter("writer");
+        return postDto;
     }
 
 }

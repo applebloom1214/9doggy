@@ -4,7 +4,9 @@ import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.domain.Reply;
 import jje.ninedoggy.dto.PagingDTO;
 import jje.ninedoggy.dto.PostDto;
+import jje.ninedoggy.dto.ReplyDTO;
 import jje.ninedoggy.service.BoardService;
+import jje.ninedoggy.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import java.util.List;
 @RestController
 public class BoardController {
     private final BoardService boardService;
+    private final ReplyService replyService;
 
     @GetMapping("/board")
     public ModelAndView board(String searchCondition) {
@@ -72,8 +75,12 @@ public class BoardController {
     @GetMapping("/posting/{bno}")
     public ModelAndView readPost(@PathVariable("bno") Long bno, int page) {
         Post post = boardService.findById(bno);
+        List<ReplyDTO> replies = replyService.readReply(bno)
+                .stream().map(ReplyDTO::new)
+                .toList();
         ModelAndView mav = new ModelAndView("read");
         mav.addObject("post", new PostDto(post));
+        mav.addObject("replies", replies);
         mav.addObject("page", page);
         return mav;
     }
