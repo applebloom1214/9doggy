@@ -95,6 +95,7 @@ if (deleteBtn) {
 
 // 리플 생성
 const replyCreateBtn = document.querySelector(".inputbox__btn");
+let replies = document.querySelector('.replies');
 if (replyCreateBtn) {
     replyCreateBtn.addEventListener("click", event => {
         // let page = document.querySelector('.read__page').value;
@@ -110,8 +111,8 @@ if (replyCreateBtn) {
                 bno : bno
             })
         }).then(() => {
-                alert("리플이 등록되었습니다 !");
-                content.value = "";
+               alert("리플이 등록되었습니다 !");
+               location.reload();
             }
         )
     })
