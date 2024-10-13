@@ -6,7 +6,6 @@ import jje.ninedoggy.dto.ReplyDTO;
 import jje.ninedoggy.repository.BoardRepository;
 import jje.ninedoggy.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
@@ -19,11 +18,11 @@ public class ReplyService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public Long saveReply(ReplyDTO replyDTO) {
+    public Reply saveReply(ReplyDTO replyDTO) {
         Reply reply = replyRepository.save(replyDTO.toEntity());
         Post post = boardRepository.findById(replyDTO.getBno()).get();
         post.addReply(reply);
-        return reply.getRno();
+        return reply;
     }
 
     public List<Reply> readReply(Long bno) {

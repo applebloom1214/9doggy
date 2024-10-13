@@ -110,11 +110,24 @@ if (replyCreateBtn) {
                 writer : "testWriter",
                 bno : bno
             })
-        }).then(() => {
-               alert("리플이 등록되었습니다 !");
-               location.reload();
-            }
-        )
+        }).then((res)=> res.json())
+        .then((data) => {
+            let reply = data;
+            console.log(reply);
+            let writer = reply.writer;
+            let createdDate = reply.data;
+            let createdContent = reply.content;
+            console.log(createdContent);
+            console.log(createdDate);
+            console.log(writer);
+        })
     })
 }
 
+// .then((res) => res.json())
+//     .then((data)=>{
+//         let likes = data;
+//         alert("좋아요 누름 !");
+//         let read__like = document.querySelector(".read__like");
+//         read__like.innerHTML = "좋아요 "+ likes +"개";
+//     })

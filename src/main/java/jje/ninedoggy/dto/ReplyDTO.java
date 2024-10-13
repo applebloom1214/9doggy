@@ -31,8 +31,9 @@ public class ReplyDTO {
         this.writer = reply.getWriter();
         this.createdAt = reply.getDate();
         this.bno = reply.getBno();
-        this.post = reply.getPost();
+//        this.post = reply.getPost();
     }
+
 
 
 }

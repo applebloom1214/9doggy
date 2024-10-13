@@ -19,12 +19,12 @@ public class ReplyController {
     private final ReplyRepository replyRepository;
 
     @PostMapping("/posting/reply")
-    public ResponseEntity<Long> addReply(@RequestBody ReplyDTO replyDTO) {
-        Long rno = replyService.saveReply(replyDTO);
-        Reply reply = replyRepository.findById(rno).get();
-        System.out.println(reply);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(rno);
+    public ResponseEntity<ReplyDTO> addReply(@RequestBody ReplyDTO replyDTO) {
+        Reply reply = replyService.saveReply(replyDTO);
+        replyDTO = new ReplyDTO(reply);
+        System.out.println(replyDTO);
+        return ResponseEntity.ok()
+                .body(replyDTO);
     }
 
 }
