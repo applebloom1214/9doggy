@@ -58,7 +58,7 @@ public class ReplyServiceTest {
 
 
         // when
-        Long newRno = replyService.saveReply(replyDTO);
+        Long newRno = replyService.saveReply(replyDTO).getRno();
 
 
         // then
@@ -84,7 +84,7 @@ public class ReplyServiceTest {
         ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
 
         // mocking
-        given(replyRepository.findAllByBno(any(Long.class)))
+        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class)))
                 .willReturn(replies);
 
 

@@ -104,11 +104,7 @@ if (replyCreateBtn) {
     replyCreateBtn.addEventListener("click", event => {
         // let page = document.querySelector('.read__page').value;
         let content = document.querySelector(".inputbox__textarea");
-        let reply__cnt = document.querySelector(".reply__cnt").value;
-        console.log("before="+reply__cnt);
-        if(reply__cnt === undefined){
-            reply__cnt = 0;
-        }
+        let reply__cnt = parseInt(document.querySelector(".reply__cnt").innerHTML);
         fetch("/posting/reply", {
             method: "POST",
             headers: {
@@ -136,17 +132,17 @@ if (replyCreateBtn) {
                 str += writer;
                 str += "</span>";
                 str += "<div class='reply__rightsection'>";
+                str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
                 str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
                 str += "<span class='reply__date'>";
                 str += createdDate;
                 str += "</span></div></div>";
-                str += "<div class='reply__content'>";
+                str += "<div class='reply__content' contenteditable='true'>";
                 str += createdContent;
                 str += "</div></div>";
                 replies.insertAdjacentHTML('afterbegin', str);
                 reply__cnt += 1;
-                console.log("after="+reply__cnt);
-                document.querySelector(".reply__cnt").innerHTML = reply__cnt+"개";
+                document.querySelector(".reply__cnt").innerHTML = reply__cnt;
             })
     })
 }

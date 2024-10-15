@@ -45,7 +45,7 @@
             <div class="read__reply">
                     <div class="reply__cnt__wrapper">
                         <span style="color: #c6bfb9">댓글</span>
-                        <div class="reply__cnt" th:text="|${post.getRcnt()}개|"/>
+                        <div class="reply__cnt" th:text="${post.getRcnt()}"/><span>개</span>
                     </div>
                 <div class="reply__write">
                     <span class="reply__write__writer">글쓴이</span>
@@ -63,11 +63,12 @@
                         <div class="reply__header">
                             <span class="reply__writer" th:text="${reply.writer}"></span>
                             <div class="reply__rightsection">
+                                <span class="reply__modify" style="color: #c08184">수정</span>
                                 <span class="reply__delete" style="color: #c08184">삭제</span>
                                                     <span class="reply__date" th:text="${reply.getCreatedAt()}"></span>
                             </div>
                         </div>
-                        <div class="reply__content" th:text="${reply.getContent()}">
+                        <div class="reply__content" th:text="${reply.getContent()}" contenteditable="true">
                         </div>
                     </div>
                 </div>
