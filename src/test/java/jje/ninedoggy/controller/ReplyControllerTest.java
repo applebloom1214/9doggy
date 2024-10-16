@@ -2,6 +2,7 @@ package jje.ninedoggy.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jje.ninedoggy.domain.Post;
+import jje.ninedoggy.domain.Reply;
 import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.dto.ReplyDTO;
 import jje.ninedoggy.repository.BoardRepository;
@@ -70,6 +71,38 @@ public class ReplyControllerTest {
 
         //then
         result.andExpect(status().isCreated());
+    }
+
+    @DisplayName("댓글 수정 테스트")
+    @Test
+    public void modifyReplyTest() throws Exception {
+        // given
+        final String url = "/posting/reply/{rno}";
+        final ReplyDTO replyDTO = createReplyDTO();
+
+        Reply savedReply = replyRepository.save(Reply.builder()
+                .content(replyDTO.getContent())
+                .writer(replyDTO.getWriter())
+                .bno(replyDTO.getBno())
+                .build());
+
+        final String newContent ="new content";
+
+        ReplyDTO modifyReplyDto = new ReplyDTO(1l, newContent);
+
+        // when
+        ResultActions result = mvc.perform(put(url, savedReply.getRno())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(modifyReplyDto)));
+
+
+        // then
+        result.andExpect(status().isOk());
+
+        Reply modifyReply =
+                replyRepository.findById(1l).get();
+
+        assertThat(modifyReply.getContent()).isEqualTo(newContent);
     }
 
     private ReplyDTO createReplyDTO(){

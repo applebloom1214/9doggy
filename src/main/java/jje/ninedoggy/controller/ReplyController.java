@@ -7,16 +7,12 @@ import jje.ninedoggy.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
 public class ReplyController {
     private final ReplyService replyService;
-    private final ReplyRepository replyRepository;
 
     @PostMapping("/posting/reply")
     public ResponseEntity<ReplyDTO> addReply(@RequestBody ReplyDTO replyDTO) {
@@ -27,4 +23,12 @@ public class ReplyController {
                 .body(replyDTO);
     }
 
+    @PutMapping("/posting/reply/{rno}")
+    public ResponseEntity<ReplyDTO> modifyReply
+            (@RequestBody ReplyDTO replyDTO, @PathVariable Long rno) {
+        Reply reply = replyService.modifyReply(replyDTO);
+        replyDTO = new ReplyDTO(reply);
+        return ResponseEntity.ok()
+                .body(replyDTO);
+    }
 }

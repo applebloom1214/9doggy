@@ -95,6 +95,39 @@ public class ReplyServiceTest {
         assertThat(readReplies).isNotNull();
     }
 
+    @Test
+    @DisplayName("댓글 수정 테스트")
+    void modifyReplyTest(){
+        //given
+        ReplyDTO replyDTO = createReplyDTO();
+        Reply reply = createReply(replyDTO);
+        PostDto postDto = createPostDto();
+        Post post = createPost(postDto);
+        String content = "testcontent";
+        String newContent = "modified content";
+
+        Long fakeRno = 1L;
+        Long fakeBno = 1L;
+        Long fakeRcnt = 1L;
+        ReflectionTestUtils.setField(reply, "rno", fakeRno);
+        ReflectionTestUtils.setField(post, "bno", fakeBno);
+        ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
+
+        //mocking
+        given(replyRepository.findById(fakeBno)).
+                willReturn(Optional.ofNullable(reply));
+
+
+        //when
+        ReplyDTO updateReplyDto = new ReplyDTO(fakeRno, newContent);
+        Reply modifiedReply = replyService.modifyReply(updateReplyDto);
+
+        //then
+        assertNotEquals(content, modifiedReply.getContent());
+    }
+
+
+
     private Reply createReply(ReplyDTO replyDTO){
         return Reply.builder()
                 .content(replyDTO.getContent())

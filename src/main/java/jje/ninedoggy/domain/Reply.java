@@ -48,6 +48,10 @@ public class Reply {
         this.bno = bno;
     }
 
+    public void modifyReply(String content){
+        this.content = content;
+    }
+
     public void updatePost(Post post) {
         this.post = post;
     }

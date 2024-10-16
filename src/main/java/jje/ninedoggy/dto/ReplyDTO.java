@@ -34,6 +34,10 @@ public class ReplyDTO {
 //        this.post = reply.getPost();
     }
 
+    public ReplyDTO(Long rno, String content){
+        this.rno = rno;
+        this.content = content;
+    }
 
 
 }

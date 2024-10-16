@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @DataJpaTest
 public class ReplyRepositoryTest {
     @Autowired
@@ -53,6 +55,22 @@ public class ReplyRepositoryTest {
         for (Reply reply : replies) {
             System.out.println(reply);
         }
+    }
+
+    @DisplayName("댓글 수정하기")
+    @Test
+    public void modifyReplyTest(){
+        // given
+        Reply reply = replyRepository.findById(1L).get();
+        String content = "modified!!";
+
+        // when
+        reply.modifyReply(content);
+
+        // then
+        assertThat(replyRepository.findById(1l).get().getContent())
+                .isEqualTo("modified!!");
+
     }
 
 

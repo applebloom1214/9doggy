@@ -29,4 +29,11 @@ public class ReplyService {
        return  replyRepository.findAllByBnoOrderByRnoDesc(bno);
     }
 
+    @Transactional
+    public Reply modifyReply(ReplyDTO replyDTO) {
+        Reply reply = replyRepository.findById(replyDTO.getRno()).get();
+        reply.modifyReply(replyDTO.getContent());
+        return reply;
+    }
+
 }
