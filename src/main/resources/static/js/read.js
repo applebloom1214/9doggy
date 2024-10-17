@@ -118,21 +118,20 @@ if (replyCreateBtn) {
         }).then((res) => res.json())
             .then((data) => {
                 let reply = data;
-                console.log(reply);
                 let writer = reply.writer;
                 let createdDate = reply.createdAt;
                 let createdContent = reply.content;
-                console.log(createdContent);
-                console.log(createdDate);
-                console.log(writer);
+                let reply__no = reply.rno;
                 let str = '';
-                str += "<div class='reply'>";
+                str += "<div class='reply' value=";
+                str += reply__no;
+                str += ">";
                 str += "<div class='reply__header'>";
                 str += "<span class='reply__writer'>";
                 str += writer;
                 str += "</span>";
                 str += "<div class='reply__rightsection'>";
-                str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
+                str += "<span class='reply__modify' style='color: #c08184' onclick='modifyReply(this)'>수정</span>";
                 str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
                 str += "<span class='reply__date'>";
                 str += createdDate;
@@ -147,12 +146,53 @@ if (replyCreateBtn) {
     })
 }
 
-// <div className="reply__header">
-//     <span className="reply__writer" th:text="${reply.writer}"></span>
-//     <div className="reply__rightsection">
-//         <span className="reply__delete" style="color: #c08184">삭제</span>
-//         <span className="reply__date" th:text="${reply.getCreatedAt()}"></span>
-//     </div>
-// </div>
-// <div className="reply__content" th:text="${reply.getContent()}">
-// </div>
+// 리플 수정
+function modifyReply(reply){
+   console.log(this);
+}
+// if (modifyReplyBtn) {
+//     modifyReplyBtn.addEventListener("click", event => {
+//         console.log("clicked!");
+//         let content = document.querySelector(".inputbox__textarea");
+//         let reply__cnt = parseInt(document.querySelector(".reply__cnt").innerHTML);
+//         fetch("/posting/reply", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 content: content.value,
+//                 writer: "testWriter",
+//                 bno: bno
+//             })
+//         }).then((res) => res.json())
+//             .then((data) => {
+//                 let reply = data;
+//                 let writer = reply.writer;
+//                 let createdDate = reply.createdAt;
+//                 let createdContent = reply.content;
+//                 let reply__no = reply.rno;
+//                 let str = '';
+//                 str += "<div class='reply' value=";
+//                 str += reply__no;
+//                 str += ">";
+//                 str += "<div class='reply__header'>";
+//                 str += "<span class='reply__writer'>";
+//                 str += writer;
+//                 str += "</span>";
+//                 str += "<div class='reply__rightsection'>";
+//                 str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
+//                 str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
+//                 str += "<span class='reply__date'>";
+//                 str += createdDate;
+//                 str += "</span></div></div>";
+//                 str += "<div class='reply__content' contenteditable='true'>";
+//                 str += createdContent;
+//                 str += "</div></div>";
+//                 replies.insertAdjacentHTML('afterbegin', str);
+//                 reply__cnt += 1;
+//                 document.querySelector(".reply__cnt").innerHTML = reply__cnt;
+//             })
+//     })
+// }
+

@@ -60,10 +60,11 @@
                 </div>
                 <div class="replies">
                     <div class="reply" th:each="reply:${replies}">
+                        <input type="hidden" class="reply__no" th:value="${reply.getRno()}">
                         <div class="reply__header">
                             <span class="reply__writer" th:text="${reply.writer}"></span>
                             <div class="reply__rightsection">
-                                <span class="reply__modify" style="color: #c08184">수정</span>
+                                <span class="reply__modify" style="color: #c08184" onclick='modifyReply(this)'>수정</span>
                                 <span class="reply__delete" style="color: #c08184">삭제</span>
                                                     <span class="reply__date" th:text="${reply.getCreatedAt()}"></span>
                             </div>
