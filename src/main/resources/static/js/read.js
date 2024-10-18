@@ -131,7 +131,7 @@ if (replyCreateBtn) {
                 str += writer;
                 str += "</span>";
                 str += "<div class='reply__rightsection'>";
-                str += "<span class='reply__modify' style='color: #c08184' onclick='modifyReply(this)'>수정</span>";
+                str += "<span class='reply__modify' style='color: #c08184' onclick='modifyReply()'>수정</span>";
                 str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
                 str += "<span class='reply__date'>";
                 str += createdDate;
@@ -147,8 +147,8 @@ if (replyCreateBtn) {
 }
 
 // 리플 수정
-function modifyReply(reply){
-   console.log(this);
+function modifyReply(){
+   console.log();
 }
 // if (modifyReplyBtn) {
 //     modifyReplyBtn.addEventListener("click", event => {
