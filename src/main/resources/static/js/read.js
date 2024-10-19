@@ -131,7 +131,7 @@ if (replyCreateBtn) {
                 str += writer;
                 str += "</span>";
                 str += "<div class='reply__rightsection'>";
-                str += "<span class='reply__modify' style='color: #c08184' onclick='modifyReply()'>수정</span>";
+                str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
                 str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
                 str += "<span class='reply__date'>";
                 str += createdDate;
@@ -140,15 +140,24 @@ if (replyCreateBtn) {
                 str += createdContent;
                 str += "</div></div>";
                 replies.insertAdjacentHTML('afterbegin', str);
+                let newReply = replies.firstChild;
+                let newReply__modify = newReply.querySelector('.reply__modify');
+                newReply__modify.addEventListener('click', event => modifyReply(event));
                 reply__cnt += 1;
                 document.querySelector(".reply__cnt").innerHTML = reply__cnt;
+                content.value = "";
             })
     })
 }
 
 // 리플 수정
-function modifyReply(){
-   console.log();
+let replyModify = document.querySelectorAll('.reply__modify');
+for (let i = 0; i < replyModify.length; i++) {
+    replyModify[i].addEventListener('click', event => modifyReply(event));
+}
+function modifyReply(event){
+    let reply = event.target.closest('.reply');
+console.log(reply);
 }
 // if (modifyReplyBtn) {
 //     modifyReplyBtn.addEventListener("click", event => {
