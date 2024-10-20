@@ -23,12 +23,11 @@ public class ReplyController {
                 .body(replyDTO);
     }
 
-    @PutMapping("/posting/reply/{rno}")
-    public ResponseEntity<ReplyDTO> modifyReply
-            (@RequestBody ReplyDTO replyDTO, @PathVariable Long rno) {
-        Reply reply = replyService.modifyReply(replyDTO);
-        replyDTO = new ReplyDTO(reply);
+    @PutMapping("/posting/reply")
+    public ResponseEntity<Void> modifyReply
+            (@RequestBody ReplyDTO replyDTO) {
+        replyService.modifyReply(replyDTO);
         return ResponseEntity.ok()
-                .body(replyDTO);
+                .build();
     }
 }

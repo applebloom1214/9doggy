@@ -59,7 +59,8 @@
                     </div>
                 </div>
                 <div class="replies">
-                    <div class="reply" th:each="reply:${replies}" th:value="${reply.getRno()}">
+                    <div class="reply" th:each="reply:${replies}">
+                        <input type="hidden" class="reply__rno" th:value="${reply.getRno()}">
                         <div class="reply__header">
                             <span class="reply__writer" th:text="${reply.writer}"></span>
                             <div class="reply__rightsection">

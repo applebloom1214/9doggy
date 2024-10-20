@@ -77,7 +77,7 @@ public class ReplyControllerTest {
     @Test
     public void modifyReplyTest() throws Exception {
         // given
-        final String url = "/posting/reply/{rno}";
+        final String url = "/posting/reply";
         final ReplyDTO replyDTO = createReplyDTO();
 
         Reply savedReply = replyRepository.save(Reply.builder()
@@ -91,7 +91,7 @@ public class ReplyControllerTest {
         ReplyDTO modifyReplyDto = new ReplyDTO(1l, newContent);
 
         // when
-        ResultActions result = mvc.perform(put(url, savedReply.getRno())
+        ResultActions result = mvc.perform(put(url)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(modifyReplyDto)));
 
