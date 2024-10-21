@@ -126,6 +126,35 @@ public class ReplyServiceTest {
         assertNotEquals(content, modifiedReply.getContent());
     }
 
+    @Test
+    @DisplayName("댓글 삭제 테스트")
+    void delReplyTest(){
+        //given
+        ReplyDTO replyDTO = createReplyDTO();
+        Reply reply = createReply(replyDTO);
+        PostDto postDto = createPostDto();
+        Post post = createPost(postDto);
+
+        Long fakeRno = 1L;
+        Long fakeBno = 1L;
+        Long fakeRcnt = 1L;
+        ReflectionTestUtils.setField(reply, "rno", fakeRno);
+        ReflectionTestUtils.setField(reply, "bno", fakeBno);
+        ReflectionTestUtils.setField(post, "bno", fakeBno);
+        ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
+        replyDTO.setRno(fakeRno);
+
+        //mocking
+        given(boardRepository.findById(fakeBno)).
+                willReturn(Optional.ofNullable(post));
+
+        //when
+        replyService.deleteReply(replyDTO);
+
+        //then
+        verify(replyRepository, atLeastOnce()).deleteById(fakeRno);
+    }
+
 
 
     private Reply createReply(ReplyDTO replyDTO){

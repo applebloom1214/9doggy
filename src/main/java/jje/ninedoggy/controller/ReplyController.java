@@ -30,4 +30,12 @@ public class ReplyController {
         return ResponseEntity.ok()
                 .build();
     }
+
+    @DeleteMapping("/posting/reply")
+    public ResponseEntity<Void> deleteReply
+            (@RequestBody ReplyDTO replyDTO) {
+        replyService.deleteReply(replyDTO);
+        return ResponseEntity.ok()
+                .build();
+    }
 }

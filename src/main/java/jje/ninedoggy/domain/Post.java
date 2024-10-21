@@ -65,6 +65,10 @@ public class Post {
         this.rcnt += 1;
     }
 
+    public void minusRcnt(){
+        this.rcnt -= 1;
+    }
+
     public void changeLikes(int likeFlag){
         this.likes += likeFlag;
     }

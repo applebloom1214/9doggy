@@ -73,5 +73,20 @@ public class ReplyRepositoryTest {
 
     }
 
+    @DisplayName("댓글 삭제하기")
+    @Test
+    public void delReplyTest(){
+        // given
+        Long rno = 1L;
+
+        // when
+        replyRepository.deleteById(rno);
+
+        // then
+        assertThat(replyRepository.findById(1l)
+                .isEmpty());
+
+    }
+
 
 }

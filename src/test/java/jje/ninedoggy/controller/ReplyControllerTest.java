@@ -105,6 +105,41 @@ public class ReplyControllerTest {
         assertThat(modifyReply.getContent()).isEqualTo(newContent);
     }
 
+    @DisplayName("댓글 삭제 테스트")
+    @Test
+    public void delReplyTest() throws Exception {
+        // given
+        final String url = "/posting/reply";
+        ReplyDTO replyDTO = createReplyDTO();
+
+        Reply savedReply = replyRepository.save(Reply.builder()
+                .content(replyDTO.getContent())
+                .writer(replyDTO.getWriter())
+                .bno(replyDTO.getBno())
+                .build());
+        replyDTO.setRno(1L);
+
+        PostDto postDto = createPostDto();
+        Post savedPost = boardRepository.save(Post.builder()
+                .title(postDto.getTitle())
+                .content(postDto.getContent())
+                .writer(postDto.getWriter())
+                .build());
+        // when
+        ResultActions result = mvc.perform(delete(url)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(replyDTO)));
+
+
+        // then
+        result.andExpect(status().isOk());
+
+
+        assertThat(replyRepository.findById(1l).orElse(null)).isNull();
+    }
+
+
+
     private ReplyDTO createReplyDTO(){
         ReplyDTO replyDTO = new ReplyDTO();
         replyDTO.setContent("reply content");

@@ -36,4 +36,11 @@ public class ReplyService {
         return reply;
     }
 
+    @Transactional
+    public void deleteReply(ReplyDTO replyDTO) {
+        replyRepository.deleteById(replyDTO.getRno());
+        Post post = boardRepository.findById(replyDTO.getBno()).get();
+        post.minusRcnt();
+    }
+
 }
