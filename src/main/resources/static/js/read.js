@@ -144,6 +144,8 @@ if (replyCreateBtn) {
                 let newReply = replies.firstChild;
                 let newReply__modify = newReply.querySelector('.reply__modify');
                 newReply__modify.addEventListener('click', event => modifyReply(event));
+                let newReply__delete = newReply.querySelector('.reply__delete');
+                newReply__delete.addEventListener('click', event => deleteReply(event));
                 reply__cnt += 1;
                 document.querySelector(".reply__cnt").innerHTML = reply__cnt;
                 content.value = "";
@@ -174,9 +176,36 @@ function modifyReply(event){
             rno : rno
         })
     }).then(() => {
-            alert("게시물이 수정되었습니다 !");
+            alert("댓글이 수정되었습니다 !");
         }
     )
 }
 
+// 리플 삭제
+let replyDelete = document.querySelectorAll('.reply__delete');
+for (let i = 0; i < replyDelete.length; i++) {
+    replyDelete[i].addEventListener('click', event => deleteReply(event));
+}
+function deleteReply(event){
+    let reply__cnt = parseInt(document.querySelector(".reply__cnt").innerHTML);
+    let reply = event.target.closest('.reply');
+    let rno = reply.querySelector('.reply__rno').value;
+
+    fetch("/posting/reply", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            rno : rno,
+            bno : bno
+        })
+    }).then(() => {
+            alert("댓글이 삭제되었습니다 !");
+            reply.remove();
+            reply__cnt -= 1;
+        document.querySelector(".reply__cnt").innerHTML = reply__cnt;
+        }
+    )
+}
 
