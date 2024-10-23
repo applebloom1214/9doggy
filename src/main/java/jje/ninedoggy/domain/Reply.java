@@ -32,20 +32,26 @@ public class Reply {
     @Column(name ="bno", updatable = false, nullable = false)
     private Long bno;
 
+    // 대댓글 부모 댓글 넘버 parent reply number
+    @Column(name = "prno")
+    private Long prno;
+
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
     @PrePersist
     public void prePersist() {
+        this.prno= this.prno == null ? 0 : this.prno;
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Builder
-    public Reply(String content, String writer, Long bno) {
+    public Reply(String content, String writer, Long bno, Long prno) {
         this.content = content;
         this.writer = writer;
         this.bno = bno;
+        this.prno = prno;
     }
 
     public void modifyReply(String content){
@@ -63,7 +69,8 @@ public class Reply {
                 ", content='" + content + '\'' +
                 ", writer='" + writer + '\'' +
                 ", date='" + date + '\'' +
-                ", bno=" + bno +
+                ", bno=" + bno + '\'' +
+                ", prno=" + prno + '\'' +
                 '}';
     }
 }

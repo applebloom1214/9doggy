@@ -1,6 +1,7 @@
 package jje.ninedoggy.repository;
 
 import jje.ninedoggy.domain.Post;
+import jje.ninedoggy.domain.Reply;
 import jje.ninedoggy.dto.PagingDTO;
 import jje.ninedoggy.dto.PostDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +22,8 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 class BoardRepositoryTest {
     @Autowired
     private BoardRepository boardRepository;
+    @Autowired
+    private ReplyRepository replyRepository;
 
     @BeforeEach
     public void setUp() {
@@ -31,6 +34,14 @@ class BoardRepositoryTest {
                     .content(post.getContent())
                     .writer(post.getWriter())
                     .build());
+        }
+
+        for (int i = 0; i < 150; i++) {
+            Long bno = (long)(Math.random()*10+1);
+            Reply reply = new Reply("replycontent"+i, "writer"+i, bno,null);
+            Post post = boardRepository.findById(bno).get();
+            post.addReply(reply);
+            replyRepository.save(reply);
         }
     }
 
@@ -141,6 +152,8 @@ class BoardRepositoryTest {
 
         // then
         assertThat(boardRepository.findById(post.getBno()).isEmpty()).isTrue();
+        Reply reply = replyRepository.findById(1l).get();
+        System.out.println(reply);
     }
     
 

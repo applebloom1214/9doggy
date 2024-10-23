@@ -32,7 +32,8 @@ public class ReplyRepositoryTest {
 
         for (int i = 0; i < 150; i++) {
             Long bno = (long)(Math.random()*10+1);
-            Reply reply = new Reply("replycontent"+i, "writer"+i, bno);
+            Long prno = (long)(Math.random()*150+1);
+            Reply reply = new Reply("replycontent"+i, "writer"+i, bno, prno);
             Post post = boardRepository.findById(bno).get();
             post.addReply(reply);
             replyRepository.save(reply);
@@ -87,6 +88,7 @@ public class ReplyRepositoryTest {
                 .isEmpty());
 
     }
+
 
 
 }
