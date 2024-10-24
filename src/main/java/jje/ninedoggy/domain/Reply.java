@@ -36,12 +36,17 @@ public class Reply {
     @Column(name = "prno")
     private Long prno;
 
+    // 삭제 표시 여부 기본은 N
+    @Column(name = "deleted")
+    private String deleted;
+
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
     @PrePersist
     public void prePersist() {
+        this.deleted = this.deleted == null ? "N" : this.deleted;
         this.prno= this.prno == null ? 0 : this.prno;
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
@@ -60,6 +65,10 @@ public class Reply {
 
     public void updatePost(Post post) {
         this.post = post;
+    }
+
+    public void  deleteReply(){
+        this.deleted = "Y";
     }
 
     @Override

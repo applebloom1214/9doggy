@@ -38,7 +38,8 @@ public class ReplyService {
 
     @Transactional
     public void deleteReply(ReplyDTO replyDTO) {
-        replyRepository.deleteById(replyDTO.getRno());
+        Reply reply = replyRepository.findById(replyDTO.getRno()).get();
+        reply.deleteReply();
         Post post = boardRepository.findById(replyDTO.getBno()).get();
         post.minusRcnt();
     }

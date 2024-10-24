@@ -192,7 +192,7 @@ function deleteReply(event){
     let rno = reply.querySelector('.reply__rno').value;
 
     fetch("/posting/reply", {
-        method: "DELETE",
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json"
         },
@@ -202,7 +202,10 @@ function deleteReply(event){
         })
     }).then(() => {
             alert("댓글이 삭제되었습니다 !");
-            reply.remove();
+            reply__header = reply.querySelector('.reply__header');
+            reply__header.remove();
+            reply__content = reply.querySelector('.reply__content');
+            reply__content.innerHTML = "삭제된 댓글입니다."
             reply__cnt -= 1;
         document.querySelector(".reply__cnt").innerHTML = reply__cnt;
         }

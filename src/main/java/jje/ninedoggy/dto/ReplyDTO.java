@@ -16,6 +16,8 @@ public class ReplyDTO {
     private String createdAt;
     private Long bno;
     private Post post;
+    private Long prno;
+    private String deleted;
 
     public Reply toEntity() {
         return Reply.builder()
@@ -31,6 +33,8 @@ public class ReplyDTO {
         this.writer = reply.getWriter();
         this.createdAt = reply.getDate();
         this.bno = reply.getBno();
+        this.prno = reply.getPrno();
+        this.deleted = reply.getDeleted();
 //        this.post = reply.getPost();
     }
 

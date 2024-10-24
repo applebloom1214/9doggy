@@ -145,14 +145,17 @@ public class ReplyServiceTest {
         replyDTO.setRno(fakeRno);
 
         //mocking
+        given(replyRepository.findById(fakeRno)).
+                willReturn(Optional.ofNullable(reply));
         given(boardRepository.findById(fakeBno)).
                 willReturn(Optional.ofNullable(post));
+
 
         //when
         replyService.deleteReply(replyDTO);
 
         //then
-        verify(replyRepository, atLeastOnce()).deleteById(fakeRno);
+        assertThat(replyRepository.findById(fakeRno).get().getDeleted()).isEqualTo("Y");
     }
 
 

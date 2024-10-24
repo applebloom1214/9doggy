@@ -31,7 +31,7 @@ public class ReplyController {
                 .build();
     }
 
-    @DeleteMapping("/posting/reply")
+    @PatchMapping("/posting/reply")
     public ResponseEntity<Void> deleteReply
             (@RequestBody ReplyDTO replyDTO) {
         replyService.deleteReply(replyDTO);

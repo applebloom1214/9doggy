@@ -126,7 +126,7 @@ public class ReplyControllerTest {
                 .writer(postDto.getWriter())
                 .build());
         // when
-        ResultActions result = mvc.perform(delete(url)
+        ResultActions result = mvc.perform(patch(url)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(replyDTO)));
 
@@ -135,7 +135,7 @@ public class ReplyControllerTest {
         result.andExpect(status().isOk());
 
 
-        assertThat(replyRepository.findById(1l).orElse(null)).isNull();
+        assertThat(replyRepository.findById(1l).get().getDeleted().equals("Y"));
     }
 
 
