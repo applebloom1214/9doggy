@@ -67,6 +67,7 @@ public class Reply {
         this.post = post;
     }
 
+    // 댓글 삭제시 deleted 상태 변경
     public void  deleteReply(){
         this.deleted = "Y";
     }
