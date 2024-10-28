@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
@@ -84,8 +85,10 @@ public class ReplyServiceTest {
         ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
 
         // mocking
-        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class)))
+        given(replyRepository.findAllByBno(any(Long.class), any(Sort.class)))
                 .willReturn(replies);
+//        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class)))
+//                .willReturn(replies);
 
 
         // when

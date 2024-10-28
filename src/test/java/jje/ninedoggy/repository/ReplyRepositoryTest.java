@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class ReplyRepositoryTest {
 
         for (int i = 0; i < 150; i++) {
             Long bno = (long)(Math.random()*10+1);
-            Long prno = (long)(Math.random()*150+1);
+            Long prno = (long)(Math.random()*10+1);
             Reply reply = new Reply("replycontent"+i, "writer"+i, bno, prno);
             Post post = boardRepository.findById(bno).get();
             post.addReply(reply);
@@ -53,6 +54,17 @@ public class ReplyRepositoryTest {
     @Test
     public void readReplyTest(){
         List<Reply> replies = replyRepository.findAllByBnoOrderByRnoDesc(1l);
+        for (Reply reply : replies) {
+            System.out.println(reply);
+        }
+    }
+
+    @DisplayName("대댓글 가져오기")
+    @Test
+    public void readNestedReplyTest(){
+        List<Reply> replies = replyRepository
+                .findAllByBno(1L, Sort.by(Sort.Order.desc("date"),
+                        Sort.Order.asc("prno"),Sort.Order.desc("rno")));
         for (Reply reply : replies) {
             System.out.println(reply);
         }

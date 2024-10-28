@@ -212,3 +212,13 @@ function deleteReply(event){
     )
 }
 
+// 대댓글
+let nested__reply = replyCreateBtn;
+let replyTargets = document.querySelectorAll('.reply');
+for (let i = 0; i < replyTargets.length; i++) {
+    replyTargets[i].addEventListener('click',() => nestedReply());
+}
+
+function nestedReply(){
+    console.log("clicked");
+}

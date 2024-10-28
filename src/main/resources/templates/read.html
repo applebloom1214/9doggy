@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="replies">
-                    <div class="reply" th:each="reply:${replies}">
+                    <div class="reply" th:each="reply:${replies}" onclick="nestedReply()">
                         <input type="hidden" class="reply__rno" th:value="${reply.getRno()}">
                         <div th:if="${reply.getDeleted() == 'N'}" class="reply__header">
                             <span class="reply__writer" th:text="${reply.writer}"></span>

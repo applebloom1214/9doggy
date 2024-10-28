@@ -6,6 +6,7 @@ import jje.ninedoggy.dto.ReplyDTO;
 import jje.ninedoggy.repository.BoardRepository;
 import jje.ninedoggy.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
@@ -26,7 +27,10 @@ public class ReplyService {
     }
 
     public List<Reply> readReply(Long bno) {
-       return  replyRepository.findAllByBnoOrderByRnoDesc(bno);
+        return  replyRepository
+                .findAllByBno(bno, Sort.by(Sort.Order.desc("date"),
+                        Sort.Order.asc("prno"),Sort.Order.desc("rno")));
+//       return  replyRepository.findAllByBnoOrderByRnoDesc(bno);
     }
 
     @Transactional
