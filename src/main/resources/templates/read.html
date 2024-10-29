@@ -58,8 +58,19 @@
                         <div class="inputbox__btn">등록</div>
                     </div>
                 </div>
+                <div class="reply__write__nested">
+                    <span class="reply__write__writer">글쓴이</span>
+                    <div class="reply__write__inputbox">
+                <textarea
+                        name="inputbox__textarea"
+                        class="inputbox__textarea"
+                        placeholder="리플을 입력하세요"
+                ></textarea>
+                        <div class="inputbox__btn">등록</div>
+                    </div>
+                </div>
                 <div class="replies">
-                    <div class="reply" th:each="reply:${replies}" onclick="nestedReply()">
+                    <div class="reply" th:each="reply:${replies}">
                         <input type="hidden" class="reply__rno" th:value="${reply.getRno()}">
                         <div th:if="${reply.getDeleted() == 'N'}" class="reply__header">
                             <span class="reply__writer" th:text="${reply.writer}"></span>

@@ -142,6 +142,7 @@ if (replyCreateBtn) {
                 str += "</div></div>";
                 replies.insertAdjacentHTML('afterbegin', str);
                 let newReply = replies.firstChild;
+                newReply.addEventListener('click', event => nestedReply(event));
                 let newReply__modify = newReply.querySelector('.reply__modify');
                 newReply__modify.addEventListener('click', event => modifyReply(event));
                 let newReply__delete = newReply.querySelector('.reply__delete');
@@ -213,12 +214,14 @@ function deleteReply(event){
 }
 
 // 대댓글
-let nested__reply = replyCreateBtn;
-let replyTargets = document.querySelectorAll('.reply');
-for (let i = 0; i < replyTargets.length; i++) {
-    replyTargets[i].addEventListener('click',() => nestedReply());
+let nested__reply = document.querySelector('.reply__write__nested');
+let all__reply = document.querySelectorAll('.reply');
+for (let i = 0; i < all__reply.length; i++) {
+    all__reply[i].addEventListener('click', event => nestedReply(event));
 }
-
-function nestedReply(){
-    console.log("clicked");
+function nestedReply(event){
+    let reply = event.target.closest('.reply');
+    reply__content = reply.querySelector('.reply__content');
+    nested__reply.setAttribute('display', 'block')
+    reply__content.after(nested__reply);
 }

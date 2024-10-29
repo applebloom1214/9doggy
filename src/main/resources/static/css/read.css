@@ -86,7 +86,11 @@ main{
                 margin-bottom: 4rem;
             }
 
-            & .reply__write{
+            & .reply__write__nested{
+                display: none;
+            }
+
+            & .reply__write, .reply__write__nested{
                 margin-bottom: 1.5rem;
                 padding-bottom: 1rem;
                 border-bottom: solid 0.2rem rgba(198, 191, 185, 0.2);
