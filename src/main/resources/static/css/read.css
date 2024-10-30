@@ -86,11 +86,8 @@ main{
                 margin-bottom: 4rem;
             }
 
-            & .reply__write__nested{
-                display: none;
-            }
 
-            & .reply__write, .reply__write__nested{
+            & .reply__write{
                 margin-bottom: 1.5rem;
                 padding-bottom: 1rem;
                 border-bottom: solid 0.2rem rgba(198, 191, 185, 0.2);
@@ -167,7 +164,9 @@ main{
                         color: #a49990;
                     }
 
-                    & .nested__reply{
+
+
+                    & .nested__reply, .reply__write__nested{
                         background-color: #f4f1ec;
                         display: flex;
                         flex-direction: column;
@@ -176,6 +175,49 @@ main{
                         padding: 1rem;
                         align-self: flex-end;
                         width: 95%;
+                    }
+
+                    & .reply__write__nested{
+                        margin-bottom: 1.5rem;
+                        padding-bottom: 1rem;
+                        border-bottom: solid 0.2rem rgba(198, 191, 185, 0.2);
+                        gap: 1rem;
+
+                        & .reply__write__writer{
+                            display: block;
+                            font-weight: bold;
+                        }
+
+                        & .reply__write__inputbox {
+                            padding: 0 2rem;
+                            height: 6rem;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            border: solid 0.1rem black;
+                            border-radius: 0.5rem;
+                            background-color: white;
+
+
+                            & .inputbox__textarea {
+                                display: block;
+                                width: 65rem;
+                                border: none;
+                                outline: none;
+                                resize: none;
+                            }
+
+                            & .inputbox__btn {
+                                color: white;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 5.5rem;
+                                height: 4rem;
+                                background-color: #5e504d;
+                                border-radius: 0.5rem;
+                            }
+                        }
                     }
                 }
 

@@ -214,6 +214,8 @@ function deleteReply(event){
 }
 
 // 대댓글
+
+document.querySelector('.reply__write__nested').style.display= ('none');
 let nested__reply = document.querySelector('.reply__write__nested');
 let all__reply = document.querySelectorAll('.reply');
 for (let i = 0; i < all__reply.length; i++) {
@@ -222,6 +224,11 @@ for (let i = 0; i < all__reply.length; i++) {
 function nestedReply(event){
     let reply = event.target.closest('.reply');
     reply__content = reply.querySelector('.reply__content');
-    nested__reply.setAttribute('display', 'block')
-    reply__content.after(nested__reply);
+    if(nested__reply.style.display ==='flex'){
+        nested__reply.style.display = 'none';
+    }else{
+        nested__reply.style.display = 'flex';
+        reply__content.after(nested__reply);
+    }
+
 }
