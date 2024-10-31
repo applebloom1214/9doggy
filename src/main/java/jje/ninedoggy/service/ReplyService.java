@@ -20,7 +20,13 @@ public class ReplyService {
 
     @Transactional
     public Reply saveReply(ReplyDTO replyDTO) {
-        Reply reply = replyRepository.save(replyDTO.toEntity());
+        Reply reply;
+        if(replyDTO.getPrno() == null){
+            reply = replyRepository.save(replyDTO.toEntity());
+            reply.setPrno(reply.getRno());
+        }else{
+            reply = replyRepository.save(replyDTO.toEntity());
+        }
         Post post = boardRepository.findById(replyDTO.getBno()).get();
         post.addReply(reply);
         return reply;

@@ -224,11 +224,13 @@ for (let i = 0; i < all__reply.length; i++) {
 function nestedReply(event){
     let reply = event.target.closest('.reply');
     reply__content = reply.querySelector('.reply__content');
-    if(nested__reply.style.display ==='flex'){
-        nested__reply.style.display = 'none';
-    }else{
+    reply__toggle = reply.classList.toggle('reply__toggle');
+    if(reply__toggle){
         nested__reply.style.display = 'flex';
         reply__content.after(nested__reply);
+        reply.classList.toggle('reply__toggle')
+    }else{
+        nested__reply.style.display = 'none'
     }
 
 }
