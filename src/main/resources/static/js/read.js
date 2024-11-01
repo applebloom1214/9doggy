@@ -143,6 +143,7 @@ if (replyCreateBtn) {
                 replies.insertAdjacentHTML('afterbegin', str);
                 let newReply = replies.firstChild;
                 newReply.addEventListener('click', event => nestedReply(event));
+                newReply.addEventListener('blur', event => nestedReply2(event));
                 let newReply__modify = newReply.querySelector('.reply__modify');
                 newReply__modify.addEventListener('click', event => modifyReply(event));
                 let newReply__delete = newReply.querySelector('.reply__delete');
@@ -218,19 +219,24 @@ function deleteReply(event){
 document.querySelector('.reply__write__nested').style.display= ('none');
 let nested__reply = document.querySelector('.reply__write__nested');
 let all__reply = document.querySelectorAll('.reply');
+let nested__reply__switch = false;
 for (let i = 0; i < all__reply.length; i++) {
     all__reply[i].addEventListener('click', event => nestedReply(event));
+    all__reply[i].addEventListener('blur', event => nestedReply2(event));
 }
 function nestedReply(event){
     let reply = event.target.closest('.reply');
     reply__content = reply.querySelector('.reply__content');
-    reply__toggle = reply.classList.toggle('reply__toggle');
-    if(reply__toggle){
+    if(reply.classList.toggle('reply__toggle')){
         nested__reply.style.display = 'flex';
         reply__content.after(nested__reply);
-        reply.classList.toggle('reply__toggle')
     }else{
         nested__reply.style.display = 'none'
     }
-
 }
+
+function nestedReply2(event){
+    let reply = event.target.closest('.reply');
+    reply.classList.remove('reply__toggle');
+}
+
