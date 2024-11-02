@@ -34,8 +34,8 @@ public class ReplyService {
 
     public List<Reply> readReply(Long bno) {
         return  replyRepository
-                .findAllByBno(bno, Sort.by(Sort.Order.desc("date"),
-                        Sort.Order.asc("prno"),Sort.Order.desc("rno")));
+                .findAllByBno(bno, Sort.by(Sort.Order.desc("prno"),
+                        Sort.Order.desc("rno")));
 //       return  replyRepository.findAllByBnoOrderByRnoDesc(bno);
     }
 

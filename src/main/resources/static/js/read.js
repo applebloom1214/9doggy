@@ -142,8 +142,9 @@ if (replyCreateBtn) {
                 str += "</div></div>";
                 replies.insertAdjacentHTML('afterbegin', str);
                 let newReply = replies.firstChild;
-                newReply.addEventListener('click', event => nestedReply(event));
-                newReply.addEventListener('blur', event => nestedReply2(event));
+                newReply__replycontent = newReply.querySelector('.reply__content');
+                newReply__replycontent.addEventListener('click', event => nestedReply(event));
+                newReply__replycontent.addEventListener('blur', event => nestedReply2(event));
                 let newReply__modify = newReply.querySelector('.reply__modify');
                 newReply__modify.addEventListener('click', event => modifyReply(event));
                 let newReply__delete = newReply.querySelector('.reply__delete');
@@ -218,8 +219,7 @@ function deleteReply(event){
 
 document.querySelector('.reply__write__nested').style.display= ('none');
 let nested__reply = document.querySelector('.reply__write__nested');
-let all__reply = document.querySelectorAll('.reply');
-let nested__reply__switch = false;
+let all__reply = document.querySelectorAll('.reply__content');
 for (let i = 0; i < all__reply.length; i++) {
     all__reply[i].addEventListener('click', event => nestedReply(event));
     all__reply[i].addEventListener('blur', event => nestedReply2(event));

@@ -56,7 +56,7 @@ public class Reply {
         this.content = content;
         this.writer = writer;
         this.bno = bno;
-        this.prno = prno == null ? 0 : this.prno;
+        this.prno = prno == null && this.prno ==null ? 0 : this.prno;
     }
 
     public void setPrno(Long prno){

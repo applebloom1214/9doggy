@@ -22,7 +22,7 @@ public class ReplyRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             Post post = new Post("testcontent"+i, "contentcontent"+i, "tester"+i);
             boardRepository.save(Post.builder()
                     .title(post.getTitle())
@@ -31,11 +31,19 @@ public class ReplyRepositoryTest {
                     .build());
         }
 
-        for (int i = 0; i < 150; i++) {
-            Long bno = (long)(Math.random()*10+1);
-            Long prno = (long)(Math.random()*10+1);
+        for (int i = 0; i < 10; i++) {
+            Long bno = 1L;
+            Long prno = (long)i+1;
             Reply reply = new Reply("replycontent"+i, "writer"+i, bno, prno);
             Post post = boardRepository.findById(bno).get();
+            post.addReply(reply);
+            replyRepository.save(reply);
+        }
+
+        for (int i = 0; i < 150; i++) {
+            Long prno = (long)(Math.random()*10+1);
+            Reply reply = new Reply("replycontent"+i, "writer"+i, 1l, prno);
+            Post post = boardRepository.findById(1l).get();
             post.addReply(reply);
             replyRepository.save(reply);
         }
@@ -63,8 +71,8 @@ public class ReplyRepositoryTest {
     @Test
     public void readNestedReplyTest(){
         List<Reply> replies = replyRepository
-                .findAllByBno(1L, Sort.by(Sort.Order.desc("date"),
-                        Sort.Order.asc("prno"),Sort.Order.desc("rno")));
+                .findAllByBno(1L, Sort.by(Sort.Order.desc("prno"),
+                        Sort.Order.desc("rno")));
         for (Reply reply : replies) {
             System.out.println(reply);
         }

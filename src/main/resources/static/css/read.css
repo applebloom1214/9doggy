@@ -178,10 +178,9 @@ main{
                     }
 
                     & .reply__write__nested{
-                        margin-bottom: 1.5rem;
+                        margin-bottom: 0.1rem;
                         padding-bottom: 1rem;
                         border-bottom: solid 0.2rem rgba(198, 191, 185, 0.2);
-                        gap: 1rem;
 
                         & .reply__write__writer{
                             display: block;
