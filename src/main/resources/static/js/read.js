@@ -215,8 +215,7 @@ function deleteReply(event){
     )
 }
 
-// 대댓글
-
+// 대댓글창
 document.querySelector('.reply__write__nested').style.display= ('none');
 let nested__reply = document.querySelector('.reply__write__nested');
 let all__reply = document.querySelectorAll('.reply__content');
@@ -238,5 +237,17 @@ function nestedReply(event){
 function nestedReply2(event){
     let reply = event.target.closest('.reply');
     reply.classList.remove('reply__toggle');
+}
+
+
+// 대댓글 작성
+let reply__write__nested = document.querySelector('.reply__write__nested');
+let nested__reply__input = reply__write__nested.querySelector('.inputbox__btn');
+nested__reply__input.addEventListener('click', event => createReply(event));
+
+function createReply(event){
+    let reply = event.target.closest('.reply');
+    let reply__rno = reply.querySelector('.reply__rno').value;
+    console.log(reply__rno);
 }
 

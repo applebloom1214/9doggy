@@ -71,7 +71,7 @@
                 </div>
                 <div class="replies">
                     <div class="reply" th:each="reply:${replies}">
-                        <div th:if="${reply.getBno() != reply.getPrno()}">
+                        <div class="reply comment" th:if="${reply.getRno() == reply.getPrno()}">
                         <input type="hidden" class="reply__rno" th:value="${reply.getRno()}">
                         <div th:if="${reply.getDeleted() == 'N'}" class="reply__header">
                             <span class="reply__writer" th:text="${reply.writer}"></span>
@@ -89,7 +89,7 @@
                         </div>
                         </div>
 
-                        <div class="nested__reply" th:if="${reply.getBno() == reply.getPrno()}">
+                        <div class="nested__reply" th:if="${reply.getRno() != reply.getPrno()}">
                             <input type="hidden" class="reply__rno" th:value="${reply.getRno()}">
                             <div th:if="${reply.getDeleted() == 'N'}" class="reply__header">
                                 <span class="reply__writer" th:text="${reply.writer}"></span>

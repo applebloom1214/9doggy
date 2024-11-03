@@ -147,6 +147,10 @@ main{
                     margin-bottom: 1.5rem;
                     padding-bottom: 1rem;
 
+                    & .comment{
+                        margin-bottom: 0rem;
+                    }
+
                     & .reply__header{
                         display: flex;
                         justify-content: space-between;

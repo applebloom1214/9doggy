@@ -35,17 +35,17 @@ public class ReplyRepositoryTest {
             Long bno = 1L;
             Long prno = (long)i+1;
             Reply reply = new Reply("replycontent"+i, "writer"+i, bno, prno);
+            replyRepository.save(reply);
             Post post = boardRepository.findById(bno).get();
             post.addReply(reply);
-            replyRepository.save(reply);
         }
 
         for (int i = 0; i < 150; i++) {
             Long prno = (long)(Math.random()*10+1);
             Reply reply = new Reply("replycontent"+i, "writer"+i, 1l, prno);
+            replyRepository.save(reply);
             Post post = boardRepository.findById(1l).get();
             post.addReply(reply);
-            replyRepository.save(reply);
         }
     }
 
