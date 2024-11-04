@@ -26,6 +26,7 @@ public class ReplyService {
             reply.setPrno(reply.getRno());
         }else{
             reply = replyRepository.save(replyDTO.toEntity());
+            reply.setPrno(replyDTO.getPrno());
         }
         Post post = boardRepository.findById(replyDTO.getBno()).get();
         post.addReply(reply);
@@ -34,8 +35,8 @@ public class ReplyService {
 
     public List<Reply> readReply(Long bno) {
         return  replyRepository
-                .findAllByBno(bno, Sort.by(Sort.Order.desc("prno"),
-                        Sort.Order.desc("rno")));
+                .findAllByBno(bno, Sort.by(Sort.Order.asc("prno"),
+                        Sort.Order.asc("rno")));
 //       return  replyRepository.findAllByBnoOrderByRnoDesc(bno);
     }
 
