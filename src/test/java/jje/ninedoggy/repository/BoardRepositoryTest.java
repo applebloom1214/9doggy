@@ -38,7 +38,7 @@ class BoardRepositoryTest {
 
         for (int i = 0; i < 150; i++) {
             Long bno = (long)(Math.random()*10+1);
-            Reply reply = new Reply("replycontent"+i, "writer"+i, bno,null);
+            Reply reply = new Reply("replycontent"+i, "writer"+i, bno);
             Post post = boardRepository.findById(bno).get();
             post.addReply(reply);
             replyRepository.save(reply);

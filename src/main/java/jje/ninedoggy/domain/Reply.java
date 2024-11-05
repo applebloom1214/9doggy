@@ -52,11 +52,10 @@ public class Reply {
     }
 
     @Builder
-    public Reply(String content, String writer, Long bno, Long prno) {
+    public Reply(String content, String writer, Long bno) {
         this.content = content;
         this.writer = writer;
         this.bno = bno;
-        this.prno = prno == null ? 0 : prno;
     }
 
     public void setPrno(Long prno){

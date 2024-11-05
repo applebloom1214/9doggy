@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="replies">
-                    <div class="reply" th:each="reply:${replies}">
+                    <div class="reply" th:each="reply:${replies}" th:classappend="${reply.getRno() != reply.getPrno()} ? 'nested':''">
                         <div class="reply comment" th:if="${reply.getRno() == reply.getPrno()}">
                         <input type="hidden" class="reply__rno" th:value="${reply.getRno()}">
                         <div th:if="${reply.getDeleted() == 'N'}" class="reply__header">

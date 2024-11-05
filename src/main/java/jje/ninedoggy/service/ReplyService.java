@@ -23,7 +23,6 @@ public class ReplyService {
         Reply reply;
         if(replyDTO.getPrno() == null){
             reply = replyRepository.save(replyDTO.toEntity());
-            reply.setPrno(reply.getRno());
         }else{
             reply = replyRepository.save(replyDTO.toEntity());
             reply.setPrno(replyDTO.getPrno());

@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -33,8 +36,7 @@ public class ReplyRepositoryTest {
 
         for (int i = 0; i < 10; i++) {
             Long bno = 1L;
-            Long prno = (long)i+1;
-            Reply reply = new Reply("replycontent"+i, "writer"+i, bno, prno);
+            Reply reply = new Reply("replycontent"+i, "writer"+i, bno);
             replyRepository.save(reply);
             Post post = boardRepository.findById(bno).get();
             post.addReply(reply);
@@ -42,8 +44,9 @@ public class ReplyRepositoryTest {
 
         for (int i = 0; i < 150; i++) {
             Long prno = (long)(Math.random()*10+1);
-            Reply reply = new Reply("replycontent"+i, "writer"+i, 1l, prno);
+            Reply reply = new Reply("replycontent"+i, "writer"+i, 1l);
             replyRepository.save(reply);
+            reply.setPrno(prno);
             Post post = boardRepository.findById(1l).get();
             post.addReply(reply);
         }
@@ -70,11 +73,26 @@ public class ReplyRepositoryTest {
     @DisplayName("대댓글 가져오기")
     @Test
     public void readNestedReplyTest(){
-        List<Reply> replies = replyRepository
-                .findAllByBno(1L, Sort.by(Sort.Order.desc("prno"),
-                        Sort.Order.desc("rno")));
-        for (Reply reply : replies) {
-            System.out.println(reply);
+        List<Reply> replies2 = replyRepository
+                .findAllByBno(1L, Sort.by(Sort.Order.asc("rno")));
+        Map<Long, List<Reply>> replies = new HashMap<>();
+
+        for(Reply reply : replies2) {
+            List<Reply> replyList = new ArrayList<>();
+            if(reply.getPrno() ==0){
+                replyList.add(reply);
+                replies.put(reply.getRno(), replyList);
+            }else{
+                replies.get(reply.getPrno()).add(reply);
+                replies.put(reply.getPrno(), replyList);
+            }
+        }
+
+        for(Long key : replies.keySet()){
+            List<Reply> replyList = replies.get(key);
+            for(Reply reply : replyList){
+                System.out.println(reply);
+            }
         }
     }
 
