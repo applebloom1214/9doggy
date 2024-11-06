@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -75,9 +76,7 @@ public class BoardController {
     @GetMapping("/posting/{bno}")
     public ModelAndView readPost(@PathVariable("bno") Long bno, int page) {
         Post post = boardService.findById(bno);
-        List<ReplyDTO> replies = replyService.readReply(bno)
-                .stream().map(ReplyDTO::new)
-                .toList();
+        Map<Long, List<ReplyDTO>> replies = replyService.readReply(bno);
         ModelAndView mav = new ModelAndView("read");
         mav.addObject("post", new PostDto(post));
         mav.addObject("replies", replies);

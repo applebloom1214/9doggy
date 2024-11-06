@@ -10,7 +10,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -32,11 +35,25 @@ public class ReplyService {
         return reply;
     }
 
-    public List<Reply> readReply(Long bno) {
-        return  replyRepository
-                .findAllByBno(bno, Sort.by(Sort.Order.asc("prno"),
-                        Sort.Order.asc("rno")));
-//       return  replyRepository.findAllByBnoOrderByRnoDesc(bno);
+    public Map<Long, List<ReplyDTO>> readReply(Long bno) {
+        List<Reply> readReplies = replyRepository
+                .findAllByBno(bno, Sort.by(Sort.Order.asc("rno")));
+        List<ReplyDTO> repliesToDTO = readReplies.stream().map(ReplyDTO :: new).toList();
+        Map<Long, List<ReplyDTO>> replies = new HashMap<>();
+
+        for(ReplyDTO replyDTO : repliesToDTO) {
+            if(replyDTO.getPrno() ==0){
+                List<ReplyDTO> replyList = new ArrayList<>();
+                replyList.add(replyDTO);
+                replies.put(replyDTO.getRno(), replyList);
+            }else{
+                List<ReplyDTO> replyList = replies.get(replyDTO.getPrno());
+                replyList.add(replyDTO);
+                replies.put(replyDTO.getPrno(), replyList);
+            }
+        }
+
+        return replies;
     }
 
     @Transactional

@@ -15,9 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -74,25 +72,29 @@ public class ReplyServiceTest {
         Reply reply = createReply(replyDTO);
         PostDto postDto = createPostDto();
         Post post = createPost(postDto);
-        List<Reply> replies = new ArrayList<>();
-        replies.add(reply);
+        List<Reply> replies2 = new ArrayList<>();
+        replies2.add(reply);
+
+        Map<Long, List<ReplyDTO>> replies = new HashMap<>();
+        List<ReplyDTO> replyList = replies.get(replyDTO.getPrno());
 
         Long fakeRno = 1L;
         Long fakeBno = 1L;
         Long fakeRcnt = 1L;
         ReflectionTestUtils.setField(reply, "rno", fakeRno);
+        ReflectionTestUtils.setField(reply, "prno", 1L);
         ReflectionTestUtils.setField(post, "bno", fakeBno);
         ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
 
         // mocking
         given(replyRepository.findAllByBno(any(Long.class), any(Sort.class)))
-                .willReturn(replies);
+                .willReturn(replies2);
 //        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class)))
 //                .willReturn(replies);
 
 
         // when
-        List<Reply> readReplies = replyService.readReply(fakeBno);
+        List<ReplyDTO> readReplies = replyService.readReply(fakeBno).get(1l);
 
         // then
         assertThat(readReplies).isNotNull();

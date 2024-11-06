@@ -3,6 +3,7 @@ package jje.ninedoggy.dto;
 import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.domain.Reply;
 import lombok.*;
+import org.springframework.data.domain.Sort;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +19,7 @@ public class ReplyDTO {
     private Post post;
     private Long prno;
     private String deleted;
+
 
     public Reply toEntity() {
         return Reply.builder()

@@ -78,12 +78,13 @@ public class ReplyRepositoryTest {
         Map<Long, List<Reply>> replies = new HashMap<>();
 
         for(Reply reply : replies2) {
-            List<Reply> replyList = new ArrayList<>();
             if(reply.getPrno() ==0){
+                List<Reply> replyList = new ArrayList<>();
                 replyList.add(reply);
                 replies.put(reply.getRno(), replyList);
             }else{
-                replies.get(reply.getPrno()).add(reply);
+                List<Reply> replyList = replies.get(reply.getPrno());
+                replyList.add(reply);
                 replies.put(reply.getPrno(), replyList);
             }
         }
@@ -91,7 +92,7 @@ public class ReplyRepositoryTest {
         for(Long key : replies.keySet()){
             List<Reply> replyList = replies.get(key);
             for(Reply reply : replyList){
-                System.out.println(reply);
+                System.out.println("key="+key+reply);
             }
         }
     }
