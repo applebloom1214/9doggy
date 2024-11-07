@@ -72,11 +72,8 @@ public class ReplyServiceTest {
         Reply reply = createReply(replyDTO);
         PostDto postDto = createPostDto();
         Post post = createPost(postDto);
-        List<Reply> replies2 = new ArrayList<>();
-        replies2.add(reply);
-
-        Map<Long, List<ReplyDTO>> replies = new HashMap<>();
-        List<ReplyDTO> replyList = replies.get(replyDTO.getPrno());
+        List<Reply> replies = new ArrayList<>();
+        replies.add(reply);
 
         Long fakeRno = 1L;
         Long fakeBno = 1L;
@@ -88,13 +85,13 @@ public class ReplyServiceTest {
 
         // mocking
         given(replyRepository.findAllByBno(any(Long.class), any(Sort.class)))
-                .willReturn(replies2);
+                .willReturn(replies);
 //        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class)))
 //                .willReturn(replies);
 
 
         // when
-        List<ReplyDTO> readReplies = replyService.readReply(fakeBno).get(1l);
+        List<Reply> readReplies = replyService.readReply(fakeBno);
 
         // then
         assertThat(readReplies).isNotNull();

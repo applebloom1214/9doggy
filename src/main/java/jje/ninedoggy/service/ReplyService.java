@@ -35,26 +35,12 @@ public class ReplyService {
         return reply;
     }
 
-    public Map<Long, List<ReplyDTO>> readReply(Long bno) {
-        List<Reply> readReplies = replyRepository
+    public List<Reply> readReply(Long bno) {
+     List<Reply> replies = replyRepository
                 .findAllByBno(bno, Sort.by(Sort.Order.asc("rno")));
-        List<ReplyDTO> repliesToDTO = readReplies.stream().map(ReplyDTO :: new).toList();
-        Map<Long, List<ReplyDTO>> replies = new HashMap<>();
-
-        for(ReplyDTO replyDTO : repliesToDTO) {
-            if(replyDTO.getPrno() ==0){
-                List<ReplyDTO> replyList = new ArrayList<>();
-                replyList.add(replyDTO);
-                replies.put(replyDTO.getRno(), replyList);
-            }else{
-                List<ReplyDTO> replyList = replies.get(replyDTO.getPrno());
-                replyList.add(replyDTO);
-                replies.put(replyDTO.getPrno(), replyList);
-            }
-        }
-
-        return replies;
+     return replies;
     }
+
 
     @Transactional
     public Reply modifyReply(ReplyDTO replyDTO) {

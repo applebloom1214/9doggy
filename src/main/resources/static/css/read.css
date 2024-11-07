@@ -227,9 +227,6 @@ main{
                     }
                 }
 
-                & .nested{
-                    border-bottom: none;
-                }
                 & .reply:last-child{
                     border-bottom: none;
                 }

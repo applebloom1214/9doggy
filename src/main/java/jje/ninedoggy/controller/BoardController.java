@@ -14,8 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -76,13 +75,29 @@ public class BoardController {
     @GetMapping("/posting/{bno}")
     public ModelAndView readPost(@PathVariable("bno") Long bno, int page) {
         Post post = boardService.findById(bno);
-        Map<Long, List<ReplyDTO>> replies = replyService.readReply(bno);
+        Map<Long, List<ReplyDTO>> replies = new LinkedHashMap<>();
+        List<Reply> readReplies = replyService.readReply(bno);
+        List<ReplyDTO> repliesToDTO = readReplies.stream().map(ReplyDTO :: new).toList();
+
+        for(ReplyDTO replyDTO : repliesToDTO) {
+            if(replyDTO.getPrno() ==0){
+                List<ReplyDTO> replyList = new ArrayList<>();
+                replyList.add(replyDTO);
+                replies.put(replyDTO.getRno(), replyList);
+            }else{
+                List<ReplyDTO> replyList = replies.get(replyDTO.getPrno());
+                replyList.add(replyDTO);
+                replies.put(replyDTO.getPrno(), replyList);
+            }
+        }
+
         ModelAndView mav = new ModelAndView("read");
         mav.addObject("post", new PostDto(post));
         mav.addObject("replies", replies);
         mav.addObject("page", page);
         return mav;
     }
+
 
     @PutMapping("/posting/{bno}")
     public ResponseEntity<Void> updatePost(@PathVariable("bno") Long bno, @RequestBody PostDto postDto) {
