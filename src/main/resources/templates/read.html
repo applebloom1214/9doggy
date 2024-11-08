@@ -71,8 +71,8 @@
                 </div>
                 <div class="replies">
                     <div class="reply" th:each="reply:${replies}">
-                      <div th:each="comment : ${reply.value}">
-                        <div class="reply comment" th:if="${comment.getRno() == comment.getPrno()}">
+                      <div class="reading__reply" th:each="comment : ${reply.value}">
+                        <div class="reply__comment" th:if="${comment.getPrno() == 0}">
                         <input type="hidden" class="reply__rno" th:value="${comment.getRno()}">
                         <div th:if="${comment.getDeleted() == 'N'}" class="reply__header">
                             <span class="reply__writer" th:text="${comment.writer}"></span>
@@ -89,21 +89,21 @@
                               class="reply__content">삭제된 댓글입니다.
                         </div>
                         </div>
-                        <div class="nested__reply" th:if="${reply.getRno() != reply.getPrno()}">
-                            <input type="hidden" class="reply__rno" th:value="${reply.getRno()}">
-                            <div th:if="${reply.getDeleted() == 'N'}" class="reply__header">
-                                <span class="reply__writer" th:text="${reply.writer}"></span>
+                        <div class="nested__reply" th:unless="${comment.getPrno() == 0}">
+                            <input type="hidden" class="reply__rno" th:value="${comment.getRno()}">
+                            <div th:if="${comment.getDeleted() == 'N'}" class="reply__header">
+                                <span class="reply__writer" th:text="${comment.writer}"></span>
                                 <span class="towriter">@안*민&nbsp;&nbsp; </span>성*훈</span>
                                 <div class="reply__rightsection">
                                     <span class="reply__modify" style="color: #c08184">수정</span>
                                     <span class="reply__delete" style="color: #c08184">삭제</span>
-                                    <span class="reply__date" th:text="${reply.getCreatedAt()}"></span>
+                                    <span class="reply__date" th:text="${comment.getCreatedAt()}"></span>
                                 </div>
                             </div>
-                            <div  th:if="${reply.getDeleted() == 'N'}"
-                                  class="reply__content" th:text="${reply.getContent()}" contenteditable="true">
+                            <div  th:if="${comment.getDeleted() == 'N'}"
+                                  class="reply__content" th:text="${comment.getContent()}" contenteditable="true">
                             </div>
-                            <div  th:if="${reply.getDeleted() == 'Y'}"
+                            <div  th:if="${comment.getDeleted() == 'Y'}"
                                   class="reply__content">삭제된 댓글입니다.
                             </div>
                         </div>

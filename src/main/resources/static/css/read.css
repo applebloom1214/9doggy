@@ -142,14 +142,17 @@ main{
                 & .reply{
                     display: flex;
                     flex-direction: column;
-                    gap: 1.5rem;
                     padding-bottom: 1rem;
+                    gap : 1rem;
                     border-bottom: solid 0.2rem rgba(198, 191, 185, 0.2);
                     margin-bottom: 1.5rem;
 
-                    & .comment{
-                        margin-bottom: 0rem;
-                    }
+                        & .reply__comment{
+                            display: flex;
+                            flex-direction: column;
+                            gap : 1.5rem;
+                        }
+
 
                     & .reply__header{
                         display: flex;
@@ -168,11 +171,6 @@ main{
                         color: #a49990;
                     }
 
-                    & .nested__reply
-                    {
-                        border-bottom: none;
-                    }
-
                     & .nested__reply, .reply__write__nested{
                         background-color: #f4f1ec;
                         display: flex;
@@ -180,8 +178,11 @@ main{
                         gap: 1.5rem;
                         border: solid 0.2rem rgba(198, 191, 185, 0.2);
                         padding: 1rem;
-                        align-self: flex-end;
                         width: 95%;
+                    }
+
+                    & .nested__reply{
+                        margin-left: 5%;
                     }
 
                     & .reply__write__nested{
