@@ -124,6 +124,8 @@ if (replyCreateBtn) {
                 let reply__no = reply.rno;
                 let str = '';
                 str += "<div class='reply' value=>";
+                str += "<div class='reading__reply'>";
+                str += "<div class='reply__comment'>";
                 str += "<input type='hidden' class='reply__rno' value=";
                 str += reply__no;
                 str += ">";
@@ -140,8 +142,8 @@ if (replyCreateBtn) {
                 str += "<div class='reply__content' contenteditable='true'>";
                 str += createdContent;
                 str += "</div></div>";
-                replies.insertAdjacentHTML('afterbegin', str);
-                let newReply = replies.firstChild;
+                replies.insertAdjacentHTML('beforeend', str);
+                let newReply = replies.lastChild;
                 newReply__replycontent = newReply.querySelector('.reply__content');
                 newReply__replycontent.addEventListener('click', event => nestedReply(event));
                 newReply__replycontent.addEventListener('blur', event => nestedReply2(event));
@@ -247,6 +249,7 @@ nested__reply__input.addEventListener('click', event => createReply(event));
 
 function createReply(event){
     let reply = event.target.closest('.reply');
+    let reading__reply = reply.querySelector('.reading__reply');
     let reply__rno = reply.querySelector('.reply__rno').value;
     let content = reply.querySelector(".inputbox__textarea");
     // let reply__cnt = parseInt(document.querySelector(".reply__cnt").innerHTML);
@@ -263,40 +266,40 @@ function createReply(event){
         })
     }).then((res) => res.json())
         .then((data) => {
-            // let reply = data;
-            // let writer = reply.writer;
-            // let createdDate = reply.createdAt;
-            // let createdContent = reply.content;
-            // let reply__no = reply.rno;
-            // let str = '';
-            // str += "<div class='reply' value=>";
-            // str += "<input type='hidden' class='reply__rno' value=";
-            // str += reply__no;
-            // str += ">";
-            // str += "<div class='reply__header'>";
-            // str += "<span class='reply__writer'>";
-            // str += writer;
-            // str += "</span>";
-            // str += "<div class='reply__rightsection'>";
-            // str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
-            // str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
-            // str += "<span class='reply__date'>";
-            // str += createdDate;
-            // str += "</span></div></div>";
-            // str += "<div class='reply__content' contenteditable='true'>";
-            // str += createdContent;
-            // str += "</div></div>";
-            // replies.insertAdjacentHTML('afterbegin', str);
-            // let newReply = replies.firstChild;
-            // newReply__replycontent = newReply.querySelector('.reply__content');
-            // newReply__replycontent.addEventListener('click', event => nestedReply(event));
-            // newReply__replycontent.addEventListener('blur', event => nestedReply2(event));
-            // let newReply__modify = newReply.querySelector('.reply__modify');
-            // newReply__modify.addEventListener('click', event => modifyReply(event));
-            // let newReply__delete = newReply.querySelector('.reply__delete');
-            // newReply__delete.addEventListener('click', event => deleteReply(event));
-            // reply__cnt += 1;
-            // document.querySelector(".reply__cnt").innerHTML = reply__cnt;
+            let reply = data;
+            let writer = reply.writer;
+            let createdDate = reply.createdAt;
+            let createdContent = reply.content;
+            let reply__no = reply.rno;
+            let str = '';
+            str += "<div class='nested__reply' value=>";
+            str += "<input type='hidden' class='reply__rno' value=";
+            str += reply__no;
+            str += ">";
+            str += "<div class='reply__header'>";
+            str += "<span class='reply__writer'>";
+            str += writer;
+            str += "</span>";
+            str += "<div class='reply__rightsection'>";
+            str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
+            str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
+            str += "<span class='reply__date'>";
+            str += createdDate;
+            str += "</span></div></div>";
+            str += "<div class='reply__content' contenteditable='true'>";
+            str += createdContent;
+            str += "</div></div>";
+            reading__reply.insertAdjacentHTML('beforeend', str);
+            let newReply = replies.firstChild;
+            newReply__replycontent = newReply.querySelector('.reply__content');
+            newReply__replycontent.addEventListener('click', event => nestedReply(event));
+            newReply__replycontent.addEventListener('blur', event => nestedReply2(event));
+            let newReply__modify = newReply.querySelector('.reply__modify');
+            newReply__modify.addEventListener('click', event => modifyReply(event));
+            let newReply__delete = newReply.querySelector('.reply__delete');
+            newReply__delete.addEventListener('click', event => deleteReply(event));
+            reply__cnt += 1;
+            document.querySelector(".reply__cnt").innerHTML = reply__cnt;
             content.value = "";
         })
 }

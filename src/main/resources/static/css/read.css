@@ -181,8 +181,8 @@ main{
                         width: 95%;
                     }
 
-                    & .nested__reply{
-                        margin-left: 5%;
+                    & .nested__reply,  .reply__write__nested{
+                        margin-left: 2.5%;
                     }
 
                     & .reply__write__nested{
