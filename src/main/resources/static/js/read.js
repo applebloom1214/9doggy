@@ -141,7 +141,7 @@ if (replyCreateBtn) {
                 str += "</span></div></div>";
                 str += "<div class='reply__content' contenteditable='true'>";
                 str += createdContent;
-                str += "</div></div>";
+                str += "</div></div></div>";
                 replies.insertAdjacentHTML('beforeend', str);
                 let newReply = replies.lastChild;
                 newReply__replycontent = newReply.querySelector('.reply__content');
@@ -249,8 +249,8 @@ nested__reply__input.addEventListener('click', event => createReply(event));
 
 function createReply(event){
     let reply = event.target.closest('.reply');
-    let reading__reply = reply.querySelector('.reading__reply');
     let reply__rno = reply.querySelector('.reply__rno').value;
+    let reply__cnt = parseInt(document.querySelector(".reply__cnt").innerHTML);
     let content = reply.querySelector(".inputbox__textarea");
     // let reply__cnt = parseInt(document.querySelector(".reply__cnt").innerHTML);
     fetch("/posting/reply", {
@@ -266,12 +266,13 @@ function createReply(event){
         })
     }).then((res) => res.json())
         .then((data) => {
-            let reply = data;
-            let writer = reply.writer;
-            let createdDate = reply.createdAt;
-            let createdContent = reply.content;
-            let reply__no = reply.rno;
+            let reading__reply = data;
+            let writer = reading__reply.writer;
+            let createdDate = reading__reply.createdAt;
+            let createdContent = reading__reply.content;
+            let reply__no = reading__reply.rno;
             let str = '';
+            str += "<div class='reading__reply'>";
             str += "<div class='nested__reply' value=>";
             str += "<input type='hidden' class='reply__rno' value=";
             str += reply__no;
@@ -280,6 +281,7 @@ function createReply(event){
             str += "<span class='reply__writer'>";
             str += writer;
             str += "</span>";
+            str += "<span class='towriter'>@안*민&nbsp;&nbsp; </span>성*훈</span>"
             str += "<div class='reply__rightsection'>";
             str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
             str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
@@ -288,9 +290,9 @@ function createReply(event){
             str += "</span></div></div>";
             str += "<div class='reply__content' contenteditable='true'>";
             str += createdContent;
-            str += "</div></div>";
-            reading__reply.insertAdjacentHTML('beforeend', str);
-            let newReply = replies.firstChild;
+            str += "</div></div></div>";
+            reply.insertAdjacentHTML('beforeend', str);
+            let newReply = replies.lastChild;
             newReply__replycontent = newReply.querySelector('.reply__content');
             newReply__replycontent.addEventListener('click', event => nestedReply(event));
             newReply__replycontent.addEventListener('blur', event => nestedReply2(event));
@@ -300,6 +302,7 @@ function createReply(event){
             newReply__delete.addEventListener('click', event => deleteReply(event));
             reply__cnt += 1;
             document.querySelector(".reply__cnt").innerHTML = reply__cnt;
+            let content = reply__write__nested.querySelector('.inputbox__textarea');
             content.value = "";
         })
 }
