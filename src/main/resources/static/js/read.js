@@ -122,10 +122,13 @@ if (replyCreateBtn) {
                 let createdDate = reply.createdAt;
                 let createdContent = reply.content;
                 let reply__no = reply.rno;
+                let reply__deleted = reply.deleted;
                 let str = '';
                 str += "<div class='reply' value=>";
                 str += "<div class='reading__reply'>";
-                str += "<div class='reply__comment'>";
+                str += "<div class='reply__comment' value=";
+                str += reply__deleted;
+                str += ">";
                 str += "<input type='hidden' class='reply__rno' value=";
                 str += reply__no;
                 str += ">";
@@ -161,7 +164,11 @@ if (replyCreateBtn) {
 // 리플 수정
 let replyModify = document.querySelectorAll('.reply__modify');
 for (let i = 0; i < replyModify.length; i++) {
-    replyModify[i].addEventListener('click', event => modifyReply(event));
+    if ( replyModify[i].closest('.nested__reply')){
+        replyModify[i].addEventListener('click', event => nested__modifyReply(event));
+    }else{
+        replyModify[i].addEventListener('click', event => modifyReply(event));
+    }
 }
 function modifyReply(event){
     let reply = event.target.closest('.reply');
@@ -189,7 +196,11 @@ function modifyReply(event){
 // 리플 삭제
 let replyDelete = document.querySelectorAll('.reply__delete');
 for (let i = 0; i < replyDelete.length; i++) {
-    replyDelete[i].addEventListener('click', event => deleteReply(event));
+    if ( replyDelete[i].closest('.nested__reply')){
+        replyDelete[i].addEventListener('click', event => nested__deleteReply(event));
+    }else{
+        replyDelete[i].addEventListener('click', event => deleteReply(event));
+    }
 }
 function deleteReply(event){
     let reply__cnt = parseInt(document.querySelector(".reply__cnt").innerHTML);
@@ -271,9 +282,12 @@ function createReply(event){
             let createdDate = reading__reply.createdAt;
             let createdContent = reading__reply.content;
             let reply__no = reading__reply.rno;
+            let reply__deleted = reading__reply.deleted;
             let str = '';
             str += "<div class='reading__reply'>";
-            str += "<div class='nested__reply' value=>";
+            str += "<div class='nested__reply' value=";
+            str += reply__deleted;
+            str += ">";
             str += "<input type='hidden' class='reply__rno' value=";
             str += reply__no;
             str += ">";
@@ -292,14 +306,14 @@ function createReply(event){
             str += createdContent;
             str += "</div></div></div>";
             reply.insertAdjacentHTML('beforeend', str);
-            let newReply = replies.lastChild;
+            let newReply = reply.lastChild;
             newReply__replycontent = newReply.querySelector('.reply__content');
             newReply__replycontent.addEventListener('click', event => nestedReply(event));
             newReply__replycontent.addEventListener('blur', event => nestedReply2(event));
             let newReply__modify = newReply.querySelector('.reply__modify');
-            newReply__modify.addEventListener('click', event => modifyReply(event));
+            newReply__modify.addEventListener('click', event => nested__modifyReply(event));
             let newReply__delete = newReply.querySelector('.reply__delete');
-            newReply__delete.addEventListener('click', event => deleteReply(event));
+            newReply__delete.addEventListener('click', event => nested__deleteReply(event));
             reply__cnt += 1;
             document.querySelector(".reply__cnt").innerHTML = reply__cnt;
             let content = reply__write__nested.querySelector('.inputbox__textarea');
@@ -307,3 +321,52 @@ function createReply(event){
         })
 }
 
+function nested__modifyReply(event){
+    let reply = event.target.closest('.nested__reply');
+    let rno = reply.querySelector('.reply__rno').value;
+    console.log(rno);
+    let content = reply.querySelector('.reply__content').innerHTML;
+    console.log(content);
+
+    fetch("/posting/reply", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: content,
+            writer: "testWriter",
+            rno : rno
+        })
+    }).then(() => {
+            alert("댓글이 수정되었습니다 !");
+        }
+    )
+}
+
+
+function nested__deleteReply(event){
+    let reply = event.target.closest('.nested__reply');
+    let rno = reply.querySelector('.reply__rno').value;
+    let reply__cnt = parseInt(document.querySelector(".reply__cnt").innerHTML);
+
+    fetch("/posting/reply", {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            rno : rno,
+            bno : bno
+        })
+    }).then(() => {
+            alert("댓글이 삭제되었습니다 !");
+            reply__header = reply.querySelector('.reply__header');
+            reply__header.remove();
+            reply__content = reply.querySelector('.reply__content');
+            reply__content.innerHTML = "삭제된 댓글입니다."
+            reply__cnt -= 1;
+            document.querySelector(".reply__cnt").innerHTML = reply__cnt;
+        }
+    )
+}
