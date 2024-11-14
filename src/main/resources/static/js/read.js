@@ -11,23 +11,12 @@ function mouseLeaveEvent(e) {
     likeIcon.style.opacity = "1";
 }
 
-function nestedReply(event){
-    let reply = event.target.closest('.reply');
-    reply__content = reply.querySelector('.reply__content');
-    if(reply.classList.toggle('reply__toggle')){
-        nested__reply.style.display = 'flex';
-        reply__content.after(nested__reply);
-    }else{
-        nested__reply.style.display = 'none'
-    }
+function nothing(){
+
 }
 
-
-function nestedReply2(event){
-    let reply = event.target.closest('.reply');
-    reply.classList.remove('reply__toggle');
-}
-
+const nestedReply = event => nestedReplyFun(event);
+const nestedReply2 = event => nestedReply2Fun(event);
 
 likeIcon.addEventListener("mouseenter", mouseEnterEvent);
 likeIcon.addEventListener("mouseleave", mouseLeaveEvent);
@@ -168,8 +157,8 @@ if (replyCreateBtn) {
                 newReply__replycontent = newReply.querySelector('.reply__content');
                 let deleted = newReply__replycontent.innerHTML;
                 if(deleted.indexOf('삭제된') == -1){
-                    newReply__replycontent.addEventListener('click', nestedReply(event));
-                    newReply__replycontent.addEventListener('blur', nestedReply2(event));
+                    newReply__replycontent.addEventListener('click', nestedReply);
+                    newReply__replycontent.addEventListener('blur', nestedReply2);
                 }
                 let newReply__modify = newReply.querySelector('.reply__modify');
                 newReply__modify.addEventListener('click', event => modifyReply(event));
@@ -226,7 +215,9 @@ for (let i = 0; i < replyDelete.length; i++) {
 function deleteReply(event){
     let reply__cnt = parseInt(document.querySelector(".reply__cnt").innerHTML);
     let reply = event.target.closest('.reply');
+    let all__nestedReply = reply.querySelectorAll('.reply__content');
     let rno = reply.querySelector('.reply__rno').value;
+
 
     fetch("/posting/reply", {
         method: "PATCH",
@@ -242,9 +233,13 @@ function deleteReply(event){
             reply__header = reply.querySelector('.reply__header');
             reply__header.remove();
             reply__content = reply.querySelector('.reply__content');
+            for (let i=0; i<all__nestedReply.length; i++) {
+                all__nestedReply[i].removeEventListener('click', nestedReply);
+                all__nestedReply[i].removeEventListener('blur', nestedReply2);
+            }
+            reply__content.removeEventListener('click', nestedReply);
+            reply__content.removeEventListener('blur', nestedReply2);
             reply__content.innerHTML = "삭제된 댓글입니다."
-        reply__content.removeEventListener('click', nestedReply(event));
-        reply__content.removeEventListener('blur', nestedReply2(event));
             reply__cnt -= 1;
         document.querySelector(".reply__cnt").innerHTML = reply__cnt;
         }
@@ -258,11 +253,30 @@ let all__reply = document.querySelectorAll('.reply__content');
 for (let i = 0; i < all__reply.length; i++) {
     let deleted = all__reply[i].innerHTML;
     if(deleted.indexOf('삭제된') == -1){
-        all__reply[i].addEventListener('click', nestedReply(event));
-        all__reply[i].addEventListener('blur', nestedReply2(event));
+        all__reply[i].addEventListener('click', nestedReply);
+        all__reply[i].addEventListener('blur', nestedReply2);
     }
 }
 
+
+function nestedReplyFun(event){
+    let reply = event.target.closest('.reply');
+    let reply__content = reply.querySelector('.reply__content');
+    if(reply.classList.toggle('reply__toggle')){
+        nested__reply.style.display = 'flex';
+        reply__content.after(nested__reply);
+    }else{
+        nested__reply.style.display = 'none'
+    }
+}
+
+
+
+
+function nestedReply2Fun(event){
+    let reply = event.target.closest('.reply');
+    reply.classList.remove('reply__toggle');
+}
 
 
 
@@ -323,8 +337,8 @@ function createReply(event){
             newReply__replycontent = newReply.querySelector('.reply__content');
             let deleted = newReply__replycontent.innerHTML;
             if(deleted.indexOf('삭제된') == -1){
-                newReply__replycontent.addEventListener('click', event => nestedReply(event));
-                newReply__replycontent.addEventListener('blur', event => nestedReply2(event));
+                newReply__replycontent.addEventListener('click', nestedReply);
+                newReply__replycontent.addEventListener('blur', nestedReply2);
             }
             let newReply__modify = newReply.querySelector('.reply__modify');
             newReply__modify.addEventListener('click', event => nested__modifyReply(event));
@@ -381,8 +395,8 @@ function nested__deleteReply(event){
             reply__header.remove();
             reply__content = reply.querySelector('.reply__content');
             reply__content.innerHTML = "삭제된 댓글입니다."
-            reply__content.removeEventListener('click', nestedReply(event));
-            reply__content.removeEventListener('blur', nestedReply2(event));
+            reply__content.removeEventListener('click', nestedReply);
+            reply__content.removeEventListener('blur', nestedReply2);
             reply__cnt -= 1;
             document.querySelector(".reply__cnt").innerHTML = reply__cnt;
         }
