@@ -1,4 +1,4 @@
-// 좋아요 구현
+/// 좋아요 구현
 let bno = document.querySelector(".read__bno").value;
 let likeTrigger = -1;
 let likeIcon = document.querySelector(".fa-heart");
@@ -10,7 +10,7 @@ function mouseEnterEvent(e) {
 function mouseLeaveEvent(e) {
     likeIcon.style.opacity = "1";
 }
-
+fddf
 function nothing(){
 
 }
