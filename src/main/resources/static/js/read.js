@@ -1,4 +1,6 @@
-/// 좋아요 구현
+// 스크롤
+
+// 좋아요 구현
 let bno = document.querySelector(".read__bno").value;
 let likeTrigger = -1;
 let likeIcon = document.querySelector(".fa-heart");
