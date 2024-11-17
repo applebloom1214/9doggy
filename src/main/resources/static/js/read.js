@@ -1,4 +1,4 @@
-// 스크롤
+// 스크롤 구현
 
 // 좋아요 구현
 let bno = document.querySelector(".read__bno").value;
