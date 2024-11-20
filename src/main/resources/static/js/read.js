@@ -1,4 +1,25 @@
 // 스크롤 구현
+window.addEventListener("scroll", infiniteScroll);
+
+let isUpdateList = true;
+
+function infiniteScroll() {
+    const currentScroll = window.scrollY;
+    console.log(currentScroll);
+    const windowHeight = window.innerHeight;
+    const bodyHeight = document.body.clientHeight;
+    console.log(bodyHeight);
+    if(currentScroll + windowHeight >= bodyHeight) {
+        if(isUpdateList) {
+            isUpdateList = false;
+
+            console.log("aaa");
+
+
+            isUpdateList = true;
+        }
+    }
+}
 
 // 좋아요 구현
 let bno = document.querySelector(".read__bno").value;
@@ -11,10 +32,6 @@ function mouseEnterEvent(e) {
 
 function mouseLeaveEvent(e) {
     likeIcon.style.opacity = "1";
-}
-fddf
-function nothing(){
-
 }
 
 const nestedReply = event => nestedReplyFun(event);

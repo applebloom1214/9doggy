@@ -260,6 +260,7 @@ main{
 
 
         & .read__btns{
+            margin-top: 1.5rem;
             display: flex;
             gap: 1.5rem;
 
