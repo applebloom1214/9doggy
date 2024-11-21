@@ -1,4 +1,4 @@
-// 스크롤 구현
+// 스크롤 구현 
 window.addEventListener("scroll", infiniteScroll);
 
 let isUpdateList = true;
