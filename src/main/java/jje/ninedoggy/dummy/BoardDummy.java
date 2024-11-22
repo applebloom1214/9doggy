@@ -33,12 +33,12 @@ public class BoardDummy implements ApplicationRunner {
                     .build());
         }
 
-//        for (int i = 0; i < 5; i++) {
-//            Long bno = 170L;
-//            Reply reply = new Reply("replycontent"+i, "writer"+i, bno);
-//            Post post = boardRepository.findById(bno).get();
-//            post.addReply(reply);
-//            replyRepository.save(reply);
-//        }
+        for (int i = 1; i <= 1000; i++) {
+            Long bno = 170L;
+            Reply reply = new Reply("replycontent"+i, "writer"+i, bno);
+            Post post = boardRepository.findById(bno).get();
+            post.addReply(reply);
+            replyRepository.save(reply);
+        }
     }
 }
