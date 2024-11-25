@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
@@ -68,6 +69,22 @@ public class ReplyRepositoryTest {
         for (Reply reply : replies) {
             System.out.println(reply);
         }
+    }
+
+    @DisplayName("댓글 페이징하여 가져오기")
+    @Test
+    public void readReplyTest2(){
+        // given
+        int page = 1;
+        PageRequest pageRequest = PageRequest.of(page, 10);
+        List<Reply> replies = replyRepository.findAllByBnoOrderByRnoDesc(1l, pageRequest).getContent();
+        for (Reply reply : replies) {
+            System.out.println(reply);
+        }
+
+        // when
+
+        // then
     }
 
     @DisplayName("대댓글 가져오기")
