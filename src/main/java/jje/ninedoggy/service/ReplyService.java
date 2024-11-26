@@ -6,6 +6,7 @@ import jje.ninedoggy.dto.ReplyDTO;
 import jje.ninedoggy.repository.BoardRepository;
 import jje.ninedoggy.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
@@ -35,9 +36,12 @@ public class ReplyService {
         return reply;
     }
 
-    public List<Reply> readReply(Long bno) {
-     List<Reply> replies = replyRepository
-                .findAllByBno(bno, Sort.by(Sort.Order.asc("rno")));
+    public List<Reply> readReply(Long bno, int page) {
+        PageRequest pageRequest = PageRequest.of(page, 10);
+        List<Reply> replies = replyRepository
+             .findAllByBnoOrderByRnoDesc(bno, pageRequest).getContent();
+//     List<Reply> replies = replyRepository
+//                .findAllByBno(bno, Sort.by(Sort.Order.asc("rno")));
      return replies;
     }
 

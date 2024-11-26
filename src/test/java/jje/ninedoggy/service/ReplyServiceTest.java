@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -74,6 +75,8 @@ public class ReplyServiceTest {
         Post post = createPost(postDto);
         List<Reply> replies = new ArrayList<>();
         replies.add(reply);
+        int page = 0;
+        PageRequest pageRequest = PageRequest.of(page, 10);
 
         Long fakeRno = 1L;
         Long fakeBno = 1L;
@@ -84,14 +87,16 @@ public class ReplyServiceTest {
         ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
 
         // mocking
-        given(replyRepository.findAllByBno(any(Long.class), any(Sort.class)))
+        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class), any(PageRequest.class)))
                 .willReturn(replies);
+//        given(replyRepository.findAllByBno(any(Long.class), any(Sort.class)))
+//                .willReturn(replies);
 //        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class)))
 //                .willReturn(replies);
 
 
         // when
-        List<Reply> readReplies = replyService.readReply(fakeBno);
+        List<Reply> readReplies = replyService.readReply(fakeBno,0);
 
         // then
         assertThat(readReplies).isNotNull();
