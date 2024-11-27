@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -77,6 +79,7 @@ public class ReplyServiceTest {
         replies.add(reply);
         int page = 0;
         PageRequest pageRequest = PageRequest.of(page, 10);
+        Page<Reply> paging = new PageImpl<>(replies);
 
         Long fakeRno = 1L;
         Long fakeBno = 1L;
@@ -88,7 +91,7 @@ public class ReplyServiceTest {
 
         // mocking
         given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class), any(PageRequest.class)))
-                .willReturn(replies);
+                .willReturn(paging);
 //        given(replyRepository.findAllByBno(any(Long.class), any(Sort.class)))
 //                .willReturn(replies);
 //        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class)))
