@@ -1,5 +1,6 @@
 package jje.ninedoggy.dummy;
 
+import jakarta.transaction.Transactional;
 import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.domain.Reply;
 import jje.ninedoggy.repository.BoardRepository;
@@ -22,6 +23,7 @@ public class BoardDummy implements ApplicationRunner {
         this.replyRepository = replyRepository;
     }
 
+    @Transactional
     @Override
     public void run(ApplicationArguments args) throws Exception {
         for (int i = 0; i < 170; i++) {
