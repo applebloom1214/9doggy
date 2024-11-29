@@ -1,4 +1,5 @@
 /// 스크롤 구현
+let scrollCnt = 1;
 window.addEventListener("scroll", infiniteScroll);
 
 let isUpdateList = true;
@@ -13,12 +14,71 @@ function infiniteScroll() {
         if(isUpdateList) {
             isUpdateList = false;
 
-            console.log("aaa");
-
+            addScroll(scrollCnt);
 
             isUpdateList = true;
         }
     }
+}
+
+function addScroll(scrollCnt) {
+    let replies = document.querySelector('.replies');
+    fetch("/posting/reply", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: content.value,
+            writer: "testWriter",
+            bno: bno
+        })
+    }).then((res) => res.json())
+        .then((data) => {
+            let reply = data;
+            let writer = reply.writer;
+            let createdDate = reply.createdAt;
+            let createdContent = reply.content;
+            let reply__no = reply.rno;
+            let reply__deleted = reply.deleted;
+            let str = '';
+            str += "<div class='reply' value=>";
+            str += "<div class='reading__reply'>";
+            str += "<div class='reply__comment' value=";
+            str += reply__deleted;
+            str += ">";
+            str += "<input type='hidden' class='reply__rno' value=";
+            str += reply__no;
+            str += ">";
+            str += "<div class='reply__header'>";
+            str += "<span class='reply__writer'>";
+            str += writer;
+            str += "</span>";
+            str += "<div class='reply__rightsection'>";
+            str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
+            str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
+            str += "<span class='reply__date'>";
+            str += createdDate;
+            str += "</span></div></div>";
+            str += "<div class='reply__content' contenteditable='true'>";
+            str += createdContent;
+            str += "</div></div></div>";
+            replies.insertAdjacentHTML('beforeend', str);
+            let newReply = replies.lastChild;
+            newReply__replycontent = newReply.querySelector('.reply__content');
+            let deleted = newReply__replycontent.innerHTML;
+            if(deleted.indexOf('삭제된') == -1){
+                newReply__replycontent.addEventListener('click', nestedReply);
+                newReply__replycontent.addEventListener('blur', nestedReply2);
+            }
+            let newReply__modify = newReply.querySelector('.reply__modify');
+            newReply__modify.addEventListener('click', event => modifyReply(event));
+            let newReply__delete = newReply.querySelector('.reply__delete');
+            newReply__delete.addEventListener('click', event => deleteReply(event));
+            reply__cnt += 1;
+            document.querySelector(".reply__cnt").innerHTML = reply__cnt;
+            content.value = "";
+        })
 }
 
 // 좋아요 구현
