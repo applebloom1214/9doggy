@@ -76,7 +76,7 @@ public class BoardController {
     public ModelAndView readPost(@PathVariable("bno") Long bno, int page) {
         Post post = boardService.findById(bno);
         Map<Long, List<ReplyDTO>> replies = new LinkedHashMap<>();
-        List<Reply> readReplies = replyService.readReply(bno, page);
+        List<Reply> readReplies = replyService.readReply(bno, page-1);
         List<ReplyDTO> repliesToDTO = readReplies.stream().map(ReplyDTO :: new).toList();
 
         for(ReplyDTO replyDTO : repliesToDTO) {

@@ -90,7 +90,7 @@ public class ReplyServiceTest {
         ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
 
         // mocking
-        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class), any(PageRequest.class)))
+        given(replyRepository.findAllByBnoOrderByRnoAsc(any(Long.class), any(PageRequest.class)))
                 .willReturn(paging);
 //        given(replyRepository.findAllByBno(any(Long.class), any(Sort.class)))
 //                .willReturn(replies);

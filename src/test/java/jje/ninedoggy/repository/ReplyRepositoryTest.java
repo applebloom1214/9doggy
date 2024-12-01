@@ -77,7 +77,7 @@ public class ReplyRepositoryTest {
         // given
         int page = 1;
         PageRequest pageRequest = PageRequest.of(page, 10);
-        List<Reply> replies = replyRepository.findAllByBnoOrderByRnoDesc(1l, pageRequest).getContent();
+        List<Reply> replies = replyRepository.findAllByBnoOrderByRnoAsc(1l, pageRequest).getContent();
         for (Reply reply : replies) {
             System.out.println(reply);
         }

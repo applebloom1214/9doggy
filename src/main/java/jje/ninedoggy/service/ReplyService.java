@@ -39,7 +39,7 @@ public class ReplyService {
     public List<Reply> readReply(Long bno, int page) {
         PageRequest pageRequest = PageRequest.of(page, 100);
         List<Reply> replies = replyRepository
-             .findAllByBnoOrderByRnoDesc(bno, pageRequest).getContent();
+             .findAllByBnoOrderByRnoAsc(bno, pageRequest).getContent();
 //     List<Reply> replies = replyRepository
 //                .findAllByBno(bno, Sort.by(Sort.Order.asc("rno")));
      return replies;

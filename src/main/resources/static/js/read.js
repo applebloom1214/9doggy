@@ -1,5 +1,5 @@
 /// 스크롤 구현
-let scrollCnt = 2;
+let scrollCnt = 1;
 window.addEventListener("scroll", infiniteScroll);
 
 let isUpdateList = true;
@@ -29,22 +29,24 @@ function addScroll(scrollCnt) {
         headers: {
             "Content-Type": "application/json"
         }
-        // ,
-        // body: JSON.stringify({
-        //     bno: bno,
-        //     page : scrollCnt
-        // })
     }).then((res) => res.json())
         .then((data) => {
             console.log(data);
-            // let reply = data;
-            // let writer = reply.writer;
-            // let createdDate = reply.createdAt;
-            // let createdContent = reply.content;
-            // let reply__no = reply.rno;
-            // let reply__deleted = reply.deleted;
-            // let str = '';
-            // str += "<div class='reply' value=>";
+             let transReplies = data;
+            for (let key in transReplies) {
+                let reply = transReplies[key];
+                reply = reply[0];
+                let writer = reply.writer;
+                let createdDate = reply.createdAt;
+                let createdContent = reply.content;
+                let reply__no = reply.rno;
+                let reply__deleted = reply.deleted;
+                let reply__prno = reply.prno;
+                let str = '';
+                str += "<div class='reply'>";
+                str += "</div>";
+                replies.insertAdjacentHTML('beforeend', str);
+            }
             // str += "<div class='reading__reply'>";
             // str += "<div class='reply__comment' value=";
             // str += reply__deleted;
