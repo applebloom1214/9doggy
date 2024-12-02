@@ -44,29 +44,63 @@ function addScroll(scrollCnt) {
                 let reply__prno = reply.prno;
                 let str = '';
                 str += "<div class='reply'>";
-                str += "</div>";
+                str += "<div class='reading__reply'>";
+                if (reply__prno ==0){
+                    str += "<div class='reply__comment' value=";
+                    str += reply__deleted;
+                    str += ">";
+                    str += "<input type='hidden' class='reply__rno' value=";
+                    str += reply__no;
+                    str += ">";
+                    if (reply__deleted == 'N'){
+                        str += "<div class='reply__header'>";
+                        str += "<span class='reply__writer'>";
+                        str += writer;
+                        str += "</span>";
+                        str += "<div class='reply__rightsection'>";
+                        str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
+                        str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
+                        str += "<span class='reply__date'>";
+                        str += createdDate;
+                        str += "</span></div></div>"; // reply__date reply__rightsection reply__header
+                        str += "<div class='reply__content' contenteditable='true'>";
+                        str += createdContent;
+                    }else {
+                        str += "<div class='reply__content'>";
+                        str += "삭제된 댓글입니다.";
+                    }
+                }else {
+                    str += "<div class='nested__reply' value=";
+                    str += reply__deleted;
+                    str += ">";
+                    str += "<input type='hidden' class='reply__rno' value=";
+                    str += reply__no;
+                    str += ">";
+                    if(reply__deleted == 'N'){
+                        str += "<div class='reply__header'>";
+                        str += "<span class='reply__writer'>";
+                        str += writer;
+                        str += "</span>";
+                        str += "<span class='towriter'>@안*민&nbsp;&nbsp; </span>성*훈</span>";
+                        str += "<div class='reply__rightsection'>";
+                        str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
+                        str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
+                        str += "<span class='reply__date'>";
+                        str += createdDate;
+                        str += "</span></div></div>"; // reply__date reply__rightsection reply__header
+                        str += "<div class='reply__content' contenteditable='true'>";
+                        str += createdContent;
+                    }else {
+                        str += "<div class='reply__content'>";
+                        str += "삭제된 댓글입니다.";
+                    }
+                }
+
+                str += "</div></div></div></div>";
+                // reply, reading__reply, reply__comment(nested__reply) reply__content
                 replies.insertAdjacentHTML('beforeend', str);
             }
-            // str += "<div class='reading__reply'>";
-            // str += "<div class='reply__comment' value=";
-            // str += reply__deleted;
-            // str += ">";
-            // str += "<input type='hidden' class='reply__rno' value=";
-            // str += reply__no;
-            // str += ">";
-            // str += "<div class='reply__header'>";
-            // str += "<span class='reply__writer'>";
-            // str += writer;
-            // str += "</span>";
-            // str += "<div class='reply__rightsection'>";
-            // str += "<span class='reply__modify' style='color: #c08184'>수정</span>";
-            // str += "<span class='reply__delete' style='color: #c08184'>삭제</span>";
-            // str += "<span class='reply__date'>";
-            // str += createdDate;
-            // str += "</span></div></div>";
-            // str += "<div class='reply__content' contenteditable='true'>";
-            // str += createdContent;
-            // str += "</div></div></div>";
+
             // replies.insertAdjacentHTML('beforeend', str);
             // let newReply = replies.lastChild;
             // newReply__replycontent = newReply.querySelector('.reply__content');
