@@ -16,8 +16,6 @@ function infiniteScroll() {
 
             addScroll(scrollCnt);
             scrollCnt += 1;
-
-            // isUpdateList = true;
         }
     }
 }
@@ -99,20 +97,20 @@ function addScroll(scrollCnt) {
                 str += "</div></div></div></div>";
                 // reply, reading__reply, reply__comment(nested__reply) reply__content
                 replies.insertAdjacentHTML('beforeend', str);
+                let newReply = replies.lastChild;
+                newReply__replycontent = newReply.querySelector('.reply__content');
+                let deleted = newReply__replycontent.innerHTML;
+                if(deleted.indexOf('삭제된') == -1){
+                    newReply__replycontent.addEventListener('click', nestedReply);
+                    newReply__replycontent.addEventListener('blur', nestedReply2);
+                }
+                let newReply__modify = newReply.querySelector('.reply__modify');
+                newReply__modify.addEventListener('click', event => modifyReply(event));
+                let newReply__delete = newReply.querySelector('.reply__delete');
+                newReply__delete.addEventListener('click', event => deleteReply(event));
             }
+            isUpdateList = true;
 
-            // replies.insertAdjacentHTML('beforeend', str);
-            // let newReply = replies.lastChild;
-            // newReply__replycontent = newReply.querySelector('.reply__content');
-            // let deleted = newReply__replycontent.innerHTML;
-            // if(deleted.indexOf('삭제된') == -1){
-            //     newReply__replycontent.addEventListener('click', nestedReply);
-            //     newReply__replycontent.addEventListener('blur', nestedReply2);
-            // }
-            // let newReply__modify = newReply.querySelector('.reply__modify');
-            // newReply__modify.addEventListener('click', event => modifyReply(event));
-            // let newReply__delete = newReply.querySelector('.reply__delete');
-            // newReply__delete.addEventListener('click', event => deleteReply(event));
             // reply__cnt += 1;
             // document.querySelector(".reply__cnt").innerHTML = reply__cnt;
             // content.value = "";
