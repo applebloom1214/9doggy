@@ -27,7 +27,7 @@ public class ReplyController {
         Map<Long, List<ReplyDTO>> replies = new LinkedHashMap<>();
         List<Reply> readReplies = replyService.readReply(bno, page);
         List<ReplyDTO> repliesToDTO = readReplies.stream().map(ReplyDTO :: new).toList();
-
+        // 대댓글 막힘
         for(ReplyDTO replyDTO : repliesToDTO) {
             if(replyDTO.getPrno() ==0){
                 List<ReplyDTO> replyList = new ArrayList<>();
