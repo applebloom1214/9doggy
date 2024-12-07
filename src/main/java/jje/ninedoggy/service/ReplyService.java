@@ -36,7 +36,7 @@ public class ReplyService {
         return reply;
     }
 
-    public List<Reply> readReply(Long bno, int page) {
+    public List<Reply> readReply(Long bno) {
 //        PageRequest pageRequest = PageRequest.of(page, 100);
 //        List<Reply> replies = replyRepository
 //             .findAllByBnoOrderByRnoAsc(bno, pageRequest).getContent();

@@ -23,11 +23,10 @@ public class ReplyController {
     private final ReplyService replyService;
 
     @GetMapping("/posting/reply")
-    public ResponseEntity<Map<Long, List<ReplyDTO>>> readPost(Long bno, int page) {
+    public ResponseEntity<Map<Long, List<ReplyDTO>>> readPost(Long bno) {
         Map<Long, List<ReplyDTO>> replies = new LinkedHashMap<>();
-        List<Reply> readReplies = replyService.readReply(bno, page);
+        List<Reply> readReplies = replyService.readReply(bno);
         List<ReplyDTO> repliesToDTO = readReplies.stream().map(ReplyDTO :: new).toList();
-        // 대댓글 고민
         for(ReplyDTO replyDTO : repliesToDTO) {
             if(replyDTO.getPrno() ==0){
                 List<ReplyDTO> replyList = new ArrayList<>();
