@@ -28,15 +28,6 @@ function addLikes() {
             let read__like = document.querySelector(".read__like");
             read__like.innerHTML = "좋아요 " + likes + "개";
         })
-
-    // .then((response) =>response.text())
-    // .then((data)=>{
-    //     let likes = data.likes;
-    //     alert("좋아요 누름 !");
-    //     console.log(data);
-    //     let read__like = document.querySelector(".read__like");
-    //     read__like.innerHTML = "좋아요 "+ likes +"개";
-    // })
 }
 
 
