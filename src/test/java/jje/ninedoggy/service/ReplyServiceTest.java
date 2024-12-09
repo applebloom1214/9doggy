@@ -90,16 +90,16 @@ public class ReplyServiceTest {
         ReflectionTestUtils.setField(post, "rcnt", fakeRcnt);
 
         // mocking
-        given(replyRepository.findAllByBnoOrderByRnoAsc(any(Long.class), any(PageRequest.class)))
-                .willReturn(paging);
-//        given(replyRepository.findAllByBno(any(Long.class), any(Sort.class)))
-//                .willReturn(replies);
+//        given(replyRepository.findAllByBnoOrderByRnoAsc(any(Long.class), any(PageRequest.class)))
+//                .willReturn(paging);
+        given(replyRepository.findAllByBno(any(Long.class), any(Sort.class)))
+                .willReturn(replies);
 //        given(replyRepository.findAllByBnoOrderByRnoDesc(any(Long.class)))
 //                .willReturn(replies);
 
 
         // when
-        List<Reply> readReplies = replyService.readReply(fakeBno,0);
+        List<Reply> readReplies = replyService.readReply(fakeBno);
 
         // then
         assertThat(readReplies).isNotNull();
