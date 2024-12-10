@@ -1,16 +1,11 @@
 package jje.ninedoggy.controller;
 
-import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.domain.Reply;
-import jje.ninedoggy.dto.PostDto;
 import jje.ninedoggy.dto.ReplyDTO;
-import jje.ninedoggy.repository.ReplyRepository;
 import jje.ninedoggy.service.ReplyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
