@@ -77,9 +77,6 @@ public class ReplyServiceTest {
         Post post = createPost(postDto);
         List<Reply> replies = new ArrayList<>();
         replies.add(reply);
-        int page = 0;
-        PageRequest pageRequest = PageRequest.of(page, 10);
-        Page<Reply> paging = new PageImpl<>(replies);
 
         Long fakeRno = 1L;
         Long fakeBno = 1L;
