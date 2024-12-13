@@ -6,7 +6,6 @@ import jje.ninedoggy.dto.ReplyDTO;
 import jje.ninedoggy.repository.BoardRepository;
 import jje.ninedoggy.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
