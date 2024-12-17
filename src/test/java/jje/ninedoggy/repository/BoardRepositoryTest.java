@@ -2,7 +2,6 @@ package jje.ninedoggy.repository;
 
 import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.domain.Reply;
-import jje.ninedoggy.dto.PagingDTO;
 import jje.ninedoggy.dto.PostDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
