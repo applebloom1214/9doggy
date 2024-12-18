@@ -21,3 +21,5 @@ if (writeBtn) {
     })
 }
 
+// 파일 업로드
+const fileUpload = document.querySelector(".inputbox__btn");
