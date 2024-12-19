@@ -3,7 +3,6 @@ package jje.ninedoggy.dto;
 import jje.ninedoggy.domain.Post;
 import jje.ninedoggy.domain.Reply;
 import lombok.*;
-import org.springframework.data.domain.Sort;
 
 @NoArgsConstructor
 @AllArgsConstructor
