@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @RequiredArgsConstructor // final이 붙거나 @NotNull이 붙은 필드의 생성자 추가
 @Service
