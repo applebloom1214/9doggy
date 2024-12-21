@@ -4,7 +4,6 @@ const searchBtn = document.querySelector('.board__search');
 if(searchBtn) {
     searchBtn.addEventListener('click', (e) => {
         // let formData = new FormData();
-        let page = 1;
         let condition = document.querySelector('.board__select').value;
         let keyword = document.querySelector('.board__text').value;
         // formData.append('page', page);
