@@ -2,7 +2,7 @@
 const searchBtn = document.querySelector('.board__search');
 
 if(searchBtn) {
-    searchBtn.addEventListener('click', (e) => {
+    searchBtn.addEventListener('click', () => {
         // let formData = new FormData();
         let condition = document.querySelector('.board__select').value;
         let keyword = document.querySelector('.board__text').value;
