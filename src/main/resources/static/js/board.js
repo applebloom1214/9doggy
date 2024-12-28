@@ -13,6 +13,6 @@ if(searchBtn) {
         location.replace("/board/1?"+"condition="+condition+"&keyword="+keyword);
 
         // for (const x of formData.entries()) {
-        //     console.log(x)
+        //     console.log(x
 
 })}
