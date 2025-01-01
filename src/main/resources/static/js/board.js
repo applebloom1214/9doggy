@@ -11,8 +11,4 @@ if(searchBtn) {
         // formData.append('keyword', keyword);
 
         location.replace("/board/1?"+"condition="+condition+"&keyword="+keyword);
-
-        // for (const x of formData.entries()) {
-        //     console.lo
-
 })}
