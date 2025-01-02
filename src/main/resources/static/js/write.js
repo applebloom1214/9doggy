@@ -22,4 +22,7 @@ if (writeBtn) {
 }
 
 // 파일 업로드
-const fileUpload = document.querySelector(".inputbox__btn");
+const fileUpload = document.querySelector(".upload__file");
+fileUpload.addEventListener("change", () => {
+console.log("file uploading...");
+})
