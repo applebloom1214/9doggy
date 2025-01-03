@@ -23,6 +23,6 @@ if (writeBtn) {
 
 // 파일 업로드
 const fileUpload = document.querySelector(".upload__file");
-fileUpload.addEventListener("change", () => {
-console.log("file uploading...");
+fileUpload.addEventListener("change", event => {
+console.log(event.target.files[0]);
 })
