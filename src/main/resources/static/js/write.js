@@ -27,6 +27,6 @@ fileUpload.addEventListener("change", event => {
 console.log(event.target.files[0]);
 // console.log(event.target.result);
 let uploadFile = event.target.files[0];
-let fileName = uploadFile.name;
+// let fileName = uploadFile.name;
 // console.log(fileName);
 })
