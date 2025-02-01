@@ -23,10 +23,11 @@ if (writeBtn) {
 
 // 파일 업로드
 const fileUpload = document.querySelector(".upload__file");
+let upload__files = document.querySelectorAll(".upload__files");
 fileUpload.addEventListener("change", event => {
-console.log(event.target.files[0]);
-// console.log(event.target.result);
-let uploadFile = event.target.files[0];
-// let fileName = uploadFile.name;
-// console.log(fileName);
+console.log("file uploading...");
+while(upload__files.hasChildNodes()) {
+    upload__files.removeChild(upload__files.firstChild);
+}
+    loadThumbImg(this);
 })
