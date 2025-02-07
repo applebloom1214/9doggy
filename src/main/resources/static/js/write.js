@@ -32,6 +32,6 @@ while(upload__files.hasChildNodes()) {
     loadThumbImg(this);
 })
 
-function loadThumbImg(files) {
-    dadc
-}
+// function loadThumbImg(files) {
+//     dadc
+// }
