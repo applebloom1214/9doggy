@@ -33,5 +33,5 @@ while(upload__files.hasChildNodes()) {
 })
 
 function loadThumbImg(files) {
-    abcdefghijklmnopqrstuvwxyz0123456789
+    abcdefghijklmnopqrstuvwxyz01234567890
 }
